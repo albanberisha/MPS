@@ -1,41 +1,39 @@
-.login
-{
+.login {
     position: fixed;
     top: 50%;
     left: 50%;
     padding: 20px;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    border: 1px solid rgb(155, 155, 155) ;
+    border: 1px solid rgb(155, 155, 155);
     border-radius: 1em;
 }
-.front
-{
+
+.front {
     background-color: teal;
 }
 
-.header-main
-{
-    padding-right:10px ;
-    height: 50px;
+.header-main {
+    padding-right: 10px;
+    height: 70px;
 }
-.content
-{
-    padding:10px;
+
+.content {
+    padding: 10px;
 }
-.centered-name
-{
+
+.centered-name {
     font-family: "Times New Roman", Times, serif;
     color: rgb(141, 141, 141);
     padding-left: 10px;
-  line-height: 30px;
-  text-align: center;
+    line-height: 30px;
+    text-align: center;
 }
-.content-name
-{
+
+.content-name {
     font-size: 2em;
-  line-height: 50px;
-  text-align: center;
+    line-height: 50px;
+    text-align: center;
 }
 
 .arrow {
@@ -45,44 +43,268 @@
     border-width: 0 3px 3px 0;
     display: inline-block;
     padding: 3px;
-  }
-  .down {
+}
+
+.down {
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
-  }
-.dropbtn:hover .down,.dropdown:hover .down
-{
-    margin-top:11px;
+}
+
+.dropbtn:hover .down,
+.dropdown:hover .down {
+    margin-top: 11px;
     transform: rotate(135deg);
     -webkit-transform: rotate(135deg);
 }
 
-.main-part
-{
-    margin:0;
-}
-.bottom-line
-{
-    margin: -7px 0 !ie7;
+hr {
+    height: 0;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    border: 0;
+    border-top: 1px solid #eee;
 }
 
-.sidebar
-{ 
-    width: 200px;
+main {
+    padding-top: 2px;
+    background-color: rgb(192, 192, 192);
 }
-hr.style-eight {
-    margin: 0 auto 24px;
-    padding: 0;
+
+.nav-bar {
+    color: white;
+    width: 15%;
+}
+
+.close {
+    display: none;
+}
+
+@media (max-width:960px) {
+    .sidenav {
+        background-color: #111;
+        width: 0;
+        height: 100%;
+    }
+    .nav-bar {
+        width: 0%;
+        height: 0%;
+    }
+    .close {
+        text-align: left;
+        display: inline;
+        float: left;
+        margin-left: -140px;
+    }
+    .centered-name-nav {
+        color: white;
+    }
+    .clipart-logo {
+        filter: grayscale(1) invert(1);
+    }
+}
+
+@media (min-width:960px) {
+    .sidenav {
+        height: 100%;
+        background-color: #007bff !important;
+        width: 15%;
+    }
+    .centered-name-nav {
+        color: #111;
+    }
+    .closebtn {
+        display: none;
+    }
+}
+
+.menu-sidebar {
+    display: contents;
+}
+
+body {
+    font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    top: 72px;
+    left: 0;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 50px;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media (max-width:960px) {
+    .content-change {
+        width: 100%;
+    }
+}
+
+@media (min-width:960px) {
+    .content-change {
+        width: 85%;
+        margin-left: 15%;
+    }
+}
+
+.centered-name-nav {
+    margin-top: 8px;
+}
+
+.mySidenav {
+    font-family: "Lato", sans-serif;
+}
+
+.centered-name-1 {
+    padding-left: 5px;
+    margin-top: 7px;
+}
+
+.drop-button-1 {
+    background-color: #111;
     border: none;
-    border-top: medium double #333;
-    color: #333;
-    text-align: center; }
-    
-    hr.style-eight:after {
-    content: "§";
-    display: inline-block;
-    position: relative; 
-    top: -0.97em;  
-    font-size: 1.5em;
-    padding: 0.25em;
-    background: white;}
+}
+
+.dropdown-content-1 {
+    margin-right: 2px;
+    background-color: #ffffff;
+    position: absolute;
+    right: 0;
+    display: none;
+    border: none;
+    min-width: 100px;
+    z-index: 1;
+    border-radius: 0 0.5em 0.5em 0.5em;
+}
+
+.dropdown-content-1 a {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.drop-button-1:hover,
+.dropdown-1:hover .drop-button-1 {
+    border-radius: 0.3em 0.3em 0 0.3em;
+}
+
+.dropdown-1:hover .down {
+    margin-top: 11px;
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+.dropdown-1:hover .dropdown-content-1 {
+    display: block;
+}
+
+@media (max-width:960px) {
+    .centered-name-1 {
+        color: white;
+        font-family: "Lato", sans-serif;
+    }
+    .dropdown-content-1 a:first-child {
+        border-bottom: solid #111 1px;
+    }
+    .clipart-logo {
+        filter: grayscale(1) invert(1);
+    }
+    .drop-button-1 {
+        background-color: #111;
+        border: none;
+    }
+    .drop-button-1:hover,
+    .dropdown-1:hover .drop-button-1 {
+        background-color: white;
+    }
+    .drop-button-1:hover .clipart-logo,
+    .dropdown-1:hover .clipart-logo {
+        filter: grayscale(1) invert(0);
+    }
+    .drop-button-1:hover .centered-name-1,
+    .dropdown-1:hover .centered-name-1 {
+        color: #111;
+    }
+    .dropdown-content-1 a:hover {
+        color: #111;
+        text-decoration: underline;
+    }
+    .dropdown-content-1 a {
+        color: #111;
+    }
+}
+
+@media (min-width:960px) {
+    .centered-name-1 {
+        color: white;
+        font-family: "Lato", sans-serif;
+    }
+    .clipart-logo {
+        filter: grayscale(1) invert(1);
+    }
+    .drop-button-1 {
+        background-color: transparent;
+        border: none;
+    }
+    .drop-button-1:hover,
+    .dropdown-1:hover .drop-button-1 {
+        background-color: white;
+    }
+    .drop-button-1:hover .clipart-logo,
+    .dropdown-1:hover .clipart-logo {
+        filter: sepia(60%);
+    }
+    .drop-button-1:hover .centered-name-1,
+    .dropdown-1:hover .centered-name-1 {
+        color: #007bff !important;
+    }
+    .dropdown-content-1 a:hover {
+        color: #007bff !important;
+        text-decoration: underline;
+    }
+    .dropdown-content-1 a {
+        color: #007bff !important;
+    }
+    .dropdown-content-1 a:first-child {
+        border-bottom: solid #007bff 1px;
+    }
+    .arrow {
+        margin-top: 9px;
+        margin-left: 10px;
+        border: solid rgb(255, 255, 255);
+        border-width: 0 3px 3px 0;
+        display: inline-block;
+        padding: 3px;
+    }
+    .dropbtn .arrow {
+        margin-top: 9px;
+        margin-left: 10px;
+        border: solid rgb(141, 141, 141);
+        border-width: 0 3px 3px 0;
+        display: inline-block;
+        padding: 3px;
+    }
+    .dropdown-1:hover .arrow {
+        border: solid #007bff;
+        border-width: 0 3px 3px 0;
+    }
+}
+
+.content-change {
+    background-color: white;
+    height: 100%;
+}

@@ -3,15 +3,15 @@
 <head>
     <meta charset="utf-8">
     <title>Kyqja</title>
-    <link rel="stylesheet" href="/css/reset.css">
-    <link rel="stylesheet" href="/css/bootstrap.css">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
         <div class="login">
             <div class="text-center">
-                <img src="/img/hospital.svg" width="100px" height="100px" />
+                <img src="img/hospital.svg" width="100px" height="100px" />
             </div>
             <div >
                 <form method="post" name="login-form">
