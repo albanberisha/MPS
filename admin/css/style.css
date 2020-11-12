@@ -13,6 +13,9 @@
     background-color: teal;
 }
 
+
+/* header style*/
+
 .header-main {
     padding-right: 10px;
     height: 70px;
@@ -26,8 +29,11 @@
     font-family: "Times New Roman", Times, serif;
     color: rgb(141, 141, 141);
     padding-left: 10px;
-    line-height: 30px;
     text-align: center;
+}
+
+p {
+    margin-bottom: 0;
 }
 
 .content-name {
@@ -65,35 +71,43 @@ hr {
     border-top: 1px solid #eee;
 }
 
-main {
-    padding-top: 2px;
-    background-color: rgb(192, 192, 192);
+
+/*sidebar style*/
+
+.side-nav {
+    max-width: 400px;
+    width: max-content;
 }
 
-.nav-bar {
-    color: white;
-    width: 15%;
+.sidenav {
+    padding-top: 40px;
 }
 
-.close {
+.openbtn {
+    font-size: 27px;
+    text-decoration: underline;
+    margin-top: -30px;
     display: none;
+    margin-left: 7px;
+    float: left;
+}
+
+.sidenav .closebtn {
+    font-size: 36px;
+    text-align: left;
+    display: inline;
+    float: right;
+    margin-top: -40px;
+    margin-right: 10px;
+}
+
+.clipart-logo {
+    margin-top: 7px;
 }
 
 @media (max-width:960px) {
     .sidenav {
-        background-color: #111;
-        width: 0;
-        height: 100%;
-    }
-    .nav-bar {
-        width: 0%;
-        height: 0%;
-    }
-    .close {
-        text-align: left;
-        display: inline;
-        float: left;
-        margin-left: -140px;
+        background-color: #111 !important;
     }
     .centered-name-nav {
         color: white;
@@ -101,19 +115,31 @@ main {
     .clipart-logo {
         filter: grayscale(1) invert(1);
     }
+    .openbtn {
+        color: #007bff;
+        text-decoration: none;
+    }
+    .openbtn:hover {
+        color: white;
+        text-decoration: underline;
+    }
 }
 
 @media (min-width:960px) {
     .sidenav {
         height: 100%;
         background-color: #007bff !important;
-        width: 15%;
     }
     .centered-name-nav {
         color: #111;
     }
+    .openbtn,
     .closebtn {
-        display: none;
+        color: #111;
+    }
+    .openbtn:hover,
+    .sidenav .closebtn:hover {
+        color: white;
     }
 }
 
@@ -126,26 +152,13 @@ body {
 }
 
 .sidenav {
+    position: relative;
+    min-height: 100%;
     height: 100%;
-    position: absolute;
-    z-index: 1;
-    top: 72px;
-    left: 0;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 50px;
 }
 
 .sidenav a:hover {
     color: #f1f1f1;
-}
-
-.sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
 }
 
 @media (max-width:960px) {
@@ -174,19 +187,12 @@ body {
     margin-top: 7px;
 }
 
-.drop-button-1 {
-    background-color: #111;
-    border: none;
-}
-
 .dropdown-content-1 {
     margin-right: 2px;
-    background-color: #ffffff;
     position: absolute;
-    right: 0;
     display: none;
     border: none;
-    min-width: 100px;
+    min-width: max-content;
     z-index: 1;
     border-radius: 0 0.5em 0.5em 0.5em;
 }
@@ -208,8 +214,14 @@ body {
     -webkit-transform: rotate(135deg);
 }
 
+.drop-button-1 {
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
 .dropdown-1:hover .dropdown-content-1 {
     display: block;
+    position: relative;
 }
 
 @media (max-width:960px) {
@@ -217,14 +229,16 @@ body {
         color: white;
         font-family: "Lato", sans-serif;
     }
-    .dropdown-content-1 a:first-child {
-        border-bottom: solid #111 1px;
+    .dropdown-content-1 a {
+        border: solid #111 1px;
+        border-radius: 0.3em 0.3em 0.3em 0.3em;
+        background-color: white;
     }
     .clipart-logo {
         filter: grayscale(1) invert(1);
     }
     .drop-button-1 {
-        background-color: #111;
+        background-color: transparent;
         border: none;
     }
     .drop-button-1:hover,
@@ -269,8 +283,9 @@ body {
         filter: sepia(60%);
     }
     .drop-button-1:hover .centered-name-1,
-    .dropdown-1:hover .centered-name-1 {
-        color: #007bff !important;
+    .dropdown-1:hover .centered-name-1,
+    .dropdown-1:hover a {
+        color: black !important;
     }
     .dropdown-content-1 a:hover {
         color: #007bff !important;
@@ -278,6 +293,9 @@ body {
     }
     .dropdown-content-1 a {
         color: #007bff !important;
+        background-color: white;
+        border: solid 1px #007bff;
+        border-radius: 0.3em;
     }
     .dropdown-content-1 a:first-child {
         border-bottom: solid #007bff 1px;
@@ -304,7 +322,14 @@ body {
     }
 }
 
-.content-change {
-    background-color: white;
-    height: 100%;
+p.centered-name-1.active {
+    display: none;
+}
+
+.centered-name-1 {
+    display: inline;
+}
+
+.dropdown-1 {
+    width: max-content;
 }

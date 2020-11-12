@@ -1,10 +1,4 @@
-<html>
 
-<head>
-    <title>Faqja krysore</title>
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/style.css">
     <style>
         .dropbtn {
             padding-top: 10px;
@@ -56,15 +50,13 @@
             border-radius: 0.5em 0.5em 0 0;
         }
     </style>
-</head>
 
-<body>
     <header class="top-head">
         <nav class="header-main">
             <div class="content">
                 <div class="float-left d-inline-flex">
                     <img src="img/hospital.svg" width="50px" height="50px" />
-                    <p class="text-primary content-name">Spitali</p>
+                    <p class="text-primary content-name">Spitali QKUK</p>
                 </div>
                 <div class="dropdown" style="float:right;">
 
