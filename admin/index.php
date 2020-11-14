@@ -157,3 +157,101 @@ function closeNav() {
     document.getElementById("nav-side").style.width = "0";
 }
 </script>
+
+
+
+<table class="wigdets" style="width: 100%;">
+                    <tr>
+                        <td class="" style="width:100px;">
+                            <div class="widget " style="width: max-content;">
+                                <div>
+                                    <p class="wid-info text-center">Data</p>
+                                    <hr class="divider" align="center">
+                                </div>
+                                <div>
+                                    <p class="widget-main-cal text-center">12/02/2020</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td></td>
+                        <td rowspan="3" class="" style="background-color: red; width: 250px;">
+                            <div class="widget " style="height: 100%;">
+                                <div>
+                                    <p class="wid-info text-center">Aktiv</p>
+                                    <hr class="divider" align="center">
+                                </div>
+                                <div class="aktiv">
+                                    aa </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="widget">
+                                <div>
+                                    <p class="wid-info text-center">Rastet kritike</p>
+                                    <hr class="divider" align="center">
+                                </div>
+
+                            </div>
+                        </td>
+                    </tr>
+
+                </table>
+
+
+                /*
+.wrapper {
+    background-color: #0E1318;
+    height: 300px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    margin: 0 auto;
+}
+
+.item {
+    background-color: #00D9E1;
+    padding: 0 10px;
+    height: 240px;
+    width: 250px;
+    border-radius: 5px;
+}
+
+.wrapper {
+    /* add this at the end */
+/*
+display: grid;
+grid-template-columns: repeat(6, auto);
+grid-gap: 0 50px;
+padding: 30px 60px;
+padding-right: 0;
+
+}
+.empty {
+    width: 10px;
+}
+.wrapper {
+    /* Add this at the end */
+    
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    
+    border-radius: 10px;
+}
+.wrapper::-webkit-scrollbar {}
+.wrapper {
+    grid-auto-flow: column;
+    grid-template-columns: auto;
+}
+
+
+<td rowspan="2" class="" style="background-color: red; width: 250px;">
+                        <div class="widget " style="height: 100%;">
+                            <div>
+                                <p class="wid-info text-center">Aktiv</p>
+                                <hr class="divider" align="center">
+                            </div>
+                            <div class="aktiv">
+                                aa </div>
+                        </div>
+                    </td>

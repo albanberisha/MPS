@@ -26,7 +26,7 @@
 }
 
 .centered-name {
-    font-family: "Times New Roman", Times, serif;
+    font-family: Helvetica, Arial, sans-serif;
     color: rgb(141, 141, 141);
     padding-left: 10px;
     text-align: center;
@@ -43,7 +43,6 @@ p {
 }
 
 .arrow {
-    margin-top: 9px;
     margin-left: 10px;
     border: solid rgb(141, 141, 141);
     border-width: 0 3px 3px 0;
@@ -58,7 +57,6 @@ p {
 
 .dropbtn:hover .down,
 .dropdown:hover .down {
-    margin-top: 11px;
     transform: rotate(135deg);
     -webkit-transform: rotate(135deg);
 }
@@ -148,7 +146,7 @@ hr {
 }
 
 body {
-    font-family: "Lato", sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
 }
 
 .sidenav {
@@ -179,7 +177,7 @@ body {
 }
 
 .mySidenav {
-    font-family: "Lato", sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
 }
 
 .centered-name-1 {
@@ -188,13 +186,15 @@ body {
 }
 
 .dropdown-content-1 {
-    margin-right: 2px;
+    margin-right: 1.5px;
     position: absolute;
     display: none;
     border: none;
     min-width: max-content;
     z-index: 1;
-    border-radius: 0 0.5em 0.5em 0.5em;
+    border-radius: 0 0 0.5em 0.5em;
+    background-color: red;
+    margin-left: 1.5px;
 }
 
 .dropdown-content-1 a {
@@ -203,13 +203,16 @@ body {
     display: block;
 }
 
+.dropbtn {
+    padding-bottom: 5px;
+}
+
 .drop-button-1:hover,
 .dropdown-1:hover .drop-button-1 {
-    border-radius: 0.3em 0.3em 0 0.3em;
+    border-radius: 0.3em 0.3em 0 0;
 }
 
 .dropdown-1:hover .down {
-    margin-top: 11px;
     transform: rotate(135deg);
     -webkit-transform: rotate(135deg);
 }
@@ -224,14 +227,17 @@ body {
     position: relative;
 }
 
+.dropdown-content-1 a:last-child {
+    border-radius: 0 0 0.3em 0.3em;
+}
+
 @media (max-width:960px) {
     .centered-name-1 {
         color: white;
-        font-family: "Lato", sans-serif;
+        font-family: Helvetica, Arial, sans-serif;
     }
     .dropdown-content-1 a {
         border: solid #111 1px;
-        border-radius: 0.3em 0.3em 0.3em 0.3em;
         background-color: white;
     }
     .clipart-logo {
@@ -265,7 +271,7 @@ body {
 @media (min-width:960px) {
     .centered-name-1 {
         color: white;
-        font-family: "Lato", sans-serif;
+        font-family: Helvetica, Arial, sans-serif;
     }
     .clipart-logo {
         filter: grayscale(1) invert(1);
@@ -295,7 +301,6 @@ body {
         color: #007bff !important;
         background-color: white;
         border: solid 1px #007bff;
-        border-radius: 0.3em;
     }
     .dropdown-content-1 a:first-child {
         border-bottom: solid #007bff 1px;
@@ -332,4 +337,181 @@ p.centered-name-1.active {
 
 .dropdown-1 {
     width: max-content;
+}
+
+
+/*Main-page-dashboard*/
+
+.card-header {
+    position: sticky;
+}
+
+.justify-content-xl-start {
+    width: 100%;
+}
+
+
+/*calendari*/
+
+.page {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.widget {
+    margin: 20px;
+    background-color: white;
+    border-radius: 0.3em;
+}
+
+.widgets td {
+    width: fit-content;
+}
+
+.calendar {
+    width: max-content;
+}
+
+.widget-main-cal {
+    padding: 20px;
+    font-size: 40px;
+    font: bold;
+    font-family: Helvetica, Arial, sans-serif;
+    color: rgb(99, 99, 99);
+}
+
+.divider {
+    margin: 0;
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}
+
+.wid-info {
+    font-size: 20px;
+    font: bolder;
+    color: rgb(99, 99, 99);
+}
+
+.widget-inline {
+    display: flex;
+}
+
+@media (max-width:960px) {
+    .side-nav {
+        position: fixed;
+        top: 0;
+        z-index: 1;
+        bottom: auto;
+        height: 100%;
+        min-height: 100%;
+        left: 0;
+    }
+    .page,
+    .top-head {
+        margin-left: 60px;
+    }
+    .header-main .content-name {
+        display: none;
+    }
+    .widget-inline {
+        display: block;
+    }
+}
+
+.active1 {
+    padding: 20px;
+}
+
+.active-users .widget {
+    height: 100%;
+}
+
+.widget-block {
+    display: block;
+}
+
+
+/*input forms*/
+
+.container-fullw {
+    padding: 50px 15px;
+}
+
+.panel-heading {
+    padding: 10px;
+}
+
+.panel-body {
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    padding: 10px;
+}
+
+.panel-form {
+    padding-top: 10px;
+}
+
+.form-group {
+    position: relative;
+    min-width: 370px;
+    width: 50%;
+    padding: 0 10px 0px 10px;
+}
+
+.input-title,
+.panel-title {
+    font-family: Helvetica, Arial, sans-serif;
+    color: rgb(99, 99, 99);
+    font-weight: bold;
+}
+
+.input-title-btn {
+    font-family: Helvetica, Arial, sans-serif;
+    color: rgb(99, 99, 99);
+}
+
+.div-inlineflex {
+    display: inline-flex;
+}
+
+.circle {
+    width: 150px;
+    height: 150px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+}
+
+.input-formimg {
+    margin-left: 100px;
+}
+
+@media (max-width:960px) {
+    .div-inlineflex {
+        display: inline;
+    }
+}
+
+.file {
+    visibility: hidden;
+    height: 0px;
+}
+
+.input-group {
+    width: 350px;
+}
+
+.register-div-info {
+    background-color: rgba(0, 0, 0, 0.03);
+    width: 100%;
+    align-self: center;
+    border: none;
+    border-radius: 1em;
+    padding: 10px 0;
+}
+
+.register-div-info .panel-title {
+    margin-left: 10px;
+    padding: 10px 10px 0 0;
 }
