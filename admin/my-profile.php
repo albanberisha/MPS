@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Admin | Shto doktorr</title>
+    <title>Admin | Profili im</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -39,12 +39,12 @@
 
         <div class="page" style="width: 100%;">
             <div class="card-header">
-                <p>Admin | Shto doktorr</p>
+                <p>Admin | Profili im</p>
             </div>
             <div class=" container-fullw">
                 <div class="panel-body">
                     <div class="panel-heading">
-                        <h5 class="panel-title">Shto nje doktorr</h5>
+                        <h5 class="panel-title">Profili im</h5>
                     </div>
                     <div class="panel-form">
                         <form>
@@ -54,102 +54,55 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <form method="post" id="image-form">
+                                <form method="post" id="image-form" style="width: 30px;">
                                     <div class="input-group my-3">
-                                        <input type="text" class="form-control" disabled placeholder="Ngarkoni fotografi" id="file">
+                                        <input type="text" class="form-control" style="display: none;" disabled placeholder="Ngarkoni fotografi" id="file">
                                         <div class="input-group-append">
-                                            <button type="button" class="browse btn btn-primary">Ngarkoni...</button>
+                                            <button type="button" class="browse btn btn-primary btn-change">Ndryshoni fotografine</button>
                                         </div>
                                     </div>
                                     <input type="file" name="img[]" class="file" accept="image/*">
                                 </form>
                             </div>
-                            <div class="form-group">
-                                <label class="input-title" for="DoctorPositon">
-                                   Pozita
-                                </label>
-                                <select name="Doctorposition" class="form-control doctorposition" required="true">
-                                    <option selected>Doktorr</option>
-                                    <option >Doktorr laboratori</option>
-                                                                                                    
-                                </select>
-                            </div>
                             <div class="div-inlineflex">
                                 <div class="form-group">
-                                    <label class="input-title">Emri i doktorrit</label>
-                                    <input type="text" id="nameDoc" class="form-control" placeholder="Sheno emrin e doktorrit">
+                                    <label class="input-title">Emri</label>
+                                    <input type="text" id="nameAdmin" class="form-control" value="Admin">
                                 </div>
                                 <div class="form-group">
-                                    <label class="input-title">Mbiemri i doktorrit</label>
-                                    <input type="text" id="surnameDoc" class="form-control" placeholder="Sheno mbiemrin e doktorrit">
+                                    <label class="input-title">Mbiemri</label>
+                                    <input type="text" id="surnameAdmin" class="form-control" value="">
                                 </div>
                             </div>
                             <div class="div-inlineflex">
                                 <div class="form-group">
                                     <label class="input-title">Datelindja</label>
-                                    <input type="date" class="form-control" id="Docstart-date" name="docstart_date" />
+                                    <input type="date" class="form-control" id="Adminstart-date" name="adminstart_date" />
                                 </div>
                                 <div class="form-group">
                                     <label class="input-title">Gjinia</label>
                                     <div class="input-title-btn">
-                                        <input type="radio" name="docgender" value="male" checked> Mashkull<br>
-                                        <input type="radio" name="docgender" value="female"> Femër
+                                        <input type="radio" name="admingender" value="male" checked> Mashkull<br>
+                                        <input type="radio" name="admingender" value="female"> Femër
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="input-title">Adresa</label>
-                                <input type="text" class="form-control" id="adressDoc" name="adressdoc" placeholder="Adresa">
+                                <input type="text" class="form-control" id="adressAdmin" name="adressadmin" placeholder="Adresa">
                             </div>
                             <div class="form-group">
                                 <label class="input-title">Numri i telefonit</label>
                                 <input class="form-control" id="phone-number" data-inputmask="'alias': 'phonebe'">
                             </div>
-                            <div class="form-group">
-                                <label class="input-title" for="DoctorSpecialization">
-                                   Specializimi
-                                </label>
-                                <select name="Doctorspecialization" class="form-control" required="true">
-                                    <option value="">Selekto Specializimin</option>
-                                    <option>Alban</option>
-                                                                                                    
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="input-title" for="DoctorDepartament">
-                                   Departamenti
-                                </label>
-                                <select name="Doctordepartament" class="form-control" required="true">
-                                    <option value="">Selekto departamentin</option>
-                                    <option>Lindjet</option>
-                                                                                                    
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="input-title">Adresa e klinikes</label>
-                                <input type="text" id="adressKDoc" class="form-control" placeholder="Sheno adresen e klinikes se doktorrit">
-                            </div>
-                            <div class="form-group">
-                                <label class="input-title">Tarifa e konsultes me mjekun</label>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">&#8364</span>
-                                    </div>
-                                    <input type="number" class="form-control" placeholder="Tarifa e konsultes me mjekun">
-                                </div>
-                            </div>
                             <div class="register-div-info">
-
-                                <h6 class="panel-title">Forma per regjistrim</h6>
-                                <hr style="margin-bottom: 0px;">
-
                                 <div class="form-group">
                                     <label class="input-title">Emaili</label>
-                                    <input type="email" class="form-control" name="docemail" placeholder="Emaili" required="required">
+                                    <input type="email" class="form-control" name="Adminemail" placeholder="Emaili" required="required">
                                 </div>
                                 <div class="form-group">
                                     <label class="input-title">Username</label>
-                                    <input type="text" class="form-control" name="docusername" placeholder="Username">
+                                    <input type="text" class="form-control" name="adminusername" placeholder="Username" required="required" value="Admin">
                                 </div>
                                 <div class="form-group">
                                     <label class="input-title">Paswordi</label>
@@ -161,7 +114,7 @@
                                 </div>
                             </div>
                             <div class="form-group" style="margin-top: 10px;">
-                                <button type="submit" class="btn btn-primary">Regjistro</button>
+                                <button type="submit" class="btn btn-primary">Ndrysho</button>
                             </div>
                         </form>
                     </div>
@@ -172,4 +125,3 @@
 </body>
 
 </html>
-

@@ -18,7 +18,7 @@
 
         <a href="javascript:void(0)" class="closebtn" id="closebtn" onclick="closeNav()">&times;</a>
         <div class="dropdown-1" style="position: relative;">
-            <button class="drop-button-1">
+            <button class="drop-button-1" onclick="window.open('dashboard.php', '_blank');">
                     <div class="d-inline-flex">
                         <img class="clipart-logo" src="img/dashboard-clipart.png"
                             style="width: 25px; height: 25px; margin-top: 5px;">
@@ -37,7 +37,7 @@
                     </div>
                 </button>
             <div class="dropdown-content-1 font-weight-bold">
-                <a href="#">Shto doktorr</a>
+                <a href="add-doctor.php">Shto doktorr</a>
                 <a href="#">Menaxho doktorret</a>
             </div>
         </div>
@@ -51,7 +51,7 @@
                     </div>
                 </button>
             <div class="dropdown-content-1 font-weight-bold">
-                <a href="#">Shto infermier</a>
+                <a href="add-infermier.php">Shto infermier</a>
                 <a href="#">Menaxho infermieret</a>
             </div>
         </div>
@@ -64,7 +64,6 @@
                     </div>
                 </button>
             <div class="dropdown-content-1 font-weight-bold">
-                <a href="#">Shto pacient</a>
                 <a href="#">Menaxho pacientet</a>
             </div>
 
@@ -74,15 +73,28 @@
                     <div class="d-inline-flex">
                         <img class="clipart-logo" src="img/staf-clipart.png"
                             style="width: 25px; height: 25px; margin-top: 5px;">
-                        <p class="centered-name-1 text-left font-weight-bold">Stafi</p>
+                        <p class="centered-name-1 text-left font-weight-bold">Recepsionistet</p>
                         <p> <i class="arrow down" style="margin-top: 14px;"></i></p>
                     </div>
                 </button>
             <div class="dropdown-content-1 font-weight-bold">
-                <a href="#">Shto staf</a>
+                <a href="add-receptionist.php">Shto recepsionist</a>
+                <a href="#">Menaxho recepsionistet</a>
+            </div>
+        </div>
+        <div class="dropdown-1" style="position: relative;">
+            <button class="drop-button-1">
+                    <div class="d-inline-flex">
+                        <img class="clipart-logo" src="img/staf-clipart.png"
+                            style="width: 25px; height: 25px; margin-top: 5px;">
+                        <p class="centered-name-1 text-left font-weight-bold">Stafi tjerë</p>
+                        <p> <i class="arrow down" style="margin-top: 14px;"></i></p>
+                    </div>
+                </button>
+            <div class="dropdown-content-1 font-weight-bold">
+                <a href="add-staf.php">Shto staf</a>
                 <a href="#">Menaxho stafin</a>
             </div>
-
         </div>
         <div class="dropdown-1" style="position: relative;">
             <button class="drop-button-1">
@@ -112,7 +124,7 @@
                     </div>
                 </button>
             <div class="dropdown-content-1 font-weight-bold">
-                <a href="#">Shto medikamente</a>
+                <a href="add-medicaments.php">Shto medikamente</a>
                 <a href="#">Menaxho medikamentet</a>
             </div>
         </div>
@@ -126,7 +138,7 @@
                 </button>
         </div>
         <div class="dropdown-1" style="position: relative;">
-            <button class="drop-button-1">
+            <button class="drop-button-1" onclick="window.open('hospital-info.php', '_blank');">
                     <div class="d-inline-flex">
                         <img class="clipart-logo" src="img/hospital-clipart.png"
                             style="width: 25px; height: 25px; margin-top: 5px;">

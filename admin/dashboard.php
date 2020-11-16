@@ -38,44 +38,10 @@
             <div class="card-header">
                 <p>Admin | Dashboard</p>
             </div>
-            <div class="widget-inline">
-                <div class="widget-block">
-                    <div class="widget">
-                        <div>
-                            <p class="wid-info text-center">Data</p>
-                            <hr class="divider" align="center">
-                        </div>
-                        <div>
-                            <p class="widget-main-cal text-center">12/02/2020</p>
-                        </div>
-                    </div>
-                    <div class="widget">
-                        <div>
-                            <p class="wid-info text-center">Data</p>
-                            <hr class="divider" align="center">
-                        </div>
-                        <div>
-                            <p class="widget-main-cal text-center">12/02/2020</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="active-users">
-                    <div class="widget">
-                        <div>
-                            <p class="wid-info text-center">Aktiv</p>
-                            <hr class="divider" align="center">
-                        </div>
-                        <div class="active1">
-                            aa </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <table class="wigdets" style="width: 100%;">
+            <table class="widgets">
                 <tr>
-                    <td class="" style="width:100px;">
-                        <div class="widget " style="width: max-content;">
+                    <td class="w-25 hide">
+                        <div class="widget">
                             <div>
                                 <p class="wid-info text-center">Data</p>
                                 <hr class="divider" align="center">
@@ -85,29 +51,186 @@
                             </div>
                         </div>
                     </td>
-                    <td rowspan="3" class="" style="background-color: red; width: 250px;">
-                        <div class="widget " style="height: 100%;">
+                    <td class="w-50 hide" colspan="2">
+                        <div>
+                            <p class="wid-info text-center">Data</p>
+                            <hr class="divider" align="center">
+                        </div>
+                        <div>
+                            <p class="widget-main-cal text-center">12/02/2020</p>
+                        </div>
+                    </td>
+                    <td class="w-25 " rowspan="4">
+                        <div class="active-users">
+                            <div class="widget">
+                                <div>
+                                    <p class="wid-info text-center">Aktiv</p>
+                                    <hr class="divider" align="center">
+                                </div>
+                                <div class="active-now">
+                                    <ul class="list-group pmd-list pmd-card-list pmd-inset-divider">
+                                        <li class="list-group-item d-flex profile-pic">
+                                            <a href="javascript:void(0);" class="pmd-avatar-list-img" title="profile-link">
+                                                <img alt="40x40" src="img/doctor.png">
+                                            </a>
+                                            <div class="media-body">
+                                                <h4 class="pmd-list-title name-surname">Alban Berisha</h4>
+                                                <p class="pmd-list-subtitle position">Doktorr</p>
+                                            </div>
+                                            <div class="status">
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item d-flex profile-pic">
+                                            <a href="javascript:void(0);" class="pmd-avatar-list-img" title="profile-link">
+                                                <img alt="40x40" src="img/doctor.png">
+                                            </a>
+                                            <div class="media-body">
+                                                <h4 class="pmd-list-title name-surname">Alban Berisha</h4>
+                                                <p class="pmd-list-subtitle position">Doktorr</p>
+                                            </div>
+                                            <div class="status">
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item d-flex profile-pic">
+                                            <a href="javascript:void(0);" class="pmd-avatar-list-img" title="profile-link">
+                                                <img alt="40x40" src="img/doctor.png">
+                                            </a>
+                                            <div class="media-body">
+                                                <h4 class="pmd-list-title name-surname">Alban Berisha</h4>
+                                                <p class="pmd-list-subtitle position">Doktorr</p>
+                                            </div>
+                                            <div class="status">
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item d-flex profile-pic">
+                                            <a href="javascript:void(0);" class="pmd-avatar-list-img" title="profile-link">
+                                                <img alt="40x40" src="img/doctor.png">
+                                            </a>
+                                            <div class="media-body">
+                                                <h4 class="pmd-list-title name-surname">Alban Berisha</h4>
+                                                <p class="pmd-list-subtitle position">Doktorr</p>
+                                            </div>
+                                            <div class="status">
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item d-flex profile-pic">
+                                            <a href="javascript:void(0);" class="pmd-avatar-list-img" title="profile-link">
+                                                <img alt="40x40" src="img/doctor.png">
+                                            </a>
+                                            <div class="media-body">
+                                                <h4 class="pmd-list-title name-surname">Alban Berisha</h4>
+                                                <p class="pmd-list-subtitle position">Doktorr</p>
+                                            </div>
+                                            <div class="status">
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item d-flex profile-pic">
+                                            <a href="javascript:void(0);" class="pmd-avatar-list-img" title="profile-link">
+                                                <img alt="40x40" src="img/doctor.png">
+                                            </a>
+                                            <div class="media-body">
+                                                <h4 class="pmd-list-title name-surname">Alban Berisha</h4>
+                                                <p class="pmd-list-subtitle position">Doktorr</p>
+                                            </div>
+                                            <div class="status">
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item d-flex profile-pic">
+                                            <a href="javascript:void(0);" class="pmd-avatar-list-img" title="profile-link">
+                                                <img alt="40x40" src="img/doctor.png">
+                                            </a>
+                                            <div class="media-body">
+                                                <h4 class="pmd-list-title name-surname">Alban Berisha</h4>
+                                                <p class="pmd-list-subtitle position">Doktorr</p>
+                                            </div>
+                                            <div class="status">
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item d-flex profile-pic">
+                                            <a href="javascript:void(0);" class="pmd-avatar-list-img" title="profile-link">
+                                                <img alt="40x40" src="img/doctor.png">
+                                            </a>
+                                            <div class="media-body">
+                                                <h4 class="pmd-list-title name-surname">Alban Berisha</h4>
+                                                <p class="pmd-list-subtitle position">Doktorr</p>
+                                            </div>
+                                            <div class="status">
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item d-flex profile-pic">
+                                            <a href="javascript:void(0);" class="pmd-avatar-list-img" title="profile-link">
+                                                <img alt="40x40" src="img/doctor.png">
+                                            </a>
+                                            <div class="media-body">
+                                                <h4 class="pmd-list-title name-surname">Alban Berisha</h4>
+                                                <p class="pmd-list-subtitle position">Doktorr</p>
+                                            </div>
+                                            <div class="status">
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+
+                </tr>
+                <tr style="margin-top: 20px;">
+                    <td class="w-25 hide">
+                        <div class="widget">
                             <div>
-                                <p class="wid-info text-center">Aktiv</p>
+                                <p class="wid-info text-center">Data</p>
                                 <hr class="divider" align="center">
                             </div>
-                            <div class="aktiv">
-                                aa </div>
+                            <div>
+                                <p class="widget-main-cal text-center">12/02/2020</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="w-25 hide">
+                        <div class="widget">
+                            <div>
+                                <p class="widget-main-cal text-center">Menaxho Doktorret</p>
+                                <p class="widget-main-cal text-center">Numri total i doktorreve</p>
+                                <p class="widget-main-cal text-center">14</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="w-25 hide">
+                        <div class="widget">
+                            <div>
+                                <p class="wid-info text-center">Data</p>
+                                <hr class="divider" align="center">
+                            </div>
+                            <div>
+                                <p class="widget-main-cal text-center">12/02/2020</p>
+                            </div>
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td class="w-25 hide">
                         <div class="widget">
                             <div>
-                                <p class="wid-info text-center">Rastet kritike</p>
+                                <p class="wid-info text-center">Data</p>
                                 <hr class="divider" align="center">
                             </div>
-
+                            <div>
+                                <p class="widget-main-cal text-center">12/02/2020</p>
+                            </div>
                         </div>
                     </td>
-                </tr>
+                    <td class="w-50 hide">
+                        <div>
+                            <p class="wid-info text-center">Data</p>
+                            <hr class="divider" align="center">
+                        </div>
+                        <div>
+                            <p class="widget-main-cal text-center">12/02/2020</p>
+                        </div>
+                    </td>
 
+                </tr>
             </table>
         </div>
     </div>

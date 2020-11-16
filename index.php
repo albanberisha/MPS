@@ -255,3 +255,162 @@ padding-right: 0;
                                 aa </div>
                         </div>
                     </td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="widget-inline">
+    <div class="widget-block">
+        <div class="widget-inline">
+            <div class="widget">
+                <div>
+                    <p class="wid-info text-center">Data</p>
+                    <hr class="divider" align="center">
+                </div>
+                <div>
+                    <p class="widget-main-cal text-center">12/02/2020</p>
+                </div>
+            </div>
+            <div class="widget">
+                <div>
+                    <p class="wid-info text-center">Data</p>
+                    <hr class="divider" align="center">
+                </div>
+                <div>
+                    <p class="widget-main-cal text-center">12/02/2020</p>
+                </div>
+            </div>
+            <div class="widget">
+                <div>
+                    <p class="wid-info text-center">Data</p>
+                    <hr class="divider" align="center">
+                </div>
+                <div>
+                    <p class="widget-main-cal text-center">12/02/2020</p>
+                </div>
+            </div>
+            <div class="widget">
+                <div>
+                    <p class="wid-info text-center">Data</p>
+                    <hr class="divider" align="center">
+                </div>
+                <div>
+                    <p class="widget-main-cal text-center">12/02/2020</p>
+                </div>
+            </div>
+            <div class="widget">
+                <div>
+                    <p class="wid-info text-center">Data</p>
+                    <hr class="divider" align="center">
+                </div>
+                <div>
+                    <p class="widget-main-cal text-center">12/02/2020</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="widget">
+            <div>
+                <p class="wid-info text-center">Data</p>
+                <hr class="divider" align="center">
+            </div>
+            <div>
+                <p class="widget-main-cal text-center">12/02/2020</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+<div class="active-users">
+    <div class="widget">
+        <div>
+            <p class="wid-info text-center">Aktiv</p>
+            <hr class="divider" align="center">
+        </div>
+        <div class="active-now">
+            <ul class="list-group pmd-list pmd-card-list pmd-inset-divider">
+                <li class="list-group-item d-flex profile-pic">
+                    <a href="javascript:void(0);" class="pmd-avatar-list-img" title="profile-link">
+                        <img alt="40x40" src="img/doctor.png">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="pmd-list-title name-surname">Alban Berisha</h4>
+                        <p class="pmd-list-subtitle position">Doktorr</p>
+                    </div>
+                    <div class="status">
+                    </div>
+                </li>
+                <li class="list-group-item d-flex profile-pic">
+                    <a href="javascript:void(0);" class="pmd-avatar-list-img" title="profile-link">
+                        <img alt="40x40" src="img/doctor.png">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="pmd-list-title name-surname">Alban Berisha</h4>
+                        <p class="pmd-list-subtitle position">Doktorr</p>
+                    </div>
+                    <div class="status">
+                    </div>
+                </li>
+                <li class="list-group-item d-flex profile-pic">
+                    <a href="javascript:void(0);" class="pmd-avatar-list-img" title="profile-link">
+                        <img alt="40x40" src="img/doctor.png">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="pmd-list-title name-surname">Alban Berisha</h4>
+                        <p class="pmd-list-subtitle position">Doktorr</p>
+                    </div>
+                    <div class="status">
+                    </div>
+                </li>
+                <li class="list-group-item d-flex profile-pic">
+                    <a href="javascript:void(0);" class="pmd-avatar-list-img" title="profile-link">
+                        <img alt="40x40" src="img/doctor.png">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="pmd-list-title name-surname">Alban Berisha</h4>
+                        <p class="pmd-list-subtitle position">Doktorr</p>
+                    </div>
+                    <div class="status">
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -32,6 +32,22 @@
     text-align: center;
 }
 
+.capital-l {
+    display: none;
+    margin-left: 4px;
+    max-width: 140px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.long-name {
+    max-width: 610px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 p {
     margin-bottom: 0;
 }
@@ -367,13 +383,17 @@ p.centered-name-1.active {
     width: fit-content;
 }
 
+.widgets {
+    position: relative;
+    width: 100%;
+}
+
 .calendar {
     width: max-content;
 }
 
 .widget-main-cal {
-    padding: 20px;
-    font-size: 40px;
+    font-size: 1em;
     font: bold;
     font-family: Helvetica, Arial, sans-serif;
     color: rgb(99, 99, 99);
@@ -397,6 +417,18 @@ p.centered-name-1.active {
     display: flex;
 }
 
+.div-inline div {
+    display: inline;
+}
+
+.w-25 {
+    width: 25%;
+}
+
+.w-50 {
+    width: 50%;
+}
+
 @media (max-width:960px) {
     .side-nav {
         position: fixed;
@@ -411,11 +443,29 @@ p.centered-name-1.active {
     .top-head {
         margin-left: 60px;
     }
-    .header-main .content-name {
+    .header-main .long-name {
         display: none;
+    }
+    .header-main .capital-l {
+        display: inline;
     }
     .widget-inline {
         display: block;
+    }
+}
+
+@media (max-width:565px) {
+    .header-main .capital-l {
+        display: none;
+    }
+}
+
+@media (max-width:960px) {
+    .hide {
+        display: none;
+    }
+    .w-50 {
+        width: 100%;
     }
 }
 
@@ -423,12 +473,80 @@ p.centered-name-1.active {
     padding: 20px;
 }
 
-.active-users .widget {
-    height: 100%;
+.active-users {
+    fill: right;
 }
 
-.widget-block {
-    display: block;
+.active-users .widget {
+    height: 500px;
+    min-width: 300px;
+    overflow-y: scroll;
+}
+
+.status {
+    background-color: green;
+    width: 10px;
+    height: 10px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    margin-top: 14px;
+}
+
+.name-surname {
+    font-family: Helvetica, Arial, sans-serif;
+    color: rgb(99, 99, 99);
+    font-size: 1.2em;
+    margin-top: 5px;
+    padding-bottom: 0px;
+}
+
+.position {
+    font-family: Helvetica, Arial, sans-serif;
+    color: rgb(141, 141, 141);
+    font-size: 0.8em;
+    margin-top: -5px;
+}
+
+.list-group-item {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.profile-pic img {
+    width: 50px;
+    height: 50px;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    border-radius: 25px;
+}
+
+.media-body {
+    margin-left: 10px;
+}
+
+
+/*Actove users scrollbar*/
+
+.active-users .widget::-webkit-scrollbar {
+    width: 12px;
+    /* width of the entire scrollbar */
+}
+
+.active-users .widget::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.125);
+    /* color of the tracking area */
+}
+
+.active-users .widget::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.245);
+    ;
+    /* color of the scroll thumb */
+    border-radius: 20px;
+    /* roundness of the scroll thumb */
+    border: none;
+    /* creates padding around scroll thumb */
 }
 
 
@@ -487,9 +605,12 @@ p.centered-name-1.active {
     margin-left: 100px;
 }
 
-@media (max-width:960px) {
+@media (max-width:1060px) {
     .div-inlineflex {
         display: inline;
+    }
+    .form-group {
+        width: 100%;
     }
 }
 
@@ -498,8 +619,8 @@ p.centered-name-1.active {
     height: 0px;
 }
 
-.input-group {
-    width: 350px;
+.form-group .my-3 {
+    width: 370px;
 }
 
 .register-div-info {
@@ -514,4 +635,29 @@ p.centered-name-1.active {
 .register-div-info .panel-title {
     margin-left: 10px;
     padding: 10px 10px 0 0;
+}
+
+.doctorposition {
+    background-color: #e9ecef;
+    ;
+}
+
+#barcode {
+    background-repeat: no-repeat;
+    background-size: 130px;
+    background-position-x: 10px;
+}
+
+.input-group .btn-change {
+    margin-left: 90px;
+    width: 180px;
+    z-index: 0;
+}
+
+
+/*Hospital info interface design*/
+
+.info-container {
+    width: 200px;
+    height: 200px;
 }
