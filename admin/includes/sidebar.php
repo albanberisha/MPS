@@ -18,7 +18,7 @@
 
         <a href="javascript:void(0)" class="closebtn" id="closebtn" onclick="closeNav()">&times;</a>
         <div class="dropdown-1" style="position: relative;">
-            <button class="drop-button-1" onclick="window.open('dashboard.php', '_blank');">
+            <button class="drop-button-1" onclick="window.open('dashboard.php', 'mywindow');">
                     <div class="d-inline-flex">
                         <img class="clipart-logo" src="img/dashboard-clipart.png"
                             style="width: 25px; height: 25px; margin-top: 5px;">
@@ -138,7 +138,7 @@
                 </button>
         </div>
         <div class="dropdown-1" style="position: relative;">
-            <button class="drop-button-1" onclick="window.open('hospital-info.php', '_blank');">
+            <button class="drop-button-1" onclick="window.open('hospital-info.php', 'mywindow');">
                     <div class="d-inline-flex">
                         <img class="clipart-logo" src="img/hospital-clipart.png"
                             style="width: 25px; height: 25px; margin-top: 5px;">

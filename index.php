@@ -414,3 +414,63 @@ padding-right: 0;
         </div>
     </div>
 </div>
+
+
+<div class="col-sm-8 bar-wid">
+                        <div class="col">
+                            <div class="panel panel-white no-radius text-center">
+                                <div class="panel-body wid">
+                                    <div id="chart-container">
+                                        <canvas id="graphCanvas"></canvas>
+                                    </div>
+
+                                    <script>
+                                        $(document).ready(function() {
+                                            //retrive data from fetch_comments.php page
+                                            showGraph();
+
+                                        });
+
+
+                                        function showGraph() {
+                                            {
+                                                $.post("data.php",
+                                                    function(data) {
+                                                        console.log(data);
+                                                        var name = [];
+                                                        var marks = [];
+
+                                                        for (var i in data) {
+                                                            marks.push(data[i].marks);
+                                                            name.push(data[i].student_name);
+
+                                                        }
+                                                        var chartdata = {
+                                                            labels: name,
+                                                            datasets: [{
+                                                                label: 'Numri I Rasteve',
+                                                                backgroundColor: '#49e2ff',
+                                                                borderColor: '#46d5f1',
+                                                                hoverBackgroundColor: '#CCCCCC',
+                                                                hoverBorderColor: '#666666',
+                                                                data: marks
+                                                            }]
+                                                        };
+
+                                                        var graphTarget = $("#graphCanvas");
+
+                                                        var barGraph = new Chart(graphTarget, {
+                                                            type: 'horizontalBar',
+                                                            data: chartdata
+                                                        });
+
+
+                                                    });
+                                            }
+                                        }
+                                    </script>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
