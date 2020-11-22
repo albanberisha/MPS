@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Admin|dashboard</title>
+    <title>Admin | Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -89,7 +89,7 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="col">
-                            <div class="panel panel-white no-radius text-center" onclick="window.open('manage-infermier.php', 'mywindow');">
+                            <div class="panel panel-white no-radius text-center" onclick="window.open('manage-infermiers.php', 'mywindow');">
                                 <div class="panel-body wid">
                                     <div class="fa-stack fa-2x image-wid">
                                         <img src="img/nurses-clipart.png">
@@ -100,7 +100,7 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="panel panel-white no-radius text-center" onclick="window.open('manage-receptionist.php', 'mywindow');">
+                            <div class="panel panel-white no-radius text-center" onclick="window.open('manage-receptionists.php', 'mywindow');">
                                 <div class="panel-body wid">
                                     <div class="fa-stack fa-2x image-wid">
                                         <img src="img/receptionists-clipart.png">

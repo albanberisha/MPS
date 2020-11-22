@@ -535,19 +535,22 @@ min-width: 300px;
 /*Actove users scrollbar*/
 
 .active-users .widget::-webkit-scrollbar,
-.messages::-webkit-scrollbar {
+.messages::-webkit-scrollbar,
+.data-list::-webkit-scrollbar {
     width: 12px;
     /* width of the entire scrollbar */
 }
 
 .active-users .widget::-webkit-scrollbar-track,
-.messages::-webkit-scrollbar-track {
+.messages::-webkit-scrollbar-track,
+.data-list::-webkit-scrollbar-track {
     background: rgba(0, 0, 0, 0.125);
     /* color of the tracking area */
 }
 
 .active-users .widget::-webkit-scrollbar-thumb,
-.messages::-webkit-scrollbar-thumb {
+.messages::-webkit-scrollbar-thumb,
+.data-list::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.245);
     /* color of the scroll thumb */
     border-radius: 20px;
@@ -804,7 +807,7 @@ ul .profile-pic:hover {
 }
 
 .form-group .my-3 {
-    width: 370px;
+    width: 350px;
 }
 
 .register-div-info {
@@ -944,9 +947,123 @@ ul .profile-pic:hover {
 }
 
 .new-ntf {
-    background-image: url("new-ntf.jpg");
+    background-image: url("../img/new-ntf.jpg");
     background-size: 17px;
     background-repeat: no-repeat;
     background-size: 15px;
     background-repeat: no-repeat;
+}
+
+
+/*scrollable */
+
+.data-to-search {
+    min-width: 284px;
+    max-width: 33.33%;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+.search-form {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.data-list {
+    width: 100%;
+    font-family: Helvetica, Arial, sans-serif;
+    color: rgb(99, 99, 99);
+    display: block;
+    overflow: auto;
+    height: 383px;
+    word-break: break-all;
+}
+
+.data-list tbody {
+    display: inline-table;
+    width: 100%;
+}
+
+.data-list tr td:first-child {
+    width: 11%;
+    word-break: break-word;
+}
+
+.data-list tr td:last-child {
+    max-width: 26px;
+}
+
+.data-list .name,
+.data-list .nameh {
+    width: 20%;
+    word-break: break-word;
+}
+
+.data-list .spec,
+.data-list .spech {
+    width: 28%;
+    word-break: break-word;
+}
+
+.data-list .sname,
+.data-list .snameh {
+    width: 29%;
+    word-break: break-word;
+}
+
+.actions {
+    text-align: right;
+}
+
+.data-list td,
+.data-list th {
+    padding: 10px;
+}
+
+.data-list tr {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.03);
+}
+
+.no-padding {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.actions span {
+    padding-right: 5px;
+}
+
+.edit-data img {
+    width: 20px;
+    height: 20px;
+}
+
+.delete-data img {
+    width: 20px;
+    height: 20px;
+}
+
+.actions img:hover {
+    background-color: #007bff;
+    cursor: pointer;
+}
+
+.table-head {
+    font-family: Helvetica, Arial, sans-serif;
+    color: rgb(99, 99, 99);
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.03);
+    padding: 10px;
+}
+
+.min-height {
+    height: max-content;
+    padding-right: 12px;
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.search-form .input-group-text {
+    padding: 10px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
 }

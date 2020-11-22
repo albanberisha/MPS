@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Admin | Shto infermier</title>
+    <title>Admin | Shto Infermier</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -38,7 +38,7 @@
 
         <div class="page" style="width: 100%;">
             <div class="card-header">
-                <p>Admin | Shto infermier</p>
+                <p>Admin | Shto Infermier</p>
             </div>
             <div class=" container-fullw">
                 <div class="panel-body">
