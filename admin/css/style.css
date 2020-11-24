@@ -984,29 +984,86 @@ ul .profile-pic:hover {
     width: 100%;
 }
 
-.data-list tr td:first-child {
+.data-list .did,
+.data-list .didh,
+.data-list .iid,
+.data-list .iidh,
+.data-list .ridh,
+.data-list .rid,
+.data-list .sidh,
+.data-list .sid,
+.data-list .midh,
+.data-list .mid {
     width: 11%;
     word-break: break-word;
 }
 
-.data-list tr td:last-child {
+.data-list .actions {
     max-width: 26px;
 }
 
-.data-list .name,
-.data-list .nameh {
+.data-list .logId,
+.data-list .logIdh {
+    width: 14%;
+    word-break: break-word;
+}
+
+.data-list .userIdh,
+.data-list .userId {
+    width: 14%;
+    word-break: break-word;
+}
+
+.data-list .uusername,
+.data-list .uusernameh,
+.data-list .logintimeh,
+.data-list .logintime,
+.data-list .logouttimeh,
+.data-list .logouttime,
+.data-list .statusLog,
+.data-list .statusLogh {
+    width: 19%;
+    word-break: break-word;
+}
+
+.data-list .dname,
+.data-list .dnameh,
+.data-list .inameh,
+.data-list .iname,
+.data-list .rnameh,
+.data-list .rname,
+.data-list .snameh,
+.data-list .sname,
+.data-list .mednameh,
+.data-list .medname {
     width: 20%;
     word-break: break-word;
 }
 
-.data-list .spec,
-.data-list .spech {
+.data-list .dspec,
+.data-list .dspech,
+.data-list .ideph,
+.data-list .idep,
+.data-list .rusernameh,
+.data-list .rusername,
+.data-list .sposh,
+.data-list .spos,
+.data-list .desch,
+.data-list .desc {
     width: 28%;
     word-break: break-word;
 }
 
-.data-list .sname,
-.data-list .snameh {
+.data-list .dsname,
+.data-list .dsnameh,
+.data-list .isname,
+.data-list .isnameh,
+.data-list .rsname,
+.data-list .rsnameh,
+.data-list .ssname,
+.data-list .ssnameh,
+.data-list .expdateh,
+.data-list .expdate {
     width: 29%;
     word-break: break-word;
 }
@@ -1066,4 +1123,15 @@ ul .profile-pic:hover {
     padding: 10px;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
+}
+
+.reg-date,
+.update-date {
+    padding-left: 5px;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 0.9rem;
+}
+
+.info-panel {
+    display: inline-grid;
 }

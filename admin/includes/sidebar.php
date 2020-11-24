@@ -106,11 +106,11 @@
                 </button>
         </div>
         <div class="dropdown-1" style="position: relative;">
-            <button class="drop-button-1">
+            <button class="drop-button-1" onclick="window.open('session-logs.php', '_self');">
                     <div class="d-inline-flex">
                         <img class="clipart-logo" src="img/kuqjet-clipart.png"
                             style="width: 25px; height: 25px; margin-top: 5px;">
-                        <p class="centered-name-1 text-left font-weight-bold">Kyçjet ditore</p>
+                        <p class="centered-name-1 text-left font-weight-bold">Kyçjet e perdoruesve</p>
                     </div>
                 </button>
         </div>

@@ -19,7 +19,7 @@ if($rowcount>0)
     }
 
 }else{
-    echo "nuk ka te dhena";
+    echo "<div style='text-align: center;'>Asnje mesazh per tu shfaqur</div>";
 }
 
 ?>

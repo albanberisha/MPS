@@ -7,7 +7,7 @@ include 'dtbconn.php';
                 setInterval(function() {
 
                     $('#Messages').load('includes/messages.php');
-                }, 500);
+                }, 50000);
             });
         </script>
         <div class="list-group-item d-flex profile-pic receiver-1">

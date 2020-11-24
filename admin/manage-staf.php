@@ -57,192 +57,30 @@
                     </div>
                     <table class="data-list min-height">
                         <tr class="table-head ">
-                            <td class="idh">ID</td>
-                            <td class="nameh">Emri</td>
-                            <td class="snameh">Mbiemri</td>
-                            <td class="spech">Pozita</td>
+                            <td class="sidh">ID</td>
+                            <td class="snameh">Emri</td>
+                            <td class="ssnameh">Mbiemri</td>
+                            <td class="sposf">Pozita</td>
                             <td class="actionsh">
                             </td>
                         </tr>
                     </table>
                     <table class="data-list">
                         <tr>
-                            <td class="id">
+                            <td class="sid">
                                 1234234
                             </td>
-                            <td class="name">
-                                Alban34234234234
-                            </td>
                             <td class="sname">
-                                Berisha234234324
+                                Shani
                             </td>
-                            <td class="spec">
-                                Specializimi234234234
+                            <td class="ssname">
+                                Bytyqi
+                            </td>
+                            <td class="spos">
+                                Pastrues
                             </td>
                             <td class="actions">
-                                <span class="edit-data"><img src="img/edit-icon.png"></span>
-                                <span class="delete-data"><img src="img/delete-icon.png"></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="id">
-                                1234234
-                            </td>
-                            <td class="name">
-                                Alban34234234234
-                            </td>
-                            <td class="sname">
-                                Berisha234234324
-                            </td>
-                            <td class="spec">
-                                Specializimi234234234
-                            </td>
-                            <td class="actions">
-                                <span class="edit-data"><img src="img/edit-icon.png"></span>
-                                <span class="delete-data"><img src="img/delete-icon.png"></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="id">
-                                1234234
-                            </td>
-                            <td class="name">
-                                Alban34234234234
-                            </td>
-                            <td class="sname">
-                                Berisha234234324
-                            </td>
-                            <td class="spec">
-                                Specializimi234234234
-                            </td>
-                            <td class="actions">
-                                <span class="edit-data"><img src="img/edit-icon.png"></span>
-                                <span class="delete-data"><img src="img/delete-icon.png"></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="id">
-                                1234234
-                            </td>
-                            <td class="name">
-                                Alban34234234234
-                            </td>
-                            <td class="sname">
-                                Berisha234234324
-                            </td>
-                            <td class="spec">
-                                Specializimi234234234
-                            </td>
-                            <td class="actions">
-                                <span class="edit-data"><img src="img/edit-icon.png"></span>
-                                <span class="delete-data"><img src="img/delete-icon.png"></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="id">
-                                1234234
-                            </td>
-                            <td class="name">
-                                Alban34234234234
-                            </td>
-                            <td class="sname">
-                                Berisha234234324
-                            </td>
-                            <td class="spec">
-                                Specializimi234234234
-                            </td>
-                            <td class="actions">
-                                <span class="edit-data"><img src="img/edit-icon.png"></span>
-                                <span class="delete-data"><img src="img/delete-icon.png"></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="id">
-                                1234234
-                            </td>
-                            <td class="name">
-                                Alban34234234234
-                            </td>
-                            <td class="sname">
-                                Berisha234234324
-                            </td>
-                            <td class="spec">
-                                Specializimi234234234
-                            </td>
-                            <td class="actions">
-                                <span class="edit-data"><img src="img/edit-icon.png"></span>
-                                <span class="delete-data"><img src="img/delete-icon.png"></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="id">
-                                1234234
-                            </td>
-                            <td class="name">
-                                Alban34234234234
-                            </td>
-                            <td class="sname">
-                                Berisha234234324
-                            </td>
-                            <td class="spec">
-                                Specializimi234234234
-                            </td>
-                            <td class="actions">
-                                <span class="edit-data"><img src="img/edit-icon.png"></span>
-                                <span class="delete-data"><img src="img/delete-icon.png"></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="id">
-                                1234234
-                            </td>
-                            <td class="name">
-                                Alban34234234234
-                            </td>
-                            <td class="sname">
-                                Berisha234234324
-                            </td>
-                            <td class="spec">
-                                Specializimi234234234
-                            </td>
-                            <td class="actions">
-                                <span class="edit-data"><img src="img/edit-icon.png"></span>
-                                <span class="delete-data"><img src="img/delete-icon.png"></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="id">
-                                1234234
-                            </td>
-                            <td class="name">
-                                Alban34234234234
-                            </td>
-                            <td class="sname">
-                                Berisha234234324
-                            </td>
-                            <td class="spec">
-                                Specializimi234234234
-                            </td>
-                            <td class="actions">
-                                <span class="edit-data"><img src="img/edit-icon.png"></span>
-                                <span class="delete-data"><img src="img/delete-icon.png"></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="id">
-                                1234234
-                            </td>
-                            <td class="name">
-                                Alban34234234234
-                            </td>
-                            <td class="sname">
-                                Berisha234234324
-                            </td>
-                            <td class="spec">
-                                Specializimi234234234
-                            </td>
-                            <td class="actions">
-                                <span class="edit-data"><img src="img/edit-icon.png"></span>
+                                <span class="edit-data" onclick="window.open('edit-staf.php', '_self');"><img src="img/edit-icon.png"></span>
                                 <span class="delete-data"><img src="img/delete-icon.png"></span>
                             </td>
                         </tr>
