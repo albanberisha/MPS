@@ -174,7 +174,7 @@ body {
     position: relative;
     min-height: 100%;
     height: 100%;
-    padding-bottom: 175px;
+    padding-bottom: 525px;
 }
 
 .sidenav a:hover {
@@ -1001,7 +1001,9 @@ ul .profile-pic:hover {
 .data-list .midh,
 .data-list .mid,
 .data-list .pid,
-.data-list .pid-h {
+.data-list .pid-h,
+.data-list .rezidh,
+.data-list .rezid {
     width: 11%;
     word-break: break-word;
 }
@@ -1051,7 +1053,9 @@ ul .profile-pic:hover {
 .data-list .pcontact,
 .data-list .pcontacth,
 .data-list .pgender,
-.data-list .pgenderh {
+.data-list .pgenderh,
+.data-list .rezdesch,
+.data-list .rezdesc {
     width: 20%;
     word-break: break-word;
 }
@@ -1065,7 +1069,9 @@ ul .profile-pic:hover {
 .data-list .sposh,
 .data-list .spos,
 .data-list .desch,
-.data-list .desc {
+.data-list .desc,
+.data-list .rezdepth,
+.data-list .rezdept {
     width: 28%;
     word-break: break-word;
 }
@@ -1079,7 +1085,9 @@ ul .profile-pic:hover {
 .data-list .ssname,
 .data-list .ssnameh,
 .data-list .expdateh,
-.data-list .expdate {
+.data-list .expdate,
+.data-list .rezdateh,
+.data-list .rezdate {
     width: 29%;
     word-break: break-word;
 }
@@ -1121,6 +1129,10 @@ ul .profile-pic:hover {
     /* IE 9 */
     transform: scale(1.3, 1.3);
     cursor: pointer;
+}
+
+.selectorfilter option {
+    border: 1px solid red;
 }
 
 .table-head {
