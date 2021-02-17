@@ -12,42 +12,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="js/sidenavigation.js"></script>
     <script src="js/imagebrowse.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#widget li').on('click', function() {
-                $(this).removeClass('new-ntf');
-            });
-        });
-    </script>
-    <script>
-        function reportWindowSize() {
-            var widthOutput = window.innerWidth;
-            if (widthOutput < 960) {
-                $('.centered-name-1').addClass('active');
-                $('.dropdown-content-1').addClass('active');
-                $(".closebtn").css("display", "none");
-                $(".openbtn").css("display", "inline");
-                $(".sidenav").css("width", "60px");
-            }
-            if (widthOutput < 1120) {
-                closeChat();
-            } else {}
-        }
 
-        function closeChat() {
-            document.getElementById("Chatbox").style.display = "none";
-
-        }
-
-        function openChat() {
-            document.getElementById("Chatbox").style.display = "inline";
-
-        }
-        window.onresize = reportWindowSize;
-    </script>
 </head>
 
-<body onload="reportWindowSize()">
+<body>
     <header>
         <?php include('includes/header.php'); ?>
         <hr style="margin-top:0px;">

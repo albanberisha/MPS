@@ -30,18 +30,8 @@
                 $(".sidenav").css("width", "60px");
             }
             if (widthOutput < 1120) {
-                closeChat();
+
             } else {}
-        }
-
-        function closeChat() {
-            document.getElementById("Chatbox").style.display = "none";
-
-        }
-
-        function openChat() {
-            document.getElementById("Chatbox").style.display = "inline";
-
         }
         window.onresize = reportWindowSize;
     </script>
