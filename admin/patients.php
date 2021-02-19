@@ -47,7 +47,7 @@
                         <div class="input-group-prepend">
                             <img class="input-group-text" src="img/search-clipart-btn.png" width="38px" height="38px">
                         </div>
-                        <input type="search" class="form-control type-text data-to-search" placeholder="Kerko sipas emrit">
+                        <input type="search" class="form-control type-text data-to-search" placeholder="Kerko sipas emrit ose ID">
                         <button type="submit" class="btn btn-primary btn-send">Kerko</button>
                     </div>
                 </form>

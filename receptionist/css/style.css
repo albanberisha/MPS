@@ -120,6 +120,10 @@ hr {
     margin-right: 10px;
 }
 
+.navbar-pat {
+    background-color: transparent;
+}
+
 .clipart-logo {
     margin-top: 7px;
 }
@@ -127,6 +131,9 @@ hr {
 @media (max-width:960px) {
     .sidenav {
         background-color: #111 !important;
+    }
+    .navbar-pat {
+        display: none;
     }
     .centered-name-nav {
         color: white;
@@ -174,7 +181,7 @@ body {
     position: relative;
     min-height: 100%;
     height: 100%;
-    padding-bottom: 140px;
+    padding-bottom: 532px;
 }
 
 .sidenav a:hover {
@@ -1214,4 +1221,133 @@ ul .profile-pic:hover {
     flex: 0 0 25%;
     max-width: 25%;
     text-align: center !important;
+}
+
+
+/*patient nav bar*/
+
+.left-marg {
+    margin-left: 20px;
+}
+
+
+/*Patient Summary*/
+
+.bottom-10 {
+    margin-bottom: 10px;
+}
+
+.col-header {
+    padding: 5px 0;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border-radius: 0.25rem;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.card-top {
+    padding-top: 0;
+}
+
+.data-list .row-info {
+    padding: 0;
+    border: none;
+}
+
+.alerts {
+    max-height: 150px;
+    height: fit-content;
+}
+
+.diagnosis,
+.min-height2,
+.min-height {
+    height: fit-content;
+    padding-right: 0;
+}
+
+.bulletp {
+    width: 10px;
+}
+
+.data-list .Pdiagnoseh,
+.data-list .Pdiagnose {
+    width: 46%;
+}
+
+.data-list .DiagnoseYear,
+.data-list .DiagnoseYeah,
+.data-list .GiagnoseStatus,
+.data-list .GiagnoseStatush {
+    width: 27%;
+}
+
+.data-list .title1,
+.data-list .title2,
+.data-list .title3 {
+    font-size: 1rem;
+    padding: 2px 0;
+    width: 20%;
+    float: left;
+    padding-left: 10px;
+    word-wrap: break-word;
+}
+
+.data-list .title1 {
+    width: 20%;
+}
+
+.data-list .title2 {
+    width: 25%;
+}
+
+.data-list .title3 {
+    width: 38%;
+}
+
+.data-list .title4 {
+    width: 17%;
+}
+
+.data-list .title5 {
+    width: 33%;
+}
+
+.card .color-none {
+    background-color: transparent;
+}
+
+.color-none tr {
+    border-bottom: 0;
+}
+
+.data-list .date {
+    width: 12%;
+}
+
+.data-list .date2 {
+    width: 15%;
+}
+
+.navbar-pat .not-allowed {
+    cursor: not-allowed;
+}
+
+.room {
+    margin: 0 30px 30px 30px;
+}
+
+.room .free {
+    background: green;
+    border: 1px solid rgb(128, 253, 128);
+    color: #fff
+}
+
+.room .busy {
+    background: red;
+    border: 1px solid rgb(255, 142, 142);
+    color: #fff
 }

@@ -96,7 +96,7 @@
                                             13:45
                                         </td>
                                         <td class="actions">
-                                            <span class="edit-data" onclick="window.open('edit-patient.php', '_self');"><img src="img/edit-icon.png"></span>
+                                            <span class="edit-data" onclick="window.open('edit-doctor.php', '_self');"><img src="img/edit-icon.png"></span>
                                         </td>
                                     </tr>
                                 </tbody>

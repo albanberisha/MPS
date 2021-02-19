@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Admin | Te dhenat e spitalit</title>
+    <title>Receptionist | Informata rreth pacientëve</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -31,11 +31,11 @@
 
 <body onload="reportWindowSize()">
     <header>
-        <?php include('includes/header.php');?>
+        <?php include('includes/header.php'); ?>
         <hr style="margin-top:0px;">
     </header>
     <div class="" style="display: flex; margin-top: -16px; width: 100%;">
-        <?php include('includes/sidebar.php');?>
+        <?php include('includes/sidebar.php'); ?>
 
         <div class="page" style="width: 100%;">
             <div class="">
@@ -46,17 +46,17 @@
                                 <button type="button" id="Summary" class="left-marg  btn btn-primary">Detaje të përgjithshme</button>
                             </li>
                             <li class="nav-item active">
-                                <button type="button" id="LabResults" class=" left-marg  btn btn-primary">Menaxho dhomat</button>
+                                <button type="button" id="LabResults" class=" left-marg  btn btn-primary">Rezultatet laboratorike</button>
                             </li>
                             <li class="nav-item active">
-                                <button type="button" id="Diagnosis" class="left-marg  btn btn-primary">Menaxho departamentet</button>
+                                <button type="button" id="Diagnosis" class="left-marg  btn btn-primary">Diagnozat</button>
                             </li>
                         </ul>
                     </div>
                 </nav>
             </div>
             <div class="container-fullw" id="container-fullw">
-            <?php include('includes/hospital-details.php'); ?>
+            <?php include('includes/summary-patient.php'); ?>
             </div>
         </div>
     </div>
@@ -67,13 +67,13 @@
 <script>
     $(document).ready(function() {
         $("#Summary").click(function() {
-            $("#container-fullw").load('includes/hospital-details.php');
+            $("#container-fullw").load('includes/summary-patient.php');
         });
         $("#LabResults").click(function() {
-            $("#container-fullw").load('includes/manage-rooms.php');
+            $("#container-fullw").load('includes/lab-results.php');
         });
         $("#Diagnosis").click(function() {
-            $("#container-fullw").load('includes/manage-departaments.php');
+            $("#container-fullw").load('includes/diagnosis.php');
         });
     });
 </script>
