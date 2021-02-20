@@ -181,7 +181,7 @@ body {
     position: relative;
     min-height: 100%;
     height: 100%;
-    padding-bottom: 532px;
+    padding-bottom: 521px;
 }
 
 .sidenav a:hover {
@@ -1016,7 +1016,9 @@ ul .profile-pic:hover {
 .data-list .Iid,
 .data-list .Iidh,
 .data-list .sjidh,
-.data-list .sjid {
+.data-list .sjid,
+.data-list .rid-h,
+.data-list .rid {
     width: 11%;
     word-break: break-word;
 }
@@ -1068,8 +1070,6 @@ ul .profile-pic:hover {
 .data-list .logouttime,
 .data-list .statusLog,
 .data-list .statusLogh,
-.data-list .pname,
-.data-list .pnameh,
 .data-list .Inameh2,
 .data-list .Iname2,
 .data-list .Isnameh2,
@@ -1091,6 +1091,32 @@ ul .profile-pic:hover {
     word-break: break-word;
 }
 
+.data-list .pname,
+.data-list .pnameh,
+.data-list .psname,
+.data-list .psnameh,
+.data-list .psname,
+.data-list .psnameh,
+.data-list .pcontact,
+.data-list .pcontacth,
+.data-list .pgender,
+.data-list .pgenderh,
+.data-list .pstatus,
+.data-list .pstatush,
+.data-list .rnameh2,
+.data-list .rname2,
+.data-list .rsnameh,
+.data-list .rsname,
+.data-list .rrecepsh,
+.data-list .rreceps,
+.data-list .rdateh,
+.data-list .rdate,
+.data-list .rtimeh,
+.data-list .rtime {
+    width: 16%;
+    word-break: break-word;
+}
+
 .data-list .dname,
 .data-list .dnameh,
 .data-list .inameh,
@@ -1100,13 +1126,7 @@ ul .profile-pic:hover {
 .data-list .snameh,
 .data-list .sname,
 .data-list .mednameh,
-.data-list .medname,
-.data-list .psnameh,
-.data-list .psname,
-.data-list .pcontact,
-.data-list .pcontacth,
-.data-list .pgender,
-.data-list .pgenderh {
+.data-list .medname {
     width: 20%;
     word-break: break-word;
 }
@@ -1312,6 +1332,10 @@ ul .profile-pic:hover {
     width: 17%;
 }
 
+.data-list .title5 {
+    width: 33%;
+}
+
 .card .color-none {
     background-color: transparent;
 }
@@ -1326,4 +1350,32 @@ ul .profile-pic:hover {
 
 .data-list .date2 {
     width: 15%;
+}
+
+.data-list .date3 {
+    width: 17%;
+}
+
+.navbar-pat .not-allowed {
+    cursor: not-allowed;
+}
+
+.room {
+    margin: 0 30px 30px 30px;
+}
+
+.room .free {
+    background: green;
+    border: 1px solid rgb(128, 253, 128);
+    color: #fff
+}
+
+.room .busy {
+    background: red;
+    border: 1px solid rgb(255, 142, 142);
+    color: #fff
+}
+
+.datalist-3 {
+    height: fit-content;
 }

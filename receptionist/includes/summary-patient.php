@@ -2,6 +2,25 @@
     <div class="row gutters-sm">
         <div class="col-md-12" style="margin-bottom: 10px;">
             <div class="card">
+            <div style="padding-bottom: 0;">
+                                        <h6 class="panel-title panel-white text-center col-header">Lokacioni i pacientit ne ambientet e spitalit</h6>
+                                    </div>
+                                    <div class="card-body card-top">
+                                        <table class="data-list min-height dignosis color-none">
+                                            <tbody>
+                                                <tr>
+                                                    <th class="">
+                                                        Statusi:
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <td class="title5">
+                                                        Jo aktiv
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                 <div style="padding-bottom: 0;">
                     <h6 class="panel-title panel-white text-center col-header">Lokacioni i pacientit ne ambientet e spitalit</h6>
                 </div>
@@ -198,7 +217,73 @@
                         </tbody>
                     </table>
                 </div>
+                <div style="padding-bottom: 0;">
+                    <h6 class="panel-title panel-white text-center col-header">Terminet</h6>
+                </div>
+                <div class="card-body card-top">
+                    <table class="data-list min-height dignosis color-none">
+                        <tbody>
+                            <tr>
+                                <th class="panel-title title1 date">
+                                    Data:
+                                </th>
+                                <th class="panel-title title2 ">
+                                    Doktori:
+                                </th>
+                                <th class="panel-title title2 ">
+                                    Ora:
+                                </th>
+                                <th class="panel-title title2 ">
+                                    Statusi:
+                                </th>
+                            </tr>
+                            <tr>
+                                <td class="title1 date">
+                                    19.12.2020
+                                </td>
+                                <td class="title2">
+                                    Dr. Argon Mustafa
+                                </td>
+                                <td class="title2">
+                                   12:45
+                                </td>
+                                <td class="title2">
+                                    Perfunduar
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="title1 date">
+                                    19.12.2020
+                                </td>
+                                <td class="title2">
+                                    Dr. Argon Mustafa
+                                </td>
+                                <td class="title2">
+                                   12:45
+                                </td>
+                                <td class="title2">
+                                    Perfunduar
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="title1 date">
+                                    19.12.2020
+                                </td>
+                                <td class="title2">
+                                    Dr. Argon Mustafa
+                                </td>
+                                <td class="title2">
+                                   12:45
+                                </td>
+                                <td class="title2">
+                                    Ne pritje per aprovim
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 </div>
+

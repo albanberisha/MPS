@@ -51,6 +51,9 @@
                             <li class="nav-item active">
                                 <button type="button" id="Diagnosis" class="left-marg  btn btn-primary">Menaxho departamentet</button>
                             </li>
+                            <li class="nav-item active">
+                                <button type="button" id="Pricing-list" class="left-marg  btn btn-primary">Qmimorja</button>
+                            </li>
                         </ul>
                     </div>
                 </nav>
@@ -74,6 +77,9 @@
         });
         $("#Diagnosis").click(function() {
             $("#container-fullw").load('includes/manage-departaments.php');
+        });
+        $("#Pricing-list").click(function() {
+            $("#container-fullw").load('includes/pricing-list.php');
         });
     });
 </script>

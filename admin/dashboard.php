@@ -74,7 +74,7 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="panel panel-white no-radius text-center" onclick="window.open('manage-patients.php', 'mywindow');">
+                            <div class="panel panel-white no-radius text-center" onclick="window.open('patients.php', 'mywindow');">
                                 <div class="panel-body wid">
                                     <div class="fa-stack fa-2x image-wid">
                                         <img src="img/patients-clipart.png">

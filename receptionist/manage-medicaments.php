@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Receptionist | Informata rreth pacientëve</title>
+    <title>Receptionist | Menaxho medikamentet</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -28,7 +28,6 @@
         window.onresize = reportWindowSize;
     </script>
 </head>
-
 <body onload="reportWindowSize()">
     <header>
         <?php include('includes/header.php'); ?>
@@ -39,7 +38,7 @@
 
         <div class="page" style="width: 100%;">
             <div class="card-header">
-                <p>Receptionist | Informata rreth pacientëve</p>
+                <p>Receptionist | Menaxho stafin</p>
             </div>
             <div class="container-fullw">
                 <form class="search-form">
@@ -47,72 +46,41 @@
                         <div class="input-group-prepend">
                             <img class="input-group-text" src="img/search-clipart-btn.png" width="38px" height="38px">
                         </div>
-                        <input type="search" class="form-control type-text data-to-search" placeholder="Kerko sipas emrit ose ID">
+                        <input type="search" class="form-control type-text data-to-search" placeholder="Kerko sipas emrit">
                         <button type="submit" class="btn btn-primary btn-send">Kerko</button>
                     </div>
                 </form>
                 <div class="panel-body no-padding">
                     <div class="panel-heading">
-                        <h5 class="panel-title panel-white text-center">Pacientët</h5>
+                        <h5 class="panel-title panel-white text-center">Medikamentet</h5>
                     </div>
                     <table class="data-list min-height">
                         <tr class="table-head ">
-                            <td class="pid-h">ID</td>
-                            <td class="pnameh">Emri</td>
-                            <td class="psnameh">Mbiemri</td>
-                            <td class="pcontacth">Kontakti</td>
-                            <td class="pgenderh">Gjinia</td>
-                            <td class="pstatush">Statusi</td>
+                            <td class="midh">ID</td>
+                            <td class="mednameh">Emri i medikamentit</td>
+                            <td class="expdateh">Data e skadimit</td>
+                            <td class="desch">Pershkrimi</td>
                             <td class="actionsh">
                             </td>
                         </tr>
                     </table>
                     <table class="data-list">
                         <tr>
-                            <td class="pid">
+                            <td class="mid">
                                 1234234
                             </td>
-                            <td class="pname">
-                                Alban34234234234
+                            <td class="medname">
+                                Paracetamoll
                             </td>
-                            <td class="psname">
-                                Berisha234234324
+                            <td class="expdate">
+                                12/12/2021
                             </td>
-                            <td class="pcontact">
-                                044528369
-                            </td>
-                            <td class="pgender">
-                               Mashkull
-                            </td>
-                            <td class="pstatus">
-                               Aktiv
+                            <td class="desc">
+                                Produkt i  mire aklshf,asmhyilreknf.oiuewhnf mewyrhwe,krg
                             </td>
                             <td class="actions">
-                            <span class="edit-data" onclick="window.open('edit-patient.php', '_self');"><img src="img/edit-icon.png"></span>
-                                <span class="edit-data" onclick="window.open('view-patient.php', '_self');"><img src="img/eye-icon.png"></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="pid">
-                                1234234
-                            </td>
-                            <td class="pname">
-                                Alban34234234234
-                            </td>
-                            <td class="psname">
-                                Berisha234234324
-                            </td>
-                            <td class="pcontact">
-                                044528369
-                            </td>
-                            <td class="pgender">
-                               Mashkull
-                            </td>
-                            <td class="pstatus">
-                               Jo aktiv
-                            </td>
-                            <td class="actions">
-                                <span class="edit-data" onclick="window.open('view-patient.php', '_self');"><img src="img/eye-icon.png"></span>
+                                <span class="edit-data" onclick="window.open('edit-medicament.php', '_self');"><img src="img/edit-icon.png"></span>
+                                <span class="delete-data"><img src="img/delete-icon.png"></span>
                             </td>
                         </tr>
                     </table>
@@ -123,3 +91,7 @@
 </body>
 
 </html>
+
+
+
+

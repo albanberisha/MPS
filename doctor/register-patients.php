@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Receptionist | Regjistrim i pacientëve</title>
+    <title>Doctor | Regjistrim i pacientëve</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -39,7 +39,7 @@
 
         <div class="page" style="width: 100%;">
             <div class="card-header">
-                <p>Receptionist | Regjistrim i pacientëve</p>
+                <p>Doctor | Regjistrim i pacientëve</p>
             </div>
             <div class="container-fullw">
                 <div class="panel-body no-padding">
@@ -62,43 +62,67 @@
                         <div>
                             <table class="data-list min-height">
                                 <tbody>
-                                    <tr class="table-head ">
-                                        <td class="didh">ID</td>
-                                        <td class="dnameh2">Emri</td>
-                                        <td class="dsnameh2">Mbiemri</td>
-                                        <td class="ddeph2">Departamenti</td>
-                                        <td class="dstatush2">Statusi</td>
-                                        <td class="dtimeh2">Mbarimi i orarit</td>
-                                        <td class="actionsh">
-                                        </td>
-                                    </tr>
+                                <tr class="table-head ">
+                            <td class="pid-h">ID</td>
+                            <td class="pnameh">Emri</td>
+                            <td class="psnameh">Mbiemri</td>
+                            <td class="pcontacth">Kontakti</td>
+                            <td class="pgenderh">Gjinia</td>
+                            <td class="pstatush">Statusi</td>
+                            <td class="actionsh">
+                            </td>
+                        </tr>
                                 </tbody>
                             </table>
                             <table class="data-list staf">
                                 <tbody>
-                                    <tr>
-                                        <td class="did">
-                                            1234234
-                                        </td>
-                                        <td class="dname2">
-                                            Arbnor
-                                        </td>
-                                        <td class="dsname2">
-                                            Berisha
-                                        </td>
-                                        <td class="ddep2">
-                                            Urgjence
-                                        </td>
-                                        <td class="dstatus2">
-                                            Kundestar
-                                        </td>
-                                        <td class="dtime2">
-                                            13:45
-                                        </td>
-                                        <td class="actions">
-                                            <span class="edit-data" onclick="window.open('edit-doctor.php', '_self');"><img src="img/edit-icon.png"></span>
-                                        </td>
-                                    </tr>
+                                <tr>
+                            <td class="pid">
+                                1234234
+                            </td>
+                            <td class="pname">
+                                Alban34234234234
+                            </td>
+                            <td class="psname">
+                                Berisha234234324
+                            </td>
+                            <td class="pcontact">
+                                044528369
+                            </td>
+                            <td class="pgender">
+                               Mashkull
+                            </td>
+                            <td class="pstatus">
+                               Jo Aktiv
+                            </td>
+                            <td class="actions">
+                            <span class="edit-data" onclick="window.open('reg-patient.php', '_self');"><img src="img/edit-icon.png"></span>
+                                <span class="edit-data" onclick="window.open('view-patient.php', '_self');"><img src="img/eye-icon.png"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="pid">
+                                1234234
+                            </td>
+                            <td class="pname">
+                                Alban34234234234
+                            </td>
+                            <td class="psname">
+                                Berisha234234324
+                            </td>
+                            <td class="pcontact">
+                                044528369
+                            </td>
+                            <td class="pgender">
+                               Mashkull
+                            </td>
+                            <td class="pstatus">
+                               aktiv
+                            </td>
+                            <td class="actions">
+                                <span class="edit-data" onclick="window.open('view-patient.php', '_self');"><img src="img/eye-icon.png"></span>
+                            </td>
+                        </tr>
                                 </tbody>
                             </table>
                         </div>

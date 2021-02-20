@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Receptionist | Informata rreth pacientëve</title>
+    <title>Receptionist | Historia e regjistrimeve</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -39,7 +39,7 @@
 
         <div class="page" style="width: 100%;">
             <div class="card-header">
-                <p>Receptionist | Informata rreth pacientëve</p>
+                <p>Receptionist | Historia e regjistrimeve</p>
             </div>
             <div class="container-fullw">
                 <form class="search-form">
@@ -57,64 +57,30 @@
                     </div>
                     <table class="data-list min-height">
                         <tr class="table-head ">
-                            <td class="pid-h">ID</td>
-                            <td class="pnameh">Emri</td>
-                            <td class="psnameh">Mbiemri</td>
-                            <td class="pcontacth">Kontakti</td>
-                            <td class="pgenderh">Gjinia</td>
-                            <td class="pstatush">Statusi</td>
-                            <td class="actionsh">
-                            </td>
+                            <td class="rid-h">ID</td>
+                            <td class="rnameh2">Emri</td>
+                            <td class="rsnameh2">Mbiemri</td>
+                            <td class="rrecepsh">Personi pergjegjes</td>
+                            <td class="rdateh">Data</td>
+                            <td class="rtimeh">Data</td>
                         </tr>
                     </table>
-                    <table class="data-list">
+                    <table class="data-list datalist-3">
                         <tr>
-                            <td class="pid">
-                                1234234
-                            </td>
-                            <td class="pname">
-                                Alban34234234234
-                            </td>
-                            <td class="psname">
-                                Berisha234234324
-                            </td>
-                            <td class="pcontact">
-                                044528369
-                            </td>
-                            <td class="pgender">
-                               Mashkull
-                            </td>
-                            <td class="pstatus">
-                               Aktiv
-                            </td>
-                            <td class="actions">
-                            <span class="edit-data" onclick="window.open('edit-patient.php', '_self');"><img src="img/edit-icon.png"></span>
-                                <span class="edit-data" onclick="window.open('view-patient.php', '_self');"><img src="img/eye-icon.png"></span>
-                            </td>
+                        <td class="rid">2435</td>
+                            <td class="rname2">Alban</td>
+                            <td class="rsname2">Berisha</td>
+                            <td class="rreceps">Arjan Kuqi</td>
+                            <td class="rdate">16.12.2021</td>
+                            <td class="rtime">15:15</td>
                         </tr>
-                        <tr>
-                            <td class="pid">
-                                1234234
-                            </td>
-                            <td class="pname">
-                                Alban34234234234
-                            </td>
-                            <td class="psname">
-                                Berisha234234324
-                            </td>
-                            <td class="pcontact">
-                                044528369
-                            </td>
-                            <td class="pgender">
-                               Mashkull
-                            </td>
-                            <td class="pstatus">
-                               Jo aktiv
-                            </td>
-                            <td class="actions">
-                                <span class="edit-data" onclick="window.open('view-patient.php', '_self');"><img src="img/eye-icon.png"></span>
-                            </td>
-                        </tr>
+                        <td class="rid">2435</td>
+                            <td class="rname2">Alban</td>
+                            <td class="rsname2">Berisha</td>
+                            <td class="rreceps">Arjan Kuqi</td>
+                            <td class="rdate">16.12.2021</td>
+                            <td class="rtime">15:15</td>
+                        </tr> 
                     </table>
                 </div>
             </div>

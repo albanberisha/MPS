@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Receptionist | Informata rreth pacientëve</title>
+    <title>Receptionist | Caktoni nje termin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -39,7 +39,7 @@
 
         <div class="page" style="width: 100%;">
             <div class="card-header">
-                <p>Receptionist | Informata rreth pacientëve</p>
+                <p>Receptionist | Caktoni nje termin</p>
             </div>
             <div class="container-fullw">
                 <form class="search-form">
@@ -88,31 +88,7 @@
                                Aktiv
                             </td>
                             <td class="actions">
-                            <span class="edit-data" onclick="window.open('edit-patient.php', '_self');"><img src="img/edit-icon.png"></span>
-                                <span class="edit-data" onclick="window.open('view-patient.php', '_self');"><img src="img/eye-icon.png"></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="pid">
-                                1234234
-                            </td>
-                            <td class="pname">
-                                Alban34234234234
-                            </td>
-                            <td class="psname">
-                                Berisha234234324
-                            </td>
-                            <td class="pcontact">
-                                044528369
-                            </td>
-                            <td class="pgender">
-                               Mashkull
-                            </td>
-                            <td class="pstatus">
-                               Jo aktiv
-                            </td>
-                            <td class="actions">
-                                <span class="edit-data" onclick="window.open('view-patient.php', '_self');"><img src="img/eye-icon.png"></span>
+                            <span class="edit-data" onclick="window.open('create-appointment.php', '_self');"><img src="img/edit-icon.png"></span>
                             </td>
                         </tr>
                     </table>

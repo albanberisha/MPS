@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Admin | Profili im</title>
+    <title>Doctor | Profili im</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -39,7 +39,7 @@
 
         <div class="page" style="width: 100%;">
             <div class="card-header">
-                <p>Admin | Profili im</p>
+                <p>Doctor | Profili im</p>
             </div>
             <div class=" container-fullw">
                 <div class="panel-body">

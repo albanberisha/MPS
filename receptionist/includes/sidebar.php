@@ -26,7 +26,7 @@
             </button>
         </div>
         <div class="dropdown-1" style="position: relative;">
-            <button class="drop-button-1" onclick="window.open('', '_self');">
+            <button class="drop-button-1" onclick="window.open('registration-history.php', '_self');">
                 <div class="d-inline-flex">
                     <img class="clipart-logo" src="img/raports-clipart.png" style="width: 25px; height: 25px;">
                     <p class="centered-name-1 text-left font-weight-bold">Historia e regjistrimeve</p>
@@ -34,10 +34,18 @@
             </button>
         </div>
         <div class="dropdown-1" style="position: relative;">
-            <button class="drop-button-1" onclick="window.open('', '_self');">
+            <button class="drop-button-1" onclick="window.open('add-appointment.php', '_self');">
                 <div class="d-inline-flex">
                     <img class="clipart-logo" src="img/kuqjet-clipart.png" style="width: 25px; height: 25px;">
                     <p class="centered-name-1 text-left font-weight-bold">Cakto nje termin</p>
+                </div>
+            </button>
+        </div>
+        <div class="dropdown-1" style="position: relative;">
+            <button class="drop-button-1" onclick="window.open('appointments.php', '_self');">
+                <div class="d-inline-flex">
+                    <img class="clipart-logo" src="img/kuqjet-clipart.png" style="width: 25px; height: 25px;">
+                    <p class="centered-name-1 text-left font-weight-bold">Terminet</p>
                 </div>
             </button>
         </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Receptionist | Menaxho pacientët</title>
+    <title>Receptionist | Regjistro pacientët</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -39,12 +39,12 @@
 
         <div class="page" style="width: 100%;">
             <div class="card-header">
-                <p>Receptionist | Menaxho pacientët</p>
+                <p>Receptionist | Regjistro pacientët</p>
             </div>
             <div class="container-fullw">
                 <div class="panel-body no-padding">
                     <div class="panel-heading">
-                        <h5 class="panel-title panel-white text-center">Menaxho pacientët</h5>
+                        <h5 class="panel-title panel-white text-center">Regjistro pacientët</h5>
                     </div>
                     <form>
                         <div class="form-group row">
@@ -96,13 +96,6 @@
                             <input type="email" class="form-control" name="patemail" placeholder="Emaili" required="required" value="A@gmail.com">
                         </div>
                         <div>
-                        <div class="form-group">
-                                <label class="input-title">Statusi</label>
-                                <input type="email" readonly="readonly" class="form-control" name="docemail" value="Joaktiv" required="required">
-                            </div>
-                        </div>
-                        <div>
-                            <p>Nese joaktiv nuk shfaqen kto</p>
                             <div class="form-group">
                                 <label class="input-title" for="PatientDept">
                                     Departamenti:
@@ -125,7 +118,7 @@
                             </div>
                         </div>
                         <div class="form-group" style="margin-top: 10px;">
-                            <button type="submit" class="btn btn-primary">Ndrysho</button>
+                            <button type="submit" class="btn btn-primary">Regjistro</button>
                         </div>
                     </form>
                 </div>

@@ -65,7 +65,7 @@
                                     Vazhdon
                                 </td>
                                 <td class="title4">
-                                    -
+                                <button type="submit" class="btn btn-primary">Perfundo</button>
                                 </td>
                             </tr>
                         </tbody>

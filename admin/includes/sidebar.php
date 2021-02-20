@@ -116,14 +116,6 @@
             </div>
         </div>
         <div class="dropdown-1" style="position: relative;">
-            <button class="drop-button-1">
-                <div class="d-inline-flex">
-                    <img class="clipart-logo" src="img/laboratory-clipart.png" style="width: 25px; height: 25px; margin-top: 5px;">
-                    <p class="centered-name-1 text-left font-weight-bold">Laboratori</p>
-                </div>
-            </button>
-        </div>
-        <div class="dropdown-1" style="position: relative;">
             <button class="drop-button-1" onclick="window.open('hospital-info.php', '_self');">
                 <div class="d-inline-flex">
                     <img class="clipart-logo" src="img/hospital-clipart.png" style="width: 25px; height: 25px; margin-top: 5px;">

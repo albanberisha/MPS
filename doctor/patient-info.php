@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Receptionist | Informata rreth pacientëve</title>
+    <title>Doctor | Informata rreth pacientëve</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -39,7 +39,7 @@
 
         <div class="page" style="width: 100%;">
             <div class="card-header">
-                <p>Receptionist | Informata rreth pacientëve</p>
+                <p>Doctor | Informata rreth pacientëve</p>
             </div>
             <div class="container-fullw">
                 <form class="search-form">

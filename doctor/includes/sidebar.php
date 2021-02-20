@@ -26,18 +26,10 @@
             </button>
         </div>
         <div class="dropdown-1" style="position: relative;">
-            <button class="drop-button-1" onclick="window.open('', '_self');">
-                <div class="d-inline-flex">
-                    <img class="clipart-logo" src="img/raports-clipart.png" style="width: 25px; height: 25px;">
-                    <p class="centered-name-1 text-left font-weight-bold">Historia e regjistrimeve</p>
-                </div>
-            </button>
-        </div>
-        <div class="dropdown-1" style="position: relative;">
-            <button class="drop-button-1" onclick="window.open('', '_self');">
+            <button class="drop-button-1" onclick="window.open('appointments-onhold.php', '_self');">
                 <div class="d-inline-flex">
                     <img class="clipart-logo" src="img/kuqjet-clipart.png" style="width: 25px; height: 25px;">
-                    <p class="centered-name-1 text-left font-weight-bold">Cakto nje termin</p>
+                    <p class="centered-name-1 text-left font-weight-bold">Terminet ne pritje</p>
                 </div>
             </button>
         </div>

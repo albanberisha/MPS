@@ -30,7 +30,7 @@
                 $(".sidenav").css("width", "60px");
             }
             if (widthOutput < 1120) {
-    
+
             } else {}
         }
 
@@ -51,8 +51,8 @@
                 <p>Doktor | Rezultate të reja</p>
             </div>
             <div class="container-fullw">
-               
-            <div class="panel-body">
+
+                <div class="panel-body">
                     <div class="panel-heading">
                         <h5 class="panel-title">Shto nje rezultat te analizave</h5>
                     </div>
@@ -68,6 +68,15 @@
                                     </div>
                                     <input type="file" name="img[]" class="file" accept="pdf/*">
                                 </form>
+                            </div>
+                            <div class="form-group">
+                                <label class="input-title" for="DepRoom">
+                                    Zgjedh analizen:
+                                </label>
+                                <select name="DepRoom" class="form-control doctorposition" required="true">
+                                    <option selected>A1t</option>
+                                    <option>E zemres</option>
+                                </select>
                             </div>
                             <div class="div-inlineflex">
                                 <div class="form-group">

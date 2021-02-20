@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Receptionist | Dashboard</title>
+    <title>Doctor | Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -57,12 +57,23 @@
 
         <div class="page" style="width: 100%;">
             <div class="card-header">
-                <p>Receptionist | Dashboard</p>
+                <p>Doctor | Dashboard</p>
             </div>
             <div class="container-fullw">
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="col">
+                            <div class="panel panel-white text-center" onclick="window.open('my-appointments.php', 'mywindow');">
+                                <div class="panel-body wid">
+                                    <div class="fa-stack fa-2x image-wid">
+                                        <img src="img/appointments-clipart.png">
+                                    </div>
+                                    <h2 class="StepTitle">Terminet e mija</h2>
+                                    <p class="links cl-effect-1">
+                                        Total Pacientë :6
+                                    </p>
+                                </div>
+                            </div>
                             <div class="panel panel-white text-center" onclick="window.open('register-patients.php', 'mywindow');">
                                 <div class="panel-body wid">
                                     <div class="fa-stack fa-2x image-wid">
@@ -72,28 +83,6 @@
                                     <p class="links cl-effect-1">
                                         Total Pacientë :6
                                     </p>
-                                </div>
-                            </div>
-                            <div class="panel panel-white no-radius text-center" onclick="window.open('', 'mywindow');">
-                                <div class="panel-body wid">
-                                    <div class="fa-stack fa-2x image-wid">
-                                        <img src="img/beds.png">
-                                    </div>
-                                    <h2 class="StepTitle">Shiko dhomat e spitalit</h2>
-                                    <p class="links cl-effect-1">
-                                        Gjithsej shtretër të lirë: 17
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="panel panel-white no-radius text-center" onclick="window.open('', 'mywindow');">
-                                <div class="panel-body wid">
-                                    <div class="fa-stack fa-2x image-wid">
-                                        <img src="img/supply-icon.png">
-                                    </div>
-                                    <h2 class="StepTitle">Menaxhimi i stoqeve dhe furnizimeve</h2>
-                                    <p class="links cl-effect-1" style="padding-bottom: 25px;">
-                                
-                                         </p>
                                 </div>
                             </div>
                         </div>
@@ -108,28 +97,6 @@
                                     <h2 class="StepTitle">Informata rreth pacientëve</h2>
                                     <p class="links cl-effect-1" style="padding-bottom: 25px;">
                                          
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="panel panel-white no-radius text-center" onclick="window.open('', 'mywindow');">
-                                <div class="panel-body wid">
-                                    <div class="fa-stack fa-2x image-wid">
-                                        <img src="img/medical-history.png">
-                                    </div>
-                                    <h2 class=" StepTitle ">Mbyll historinë</h2>
-                                    <p class="links cl-effect-1">
-                                        Pacientë aktiv :6
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="panel panel-white no-radius text-center" onclick="window.open('manage-staf.php', 'mywindow');">
-                                <div class="panel-body wid">
-                                    <div class="fa-stack fa-2x image-wid">
-                                        <img src="img/working-clipart.png">
-                                    </div>
-                                    <h2 class=" StepTitle ">Menaxho stafin dhe oraret</h2>
-                                    <p class="links cl-effect-1">
-                                       Staf aktiv :6
                                     </p>
                                 </div>
                             </div>
