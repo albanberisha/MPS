@@ -1,4 +1,69 @@
 <div class="main-body">
+
+<div class="col-md-12" style="margin-bottom: 10px;">
+            <div class="card">
+                <div style="padding-bottom: 0;">
+                    <h6 class="panel-title panel-white text-center col-header">Lokacioni i pacientit ne ambientet e spitalit</h6>
+                </div>
+                <div class="card-body card-top">
+                    <table class="data-list min-height dignosis color-none">
+                        <tbody>
+                            <tr>
+                                <th class="">
+                                    Statusi:
+                                </th>
+                            </tr>
+                            <tr>
+                                <td class="title5">
+                                    Jo aktiv
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="padding-bottom: 0;">
+                    <h6 class="panel-title panel-white text-center col-header">Lokacioni i pacientit ne ambientet e spitalit</h6>
+                </div>
+                <div class="card-body card-top">
+                    <table class="data-list min-height dignosis color-none">
+                        <tbody>
+                            <tr>
+                                <th class="panel-title title5">
+                                    Departamenti:
+                                </th>
+                                <th class="panel-title title5 ">
+                                    Dhoma:
+                                </th>
+                                <th class="panel-title title5 ">
+                                    Shtrati:
+                                </th>
+                                <th class="panel-title title5 ">
+                                    Kategoria:
+                                </th>
+                            </tr>
+                            <tr>
+                                <td class="title5">
+                                    I zemres
+                                </td>
+                                <td class="title5">
+                                    7
+                                </td>
+                                <td class="title5">
+                                    14
+                                </td>
+                                <td>
+                                <a href="" type="button" class="btn btn-secondary" style="background: yellow; border:1px solid rgb(199, 199, 105); color: #fff" data-toggle="tooltip" data-placement="bottom" title="Rast urgjent. Kerkohen shume resurse mirpo jo rreizk per jeten. Rast potencial resioz">Verdhë</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+
     <div class="row gutters-sm " id="pdf">
         <div class="col-md-4 mb-3">
             <div class="card">

@@ -62,7 +62,7 @@
                             <td class="rsnameh2">Mbiemri</td>
                             <td class="rrecepsh">Personi pergjegjes</td>
                             <td class="rdateh">Data</td>
-                            <td class="rtimeh">Data</td>
+                            <td class="rtimeh">Ora</td>
                         </tr>
                     </table>
                     <table class="data-list datalist-3">

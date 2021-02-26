@@ -1,3 +1,9 @@
+
+<?php
+session_start();
+error_reporting(0);
+include("includes/config.php");
+?>
 <style>
     .dropdown {
         overflow-wrap: break-word;
@@ -71,19 +77,47 @@
 <header class="top-head">
     <nav class="header-main">
         <div class="content">
-            <div class="float-left d-inline-flex"><img src="img/hospital.svg" width="50px" height="50px" />
-                <p class="text-primary content-name long-name">Qendra Klinike Universitare e Kosoves</p>
-                <p class="text-primary content-name capital-l">QKUK</p>
+            <div class="float-left d-inline-flex">
+            <?php
+            $query = "SELECT * FROM hospital_details";
+            $result = mysqli_query($con, $query);
+            $row = mysqli_fetch_array($result);
+            if($row['logo']==Null)
+            {}else{
+            echo '  
+                     <img src="data:image/jpeg;base64,' . base64_encode($row['logo']) . '" height="50" width="50" />  
+                     ';
+            }
+                     echo '<p class="text-primary content-name long-name">'.$row['name']."</p>";
+                     echo '<p class="text-primary content-name capital-l">'.$row['initials'].'</p>
+                     ';
+            ?>
             </div>
             <div class="dropdown" style="float:right;"><button class="dropbtn">
                 <div class="d-inline-flex text-xl-center">
-                    <img src="img/doctor.png" width="30px" height="30px" style="border-radius: 50%;" />
-                    <p class="text-left centered-name max-width-190">Admin</p>
+                <?php
+            $query = "SELECT * FROM users WHERE id='" . $_SESSION['id']. "'";
+            $result = mysqli_query($con, $query);
+            $row = mysqli_fetch_array($result);
+
+
+            echo '  
+                     <img src="data:image/jpeg;base64,' . base64_encode($row['photo']) . '" height="30" width="30" style="border-radius: 50%;" />  
+                     ';
+                     echo '<p class="text-left centered-name max-width-190">';
+                     if($row['name']==null)
+                     {
+                         echo 'Admin';
+                     }else{
+                         echo $row['name'];
+                     }
+                     echo'</p>';
+            ?>
                         <p style="margin-top:-2px;">
                         <i class="arrow down"></i></p></div></button>
                 <div class="dropdown-content">
                     <a href="my-profile.php">Shiko profilin</a>
-                    <a href="#">Dil</a>
+                    <a href="includes/logout.inc.php">Dil</a>
                 </div>
             </div>
         </div>

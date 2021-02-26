@@ -115,6 +115,43 @@
                                 <option>25</option>                                                              
                             </select>
                         </div>
+                        <div class="form-group">
+                                <label class="input-title" for="PatientDept">
+                                   Grupi i gjakut:
+                                </label>
+                                <select name="PatientDept" class="form-control patient-departament" required="true">
+                                    <option selected="">A+</option>
+                                    <option>A-</option>
+                                </select>
+                            </div>
+                        <div>
+                            <h5 class="panel-title panel-white text-center">Kontakt ne rast emergjence</h5>
+                                <div class="div-inlineflex">
+                                    <div class="form-group">
+                                        <label class="input-title" for="PatientName">
+                                            Emri i kontaktit:
+                                        </label>
+                                        <input type="text" id="namePatient" class="form-control" placeholder="Sheno emrin " />
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="input-title">Mbiemri:</label>
+                                        <input type="text" id="surnamePatient" class="form-control" placeholder="Sheno mbiemrin">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="input-title">Afersia</label>
+                                    <input type="text" id="surnamePatient" class="form-control" placeholder="Sheno afersine">
+                                </div>
+                                <div class="form-group">
+                                    <label class="input-title">Numri i telefonit</label>
+                                    <input class="form-control" id="phone-number" value="38349549509">
+                                </div>
+                                <div class="form-group">
+                                    <label class="input-title">Adresa</label>
+                                    <input type="text" class="form-control" id="adressPat" name="adresspat" placeholder="Adresa" value="Xheladin Hana, Aktash">
+                                </div>
+                            </div>
                         <div class="form-group" style="margin-top: 10px;">
                             <button type="submit" class="btn btn-primary">Regjistro</button>
                         </div>

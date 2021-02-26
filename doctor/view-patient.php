@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script type='text/javascript' src='https://code.jquery.com/jquery-1.11.0.js'></script>
-    <script type='text/javascript' src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+    <script type="text/javascript" src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
     <script src="js/sidenavigation.js"></script>
     <script src="js/imagebrowse.js"></script>
     <script src="js/input-masks.js"></script>
@@ -85,6 +85,9 @@ function printDiv(divId,
                             <li class="nav-item active">
                                 <button type="button" id="Manage" class="left-marg  btn btn-primary">Menaxho</button>
                             </li>
+                            <li class="nav-item active">
+                                <button type="button" id="ActualCond" class="left-marg  btn btn-primary">Gjendja aktuale</button>
+                            </li>
                         </ul>
                     </div>
                 </nav>
@@ -111,6 +114,9 @@ function printDiv(divId,
         });
         $("#Manage").click(function() {
             $("#container-fullw").load('includes/manage-patient.php');
+        });
+        $("#ActualCond").click(function() {
+            $("#container-fullw").load('includes/actual-condition.php');
         });
     });
 </script>

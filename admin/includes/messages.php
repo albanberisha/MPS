@@ -1,3 +1,4 @@
+
 <?php
 include 'dtbconn.php';
 $sqlQuery = "SELECT * FROM messages1 ORDER BY ID DESC ";

@@ -23,79 +23,189 @@
             </div>
             <div class="form-group">
                 <label class="input-title" for="HospitalDepartaments">
-                    Departamentet
+                    Filtro sipas departamenteve:
                 </label>
                 <select name="hospitalDepartaments" class="form-control" required="true">
-                    <option selected="" value="">Selekto departamentin</option>
+                    <option selected="" value="">Të gjitha</option>
                     <option>Urgjence</option>
                     <option>Emergjence</option>
                     <option>Urologji</option>
                 </select>
             </div>
-            <div class="card">
-                <div style="padding-bottom: 0;">
-                    <h6 class="panel-title panel-white text-center col-header">Dhomat</h6>
-                </div>
-                <div class="card-body card-top">
-                    <table class="data-list min-height dignosis color-none">
-                        <tbody>
-                            <tr>
-                                <th class="panel-title title1">
-                                    Numri i dhomes
-                                </th>
-                                <th class="panel-title title3 ">
-                                    Departamenti
-                                </th>
-                                <th class="panel-title title3 date">
-                                    Data e krijimit
-                                </th>
-                                <th class="actionsh">
-                                </th>
+            <div class="row gutters-sm " id="pdf">
+                <div class="col-md-6 mb-3">
+                    <div class="panel-body no-padding">
+                        <div class="panel-heading">
+                            <h5 class="panel-title panel-white text-center">Shtreterit</h5>
+                        </div>
+                        <table class="data-list min-height">
+                            <tr class="table-head ">
+                                <td class="bidh">Numri i shtratit</td>
+                                <td class="ridh">Numri i dhomes</td>
+                                <td class="deph">Departamenti</td>
+                                <td class="actionsh">
                             </tr>
+                        </table>
+                        <table class="data-list">
                             <tr>
-                                <td class="title1">
+                                <td class="rid">
                                     1
                                 </td>
-                                <td class="title3">
-                                    Emergjence
+                                <td class="rid">
+                                    1
                                 </td>
-                                <td class="title3 date">
-                                    12.11.2020
+                                <td class="dep">
+                                    Urologji
+                                </td>
+                                <td class=" actions" style="margin-top: -10px;">
+                                    <span class="delete-data"><img style="margin-top: -15px;" src="img/delete-icon.png"></span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel-body no-padding">
+                        <div class="panel-heading">
+                            <h5 class="panel-title panel-white text-center">Dhomat</h5>
+                        </div>
+                        <table class="data-list min-height">
+                            <tr class="table-head ">
+                                <td class="bidh">Numri i dhomes</td>
+                                <td class="ridh">Numri i shtreterve</td>
+                                <td class="deph">Departamenti</td>
+                                <td class="actionsh">
+                            </tr>
+                        </table>
+                        <table class="data-list">
+                            <tr>
+                                <td class="rid">
+                                    1
+                                </td>
+                                <td class="rid">
+                                    1
+                                </td>
+                                <td class="dep">
+                                    Urologji
                                 </td>
                                 <td class=" actions" style="margin-top: -10px;">
                                     <span class="delete-data"><img style="margin-top: -15px;" src="img/delete-icon.png"></span>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="title1">
-                                    2
+                                <td class="rid">
+                                    1
                                 </td>
-                                <td class="title3">
-                                    Emergjence
+                                <td class="rid">
+                                    1
                                 </td>
-                                <td class="title3 date">
-                                    12.11.2020
+                                <td class="dep">
+                                    Urologji
                                 </td>
                                 <td class=" actions" style="margin-top: -10px;">
                                     <span class="delete-data"><img style="margin-top: -15px;" src="img/delete-icon.png"></span>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="title1">
-                                    3
+                                <td class="rid">
+                                    1
                                 </td>
-                                <td class="title3">
-                                    Emergjence
+                                <td class="rid">
+                                    1
                                 </td>
-                                <td class="title3 date">
-                                    12.11.2020
+                                <td class="dep">
+                                    Urologji
                                 </td>
-                                <td class=" actions">
+                                <td class=" actions" style="margin-top: -10px;">
                                     <span class="delete-data"><img style="margin-top: -15px;" src="img/delete-icon.png"></span>
                                 </td>
                             </tr>
-                        </tbody>
-                    </table>
+                            <tr>
+                                <td class="rid">
+                                    1
+                                </td>
+                                <td class="rid">
+                                    1
+                                </td>
+                                <td class="dep">
+                                    Urologji
+                                </td>
+                                <td class=" actions" style="margin-top: -10px;">
+                                    <span class="delete-data"><img style="margin-top: -15px;" src="img/delete-icon.png"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="rid">
+                                    1
+                                </td>
+                                <td class="rid">
+                                    1
+                                </td>
+                                <td class="dep">
+                                    Urologji
+                                </td>
+                                <td class=" actions" style="margin-top: -10px;">
+                                    <span class="delete-data"><img style="margin-top: -15px;" src="img/delete-icon.png"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="rid">
+                                    1
+                                </td>
+                                <td class="rid">
+                                    1
+                                </td>
+                                <td class="dep">
+                                    Urologji
+                                </td>
+                                <td class=" actions" style="margin-top: -10px;">
+                                    <span class="delete-data"><img style="margin-top: -15px;" src="img/delete-icon.png"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="rid">
+                                    1
+                                </td>
+                                <td class="rid">
+                                    1
+                                </td>
+                                <td class="dep">
+                                    Urologji
+                                </td>
+                                <td class=" actions" style="margin-top: -10px;">
+                                    <span class="delete-data"><img style="margin-top: -15px;" src="img/delete-icon.png"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="rid">
+                                    1
+                                </td>
+                                <td class="rid">
+                                    1
+                                </td>
+                                <td class="dep">
+                                    Urologji
+                                </td>
+                                <td class=" actions" style="margin-top: -10px;">
+                                    <span class="delete-data"><img style="margin-top: -15px;" src="img/delete-icon.png"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="rid">
+                                    1
+                                </td>
+                                <td class="rid">
+                                    1
+                                </td>
+                                <td class="dep">
+                                    Urologji
+                                </td>
+                                <td class=" actions" style="margin-top: -10px;">
+                                    <span class="delete-data"><img style="margin-top: -15px;" src="img/delete-icon.png"></span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

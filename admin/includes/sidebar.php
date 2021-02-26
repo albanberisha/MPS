@@ -1,3 +1,4 @@
+
 <div class="side-nav" id="side-nav">
     <script>
         function closeNav() {
@@ -133,3 +134,12 @@
         </div>
     </div>
 </div>
+
+
+<script>
+ $(document).ready(function() {
+        $("#ManageDoctors").click(function() {
+            $("#page").load('includes/manage-doctors.php');
+        });
+    });
+</script>

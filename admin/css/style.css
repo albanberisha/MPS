@@ -1064,8 +1064,8 @@ ul .profile-pic:hover {
 .data-list .uusernameh,
 .data-list .logintimeh,
 .data-list .logintime,
-.data-list .logouttimeh,
-.data-list .logouttime,
+.data-list .loginhourh,
+.data-list .loginhour,
 .data-list .statusLog,
 .data-list .statusLogh,
 .data-list .pname,
@@ -1125,6 +1125,20 @@ ul .profile-pic:hover {
     word-break: break-word;
 }
 
+.data-list .bidh,
+.data-list .bid,
+.data-list .ridh,
+.data-list .rid {
+    width: 25%;
+    word-break: break-word;
+}
+
+.data-list .deph,
+.data-list .dep {
+    width: 40%;
+    word-break: break-word;
+}
+
 .data-list .dsname,
 .data-list .dsnameh,
 .data-list .isname,
@@ -1178,12 +1192,20 @@ ul .profile-pic:hover {
     cursor: pointer;
 }
 
+.data-list .table-head {
+    border-right: 20px solid rgba(0, 0, 0, 0.03);
+}
+
 .table-head {
     font-family: Helvetica, Arial, sans-serif;
     color: rgb(99, 99, 99);
     font-weight: bold;
     background-color: rgba(0, 0, 0, 0.03);
     padding: 10px;
+}
+
+.form-group span {
+    font-size: 15px;
 }
 
 .min-height {
@@ -1310,6 +1332,10 @@ ul .profile-pic:hover {
 
 .data-list .title4 {
     width: 17%;
+}
+
+.data-list .title5 {
+    width: 50%;
 }
 
 .card .color-none {

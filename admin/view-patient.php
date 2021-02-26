@@ -1,3 +1,22 @@
+<?php
+session_start();
+error_reporting(0);
+include('includes/config.php');
+include('includes/logincheck.php');
+check_login();
+//Ending a php session after 6(360 min) hours of inactivity
+$minutesBeforeSessionExpire = 360;
+if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > ($minutesBeforeSessionExpire * 60))) {
+    session_unset();     // unset $_SESSION   
+    session_destroy();   // destroy session data 
+    $host = $_SERVER['HTTP_HOST'];
+    $uri  = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+    $extra = "../index.php";
+    $_SESSION["login"] = "";
+    header("Location: http://$host$uri/$extra");
+}
+$_SESSION['LAST_ACTIVITY'] = time(); // update last activity
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -73,16 +92,9 @@
                             <tr>
                             <th>Gjinia</th>
                                 <td>Mashkull</td>
-                                <th>Mosha</th>
-                                <td>26</td>
-                            </tr>
-                            <tr>
-                                <th>Historia</th>
-                                <td>diabetik</td>
                                 <th>Date e regjistrimit</th>
                                 <td>2019-11-04 22:38:06</td>
                             </tr>
-
                         </tbody>
                     </table>
                 </div>

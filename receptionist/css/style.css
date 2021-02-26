@@ -46,6 +46,10 @@ html {
     text-overflow: ellipsis;
 }
 
+.data-list .table-head {
+    border-right: 20px solid rgba(0, 0, 0, 0.03);
+}
+
 .long-name {
     max-width: 610px;
     white-space: nowrap;
@@ -1333,7 +1337,7 @@ ul .profile-pic:hover {
 }
 
 .data-list .title5 {
-    width: 33%;
+    width: 25%;
 }
 
 .card .color-none {

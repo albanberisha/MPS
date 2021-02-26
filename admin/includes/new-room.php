@@ -1,3 +1,4 @@
+
 <div class="card">
     <div class="form-group">
         <form>
@@ -12,7 +13,7 @@
             </div>
 
             <div class="form-group" style="margin-top: 10px;">
-                <button type="submit" class="btn btn-primary">Regjistro</button>
+                <button type="submit" class="btn btn-primary">Shto</button>
             </div>
         </form>
     </div>

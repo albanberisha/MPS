@@ -1,476 +1,156 @@
 <?php
-require "header.php";
+session_start();
+error_reporting(0);
+include("includes/config.php");
+
+function validation($form_data)
+{
+    $form_data = trim(stripcslashes(htmlspecialchars($form_data)));
+    return $form_data;
+}
+
+function loginerror()
+{
+    $_SESSION['errmsg'] = "Emaili ose username i gabuar.";
+    $extra = "index.php";
+    $host  = $_SERVER['HTTP_HOST'];
+    $uri  = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+    header("location:http://$host$uri/$extra");
+    exit();
+}
+
+function userlog($con, $userId, $username, $loginDate, $loginTime, $status)
+{
+
+    $log = mysqli_query($con, "INSERT INTO userlog(userId,username,loginDate,loginTime,status) values('$userId','$username','$loginDate','$loginTime','$status')");
+}
+$sql = mysqli_query($con, "SELECT * FROM hospital_details");
+$num = mysqli_fetch_array($sql);
+if ($num > 0) {
+} else {
+    $logofirst = addslashes(file_get_contents("img/hospital-logo.png"));
+    $sql = mysqli_query($con, "INSERT INTO hospital_details(name, initials, logo) VALUES ('Qendra Klinike Universitare e Kosoves', 'QKUK','$logofirst')");
+    if ($sql) {
+    } else {
+        echo "Error: " . $sql . "<br>" . $con->error;
+    }
+}
+$sql = mysqli_query($con, "SELECT * FROM users");
+$num = mysqli_fetch_array($sql);
+if ($num > 0) {
+} else {
+    $psw = 'admin';
+    $photo = addslashes(file_get_contents("img/empty-img.png"));
+    $password = password_hash($psw, PASSWORD_BCRYPT);
+    $sql = mysqli_query($con, "INSERT INTO users(username, password, privilege,photo) VALUES ('admin', '$password', 'admin','$photo')");
+    if ($sql) {
+    } else {
+        echo "Error: " . $sql . "<br>" . $con->error;
+    }
+}
+
+
+
+if (isset($_POST['submit'])) {
+    $user_username = $_POST['username'];
+    $user_pasword = $_POST['password'];
+
+    $date = date("Y-m-d");
+    $time = date("h:i:sa");
+    $status = 0;
+
+    $ret = mysqli_query($con, "SELECT * FROM users WHERE email='" . $_POST['username'] . "'");
+    $num = mysqli_fetch_array($ret);
+    if ($num > 0) {
+        $dbpass = $num['password'];
+        if (password_verify($user_pasword, $dbpass)) {
+            print($num['username']);
+            $extra = "admin/dashboard.php"; //
+            $_SESSION['login'] = $num['username'];
+            $_SESSION['id'] = $num['id'];
+            $host = $_SERVER['HTTP_HOST'];
+            $uip = $_SERVER['REMOTE_ADDR'];
+            $status = 1;
+            userlog($con, $num['id'], $num['username'], $date, $time, $status);
+            $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+            header("location:http://$host$uri/$extra?login=success");;
+            exit();
+        } else {
+            userlog($con, $num['id'], $num['username'], $date, $time, $status);
+            loginerror();
+        }
+    } else {
+        $ret = mysqli_query($con, "SELECT * FROM users WHERE username='" . $_POST['username'] . "'");
+        $num = mysqli_fetch_array($ret);
+        if ($num > 0) {
+            $dbpass = $num['password'];
+            if (password_verify($user_pasword, $dbpass)) {
+                $extra = "admin/dashboard.php"; //
+                $_SESSION['login'] = $num['username'];
+                $_SESSION['id'] = $num['id'];
+                $host = $_SERVER['HTTP_HOST'];
+                $uip = $_SERVER['REMOTE_ADDR'];
+                $status = 1;
+                userlog($con, $num['id'], $num['username'], $date, $time, $status);
+                $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+                header("location:http://$host$uri/$extra?login=success");
+                exit();
+            } else {
+                userlog($con, $num['id'], $num['username'], $date, $time, $status);
+                loginerror();
+            }
+        } else {
+            loginerror();
+        }
+    }
+}
 ?>
+<!DOCTYPE html>
 
+<head>
+    <meta charset="utf-8">
+    <title>Kyqja</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+    </style>
+</head>
 
-<div style="display:inline:block;">
-
-    <div id="nav-side">
-        <span class="close" style="cursor:pointer;" onclick="openNav()">&#9776;</span>
-        <div id="mySidenav" class="sidenav">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <div class="dropdown-1" style="position: relative;">
-                <button class="drop-button-1">
-                    <div class="d-inline-flex">
-                        <img class="clipart-logo" src="img/dashboard-clipart.png"
-                            style="width: 25px; height: 25px; margin-top: 5px;">
-                        <p class="centered-name-1 font-weight-bold">Dashboard</p>
-                    </div>
-                </button>
-            </div>
-            <div class="dropdown-1">
-                <button class="drop-button-1">
-                    <div class="d-inline-flex">
-                        <img class="clipart-logo" src="img/doc-clipart.png"
-                            style="width: 25px; height: 25px; margin-top: 7px;">
-                        <p class="centered-name-1 font-weight-bold">Doktoret</p>
-                        <p> <i class="arrow down" style="margin-top: 14px;"></i></p>
-                    </div>
-                </button>
-                <div class="dropdown-content-1 font-weight-bold">
-                    <a href="#">Shto doktorr</a>
-                    <a href="#">Menaxho doktorret</a>
-                </div>
-            </div>
-            <div class="dropdown-1" style="position: relative;">
-                <button class="drop-button-1">
-                    <div class="d-inline-flex">
-                        <img class="clipart-logo" src="img/nurse-clipart.png"
-                            style="width: 25px; height: 25px; margin-top: 7px;">
-                        <p class="centered-name-1 font-weight-bold">Infermieret</p>
-                        <p> <i class="arrow down" style="margin-top: 14px;"></i></p>
-                    </div>
-                </button>
-                <div class="dropdown-content-1 font-weight-bold">
-                    <a href="#">Shto infermier</a>
-                    <a href="#">Menaxho infermieret</a>
-                </div>
-            </div>
-            <div class="dropdown-1" style="position: relative;">
-                <button class="drop-button-1">
-                    <div class="d-inline-flex">
-                        <img class="clipart-logo" src="img/patient-clipart.png" style="width: 25px; height: 25px;">
-                        <p class="centered-name-1 font-weight-bold">Pacientët</p>
-                        <p> <i class="arrow down" style="margin-top: 14px;"></i></p>
-                    </div>
-                </button>
-                <div class="dropdown-content-1 font-weight-bold">
-                    <a href="#">Shto pacient</a>
-                    <a href="#">Menaxho pacientet</a>
-                </div>
-
-            </div>
-            <div class="dropdown-1" style="position: relative;">
-                <button class="drop-button-1">
-                    <div class="d-inline-flex">
-                        <img class="clipart-logo" src="img/staf-clipart.png"
-                            style="width: 25px; height: 25px; margin-top: 5px;">
-                        <p class="centered-name-1 font-weight-bold">Stafi</p>
-                        <p> <i class="arrow down" style="margin-top: 14px;"></i></p>
-                    </div>
-                </button>
-                <div class="dropdown-content-1 font-weight-bold">
-                    <a href="#">Shto staf</a>
-                    <a href="#">Menaxho stafin</a>
-                </div>
-
-            </div>
-            <div class="dropdown-1" style="position: relative;">
-                <button class="drop-button-1">
-                    <div class="d-inline-flex">
-                        <img class="clipart-logo" src="img/raports-clipart.png"
-                            style="width: 25px; height: 25px; margin-top: 5px;">
-                        <p class="centered-name-1 font-weight-bold">Raportet ditore</p>
-                    </div>
-                </button>
-            </div>
-            <div class="dropdown-1" style="position: relative;">
-                <button class="drop-button-1">
-                    <div class="d-inline-flex">
-                        <img class="clipart-logo" src="img/kuqjet-clipart.png"
-                            style="width: 25px; height: 25px; margin-top: 5px;">
-                        <p class="centered-name-1 font-weight-bold">Kyçjet ditore</p>
-                    </div>
-                </button>
-            </div>
-            <div class="dropdown-1" style="position: relative;">
-                <button class="drop-button-1">
-                    <div class="d-inline-flex">
-                        <img class="clipart-logo" src="img/medicaments-clipart.png"
-                            style="width: 25px; height: 25px; margin-top: 5px;">
-                        <p class="centered-name-1 font-weight-bold">Menaxho medikamentet</p>
-                    </div>
-                </button>
-                <div class="dropdown-content-1 font-weight-bold">
-                    <a href="#">Shto medikamente</a>
-                    <a href="#">Menaxho medikamentet</a>
-                </div>
-            </div>
-            <div class="dropdown-1" style="position: relative;">
-                <button class="drop-button-1">
-                    <div class="d-inline-flex">
-                        <img class="clipart-logo" src="img/laboratory-clipart.png"
-                            style="width: 25px; height: 25px; margin-top: 5px;">
-                        <p class="centered-name-1 font-weight-bold">Laboratori</p>
-                    </div>
-                </button>
-            </div>
-            <div class="dropdown-1" style="position: relative;">
-                <button class="drop-button-1">
-                    <div class="d-inline-flex">
-                        <img class="clipart-logo" src="img/hospital-clipart.png"
-                            style="width: 25px; height: 25px; margin-top: 5px;">
-                        <p class="centered-name-1 font-weight-bold">Te dhenat e spitalit</p>
-                    </div>
-                </button>
-            </div>
-            <div class="dropdown-1" style="position: relative;">
-                <button class="drop-button-1">
-                    <div class="d-inline-flex">
-                        <img class="clipart-logo" src="img/charts-clipart.png"
-                            style="width: 25px; height: 25px; margin-top: 5px;">
-                        <p class="centered-name-1 font-weight-bold">Statistika dhe analiza</p>
-                    </div>
-                </button>
-            </div>
-
-        </div>
-    </div>
-    <div class="">
-        <?php
-          require "header.php";
+<body>
+    <div class="login">
+        <div class="text-center">
+            <?php
+            $query = "SELECT * FROM hospital_details";
+            $result = mysqli_query($con, $query);
+            $row = mysqli_fetch_array($result);
+            if($row['logo']==Null)
+            {}else{
+            echo '  
+                     <img src="data:image/jpeg;base64,' . base64_encode($row['logo']) . '" height="100" width="100" />  
+                     ';
+                    }
             ?>
-    </div>
-</div>
-
-
-
-<script>
-function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-    document.getElementById("nav-side").style.width = "250px";
-
-}
-
-function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("nav-side").style.width = "0";
-}
-</script>
-
-
-
-<table class="wigdets" style="width: 100%;">
-                    <tr>
-                        <td class="" style="width:100px;">
-                            <div class="widget " style="width: max-content;">
-                                <div>
-                                    <p class="wid-info text-center">Data</p>
-                                    <hr class="divider" align="center">
-                                </div>
-                                <div>
-                                    <p class="widget-main-cal text-center">12/02/2020</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td></td>
-                        <td rowspan="3" class="" style="background-color: red; width: 250px;">
-                            <div class="widget " style="height: 100%;">
-                                <div>
-                                    <p class="wid-info text-center">Aktiv</p>
-                                    <hr class="divider" align="center">
-                                </div>
-                                <div class="aktiv">
-                                    aa </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="widget">
-                                <div>
-                                    <p class="wid-info text-center">Rastet kritike</p>
-                                    <hr class="divider" align="center">
-                                </div>
-
-                            </div>
-                        </td>
-                    </tr>
-
-                </table>
-
-
-                /*
-.wrapper {
-    background-color: #0E1318;
-    height: 300px;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    margin: 0 auto;
-}
-
-.item {
-    background-color: #00D9E1;
-    padding: 0 10px;
-    height: 240px;
-    width: 250px;
-    border-radius: 5px;
-}
-
-.wrapper {
-    /* add this at the end */
-/*
-display: grid;
-grid-template-columns: repeat(6, auto);
-grid-gap: 0 50px;
-padding: 30px 60px;
-padding-right: 0;
-
-}
-.empty {
-    width: 10px;
-}
-.wrapper {
-    /* Add this at the end */
-    
-    -ms-overflow-style: none;
-    /* IE and Edge */
-    
-    border-radius: 10px;
-}
-.wrapper::-webkit-scrollbar {}
-.wrapper {
-    grid-auto-flow: column;
-    grid-template-columns: auto;
-}
-
-
-<td rowspan="2" class="" style="background-color: red; width: 250px;">
-                        <div class="widget " style="height: 100%;">
-                            <div>
-                                <p class="wid-info text-center">Aktiv</p>
-                                <hr class="divider" align="center">
-                            </div>
-                            <div class="aktiv">
-                                aa </div>
-                        </div>
-                    </td>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="widget-inline">
-    <div class="widget-block">
-        <div class="widget-inline">
-            <div class="widget">
-                <div>
-                    <p class="wid-info text-center">Data</p>
-                    <hr class="divider" align="center">
-                </div>
-                <div>
-                    <p class="widget-main-cal text-center">12/02/2020</p>
-                </div>
-            </div>
-            <div class="widget">
-                <div>
-                    <p class="wid-info text-center">Data</p>
-                    <hr class="divider" align="center">
-                </div>
-                <div>
-                    <p class="widget-main-cal text-center">12/02/2020</p>
-                </div>
-            </div>
-            <div class="widget">
-                <div>
-                    <p class="wid-info text-center">Data</p>
-                    <hr class="divider" align="center">
-                </div>
-                <div>
-                    <p class="widget-main-cal text-center">12/02/2020</p>
-                </div>
-            </div>
-            <div class="widget">
-                <div>
-                    <p class="wid-info text-center">Data</p>
-                    <hr class="divider" align="center">
-                </div>
-                <div>
-                    <p class="widget-main-cal text-center">12/02/2020</p>
-                </div>
-            </div>
-            <div class="widget">
-                <div>
-                    <p class="wid-info text-center">Data</p>
-                    <hr class="divider" align="center">
-                </div>
-                <div>
-                    <p class="widget-main-cal text-center">12/02/2020</p>
-                </div>
-            </div>
-
         </div>
-        <div class="widget">
-            <div>
-                <p class="wid-info text-center">Data</p>
-                <hr class="divider" align="center">
-            </div>
-            <div>
-                <p class="widget-main-cal text-center">12/02/2020</p>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-</div>
-
-
-
-
-
-
-<div class="active-users">
-    <div class="widget">
         <div>
-            <p class="wid-info text-center">Aktiv</p>
-            <hr class="divider" align="center">
-        </div>
-        <div class="active-now">
-            <ul class="list-group pmd-list pmd-card-list pmd-inset-divider">
-                <li class="list-group-item d-flex profile-pic">
-                    <a href="javascript:void(0);" class="pmd-avatar-list-img" title="profile-link">
-                        <img alt="40x40" src="img/doctor.png">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="pmd-list-title name-surname">Alban Berisha</h4>
-                        <p class="pmd-list-subtitle position">Doktorr</p>
-                    </div>
-                    <div class="status">
-                    </div>
-                </li>
-                <li class="list-group-item d-flex profile-pic">
-                    <a href="javascript:void(0);" class="pmd-avatar-list-img" title="profile-link">
-                        <img alt="40x40" src="img/doctor.png">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="pmd-list-title name-surname">Alban Berisha</h4>
-                        <p class="pmd-list-subtitle position">Doktorr</p>
-                    </div>
-                    <div class="status">
-                    </div>
-                </li>
-                <li class="list-group-item d-flex profile-pic">
-                    <a href="javascript:void(0);" class="pmd-avatar-list-img" title="profile-link">
-                        <img alt="40x40" src="img/doctor.png">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="pmd-list-title name-surname">Alban Berisha</h4>
-                        <p class="pmd-list-subtitle position">Doktorr</p>
-                    </div>
-                    <div class="status">
-                    </div>
-                </li>
-                <li class="list-group-item d-flex profile-pic">
-                    <a href="javascript:void(0);" class="pmd-avatar-list-img" title="profile-link">
-                        <img alt="40x40" src="img/doctor.png">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="pmd-list-title name-surname">Alban Berisha</h4>
-                        <p class="pmd-list-subtitle position">Doktorr</p>
-                    </div>
-                    <div class="status">
-                    </div>
-                </li>
-            </ul>
+            <form method="post" name="login-form">
+                <p>
+                    <span style="color:red;"><?php echo htmlentities($_SESSION['errmsg']); ?><?php echo htmlentities($_SESSION['errmsg'] = ""); ?></span>
+                </p>
+                <div class="text-center">
+                    <label class="col-form-label">Emaili ose Username:</label>
+                    <input class="form-control" type="text" name="username" placeholder="Emaili ose username" required />
+                </div>
+                <div class="text-center">
+                    <label class="col-form-label">Paswordi:</label>
+                    <input class="form-control" type="password" name="password" placeholder="Paswordi" />
+                </div>
+                <div class="text-center col-form-label">
+                    <button type="submit" name="submit" class="btn-primary" style="width: 100%; border: 1px solid blue; border-radius: 5px; padding: 3px;">Kyquni</button>
+                </div>
+            </form>
         </div>
     </div>
-</div>
+</body>
 
-
-<div class="col-sm-8 bar-wid">
-                        <div class="col">
-                            <div class="panel panel-white no-radius text-center">
-                                <div class="panel-body wid">
-                                    <div id="chart-container">
-                                        <canvas id="graphCanvas"></canvas>
-                                    </div>
-
-                                    <script>
-                                        $(document).ready(function() {
-                                            //retrive data from fetch_comments.php page
-                                            showGraph();
-
-                                        });
-
-
-                                        function showGraph() {
-                                            {
-                                                $.post("data.php",
-                                                    function(data) {
-                                                        console.log(data);
-                                                        var name = [];
-                                                        var marks = [];
-
-                                                        for (var i in data) {
-                                                            marks.push(data[i].marks);
-                                                            name.push(data[i].student_name);
-
-                                                        }
-                                                        var chartdata = {
-                                                            labels: name,
-                                                            datasets: [{
-                                                                label: 'Numri I Rasteve',
-                                                                backgroundColor: '#49e2ff',
-                                                                borderColor: '#46d5f1',
-                                                                hoverBackgroundColor: '#CCCCCC',
-                                                                hoverBorderColor: '#666666',
-                                                                data: marks
-                                                            }]
-                                                        };
-
-                                                        var graphTarget = $("#graphCanvas");
-
-                                                        var barGraph = new Chart(graphTarget, {
-                                                            type: 'horizontalBar',
-                                                            data: chartdata
-                                                        });
-
-
-                                                    });
-                                            }
-                                        }
-                                    </script>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+</html>

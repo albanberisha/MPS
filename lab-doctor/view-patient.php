@@ -73,12 +73,6 @@
                             <tr>
                             <th>Gjinia</th>
                                 <td>Mashkull</td>
-                                <th>Mosha</th>
-                                <td>26</td>
-                            </tr>
-                            <tr>
-                                <th>Historia</th>
-                                <td>diabetik</td>
                                 <th>Date e regjistrimit</th>
                                 <td>2019-11-04 22:38:06</td>
                             </tr>

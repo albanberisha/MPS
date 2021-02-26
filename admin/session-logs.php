@@ -1,3 +1,22 @@
+<?php
+session_start();
+error_reporting(0);
+include('includes/config.php');
+include('includes/logincheck.php');
+check_login();
+//Ending a php session after 6(360 min) hours of inactivity
+$minutesBeforeSessionExpire = 360;
+if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > ($minutesBeforeSessionExpire * 60))) {
+    session_unset();     // unset $_SESSION   
+    session_destroy();   // destroy session data 
+    $host = $_SERVER['HTTP_HOST'];
+    $uri  = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+    $extra = "../index.php";
+    $_SESSION["login"] = "";
+    header("Location: http://$host$uri/$extra");
+}
+$_SESSION['LAST_ACTIVITY'] = time(); // update last activity
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,93 +79,50 @@
                             <td class="logIdh">Nr.</td>
                             <td class="userIdh">Id</td>
                             <td class="uusernameh">Username</td>
-                            <td class="logintimeh">Koha e kycjes</td>
-                            <td class="logouttimeh">Koha e shkycjes</td>
+                            <td class="logintimeh">Data e kycjes</td>
+                            <td class="loginhourh">Ora e shkycjes</td>
                             <td class="statusLogh">Statusi</td>
                         </tr>
                     </table>
                     <table class="data-list">
-                        <tr>
-                            <td class="logId">1234</td>
-                            <td class="userId">12</td>
-                            <td class="uusername">Username</td>
-                            <td class="logintime">27-12-2020 12:34</td>
-                            <td class="logouttime">27-12-2020 20:34</td>
-                            <td class="statusLog">Sukses</td>
-                        </tr>
-                        <tr>
-                            <td class="logId">1234</td>
-                            <td class="userId">12</td>
-                            <td class="uusername">Username</td>
-                            <td class="logintime">27-12-2020 12:34</td>
-                            <td class="logouttime">27-12-2020 20:34</td>
-                            <td class="statusLog">Sukses</td>
-                        </tr>
-                        <tr>
-                            <td class="logId">1234</td>
-                            <td class="userId">12</td>
-                            <td class="uusername">Username</td>
-                            <td class="logintime">27-12-2020 12:34</td>
-                            <td class="logouttime">27-12-2020 20:34</td>
-                            <td class="statusLog">Sukses</td>
-                        </tr>
-                        <tr>
-                            <td class="logId">1234</td>
-                            <td class="userId">12</td>
-                            <td class="uusername">Username</td>
-                            <td class="logintime">27-12-2020 12:34</td>
-                            <td class="logouttime">27-12-2020 20:34</td>
-                            <td class="statusLog">Sukses</td>
-                        </tr>
-                        <tr>
-                            <td class="logId">1234</td>
-                            <td class="userId">12</td>
-                            <td class="uusername">Username</td>
-                            <td class="logintime">27-12-2020 12:34</td>
-                            <td class="logouttime">27-12-2020 20:34</td>
-                            <td class="statusLog">Sukses</td>
-                        </tr>
-                        <tr>
-                            <td class="logId">1234</td>
-                            <td class="userId">12</td>
-                            <td class="uusername">Username</td>
-                            <td class="logintime">27-12-2020 12:34</td>
-                            <td class="logouttime">27-12-2020 20:34</td>
-                            <td class="statusLog">Sukses</td>
-                        </tr>
-                        <tr>
-                            <td class="logId">1234</td>
-                            <td class="userId">12</td>
-                            <td class="uusername">Username</td>
-                            <td class="logintime">27-12-2020 12:34</td>
-                            <td class="logouttime">27-12-2020 20:34</td>
-                            <td class="statusLog">Sukses</td>
-                        </tr>
-                        <tr>
-                            <td class="logId">1234</td>
-                            <td class="userId">12</td>
-                            <td class="uusername">Username</td>
-                            <td class="logintime">27-12-2020 12:34</td>
-                            <td class="logouttime">27-12-2020 20:34</td>
-                            <td class="statusLog">Sukses</td>
-                        </tr>
-                        <tr>
-                            <td class="logId">1234</td>
-                            <td class="userId">12</td>
-                            <td class="uusername">Username</td>
-                            <td class="logintime">27-12-2020 12:34</td>
-                            <td class="logouttime">27-12-2020 20:34</td>
-                            <td class="statusLog">Sukses</td>
-                        </tr>
-                        <tr>
-                            <td class="logId">1234</td>
-                            <td class="userId">12</td>
-                            <td class="uusername">Username</td>
-                            <td class="logintime">27-12-2020 12:34</td>
-                            <td class="logouttime">27-12-2020 20:34</td>
-                            <td class="statusLog">Sukses</td>
-                        </tr>
-
+                        <?php
+                        $query=mysqli_query($con,"SELECT * from userlog ORDER BY id DESC");
+                        
+                        if (!$query) {
+                            die("E pamundur te azhurohen te dhenat: " . mysqli_connect_error());
+                        } else {
+                            $cnt=1;
+                          while(($data=mysqli_fetch_array($query)) && $cnt<100)
+                          {
+                            ?>
+                            <tr>
+                            <td class="logId"><?php echo $cnt;?></td>
+                            <td class="userId"><?php echo $data['userId'];?></td>
+                            <td class="uusername"><?php echo $data['username'];?></td>
+                            <td class="logintime"><?php echo $data['loginDate'];?></td>
+                            <td class="loginhour"><?php echo $data['loginTime'];?></td>
+                            <td class="statusLog
+                            <?php
+                            if($data['status']==1)
+                            {
+                                ?>
+                                text-success">
+                                <?php
+                                echo "Sukses.";
+                            }else{
+                                ?>
+                                text-danger">
+                                <?php
+                                echo "Pa sukses.";
+                            }
+                            ?>
+                            </td>
+                             </tr>
+                            <?php  
+                            $cnt=$cnt+1;
+                          }
+                        }
+                        ?>
                     </table>
                 </div>
             </div>

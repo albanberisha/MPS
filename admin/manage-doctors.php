@@ -1,3 +1,24 @@
+
+
+<?php
+session_start();
+error_reporting(0);
+include('includes/config.php');
+include('includes/logincheck.php');
+check_login();
+//Ending a php session after 6(360 min) hours of inactivity
+$minutesBeforeSessionExpire = 360;
+if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > ($minutesBeforeSessionExpire * 60))) {
+    session_unset();     // unset $_SESSION   
+    session_destroy();   // destroy session data 
+    $host = $_SERVER['HTTP_HOST'];
+    $uri  = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+    $extra = "../index.php";
+    $_SESSION["login"] = "";
+    header("Location: http://$host$uri/$extra");
+}
+$_SESSION['LAST_ACTIVITY'] = time(); // update last activity
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,12 +28,18 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/Chart.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script type='text/javascript' src='https://code.jquery.com/jquery-1.11.0.js'></script>
-    <script type='text/javascript' src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
     <script src="js/sidenavigation.js"></script>
     <script src="js/imagebrowse.js"></script>
-    <script src="js/input-masks.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#widget li').on('click', function() {
+                $(this).removeClass('new-ntf');
+            });
+        });
+    </script>
     <script>
         function reportWindowSize() {
             var widthOutput = window.innerWidth;
@@ -23,21 +50,33 @@
                 $(".openbtn").css("display", "inline");
                 $(".sidenav").css("width", "60px");
             }
+            if (widthOutput < 1120) {
+                closeChat();
+            } else {}
         }
 
+        function closeChat() {
+            document.getElementById("Chatbox").style.display = "none";
+
+        }
+
+        function openChat() {
+            document.getElementById("Chatbox").style.display = "inline";
+
+        }
         window.onresize = reportWindowSize;
     </script>
 </head>
 
 <body onload="reportWindowSize()">
     <header>
-        <?php include('includes/header.php');?>
+        <?php include('includes/header.php'); ?>
         <hr style="margin-top:0px;">
     </header>
     <div class="" style="display: flex; margin-top: -16px; width: 100%;">
-        <?php include('includes/sidebar.php');?>
+        <?php include('includes/sidebar.php'); ?>
 
-        <div class="page" style="width: 100%;">
+        <div class="page" id="page" style="width: 100%;">
             <div class="card-header">
                 <p>Admin | Menaxho Doktorret</p>
             </div>
@@ -80,11 +119,10 @@
                                 Specializimi234234234
                             </td>
                             <td class="actions">
-                                <span class="edit-data" onclick="window.open('edit-doctor.php', '_self');"><img src="img/edit-icon.png"></span>
+                                <span class="edit-data" id="EditDoctor"><img src="img/edit-icon.png"></span>
                                 <span class="delete-data"><img src="img/delete-icon.png"></span>
                             </td>
                         </tr>
-
                     </table>
                 </div>
             </div>
@@ -93,3 +131,10 @@
 </body>
 
 </html>
+<script>
+    $(document).ready(function() {
+        $("#EditDoctor").click(function() {
+            $("#page").load('includes/edit-doctor.php');
+        });
+    });
+</script>

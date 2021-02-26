@@ -3,6 +3,10 @@ html {
     min-height: 100%;
 }
 
+.data-list .table-head {
+    border-right: 20px solid rgba(0, 0, 0, 0.03);
+}
+
 .login {
     position: fixed;
     top: 50%;

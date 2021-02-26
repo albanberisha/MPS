@@ -44,7 +44,7 @@
             <div class="container-fullw">
                 <div class="panel-body no-padding">
                     <div class="panel-heading">
-                        <h5 class="panel-title panel-white text-center">Dhomat në spital</h5>
+                        <h5 class="panel-title panel-white text-center">Shtreterit dhe dhomat në spital</h5>
                     </div>
                     <div class="form-group">
                                 <label class="input-title" for="HospitalDepartaments">

@@ -83,6 +83,33 @@
                             <td class="pgender">
                                Mashkull
                             </td>
+                            <td class="pstatus">
+                               Aktiv
+                            </td>
+                            <td class="actions">
+                            <span class="edit-data" onclick="window.open('edit-patient.php', '_self');"><img src="img/edit-icon.png"></span>
+                                <span class="edit-data" onclick="window.open('view-patient.php', '_self');"><img src="img/eye-icon.png"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="pid">
+                                1234234
+                            </td>
+                            <td class="pname">
+                                Alban34234234234
+                            </td>
+                            <td class="psname">
+                                Berisha234234324
+                            </td>
+                            <td class="pcontact">
+                                044528369
+                            </td>
+                            <td class="pgender">
+                               Mashkull
+                            </td>
+                            <td class="pstatus">
+                               Jo aktiv
+                            </td>
                             <td class="actions">
                                 <span class="edit-data" onclick="window.open('view-patient.php', '_self');"><img src="img/eye-icon.png"></span>
                             </td>
