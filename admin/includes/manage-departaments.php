@@ -9,10 +9,19 @@ include('config.php');
                 <label class="input-title" for="HospitalDepartaments">
                     Shto nje departament te ri:
                 </label>
-                <div style="margin-bottom: 10px;">
-                    <button type="button" id="NewDepartament" class="left-marg  btn btn-primary"><span style="font-size: 15px;">&#43;</span> Shto</button>
-                </div>
                 <div id="New-departament">
+                    <div class="card">
+                        <div class="form-group">
+                            <form id="addDep_form" method="post">
+                                <div class="form-group">
+                                <label class="input-title" for="DepRoom">Shenoni emrin e departamentit</label>
+                                <input type="text" id="DepName" class="form-control" placeholder="Sheno emrin e departamentit">
+                                    <p id="ResponseDepAdd" style="color:red;"></p>
+                                </div>
+                                <div class="form-group" style="margin-top: 10px;"><button type="submit" class="btn btn-primary">Shto</button></div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="card">
@@ -68,8 +77,8 @@ include('config.php');
 <script>
     $(document).ready(function() {
         $("#NewDepartament").click(function() {
-            var html = '<div class="card"> <div class="form-group"><form><div class="form-group"><label class="input-title" for="DepRoom">Shenoni emrin e departamentit</label><input type="text" id="DepName" class="form-control" placeholder="Sheno emrin e departamentit">  <p id="ResponseDepAdd" style="color:red;"></p></div><div class="form-group" style="margin-top: 10px;"><button type="submit" onclick="adddepartament();" class="btn btn-primary">Shto</button></div></form></div></div>';
-            $("#New-departament").html(html);
+            var html = '<div class="card"> <div class="form-group"><form  id="addDep_form" method="post"><div class="form-group"><label class="input-title" for="DepRoom">Shenoni emrin e departamentit</label><input type="text" id="DepName" class="form-control" placeholder="Sheno emrin e departamentit">  <p id="ResponseDepAdd" style="color:red;"></p></div><div class="form-group" style="margin-top: 10px;"><button type="submit" class="btn btn-primary">Shto</button></div></form></div></div>';
+            //$("#New-departament").html(html);
         });
     });
 </script>
@@ -88,17 +97,21 @@ include('config.php');
                     }
                 })
                 .done(function(response) {
-                    $("#Departaments").html(response);
-                    $('#Response').html("Fshierja u krye me sukses.");
-                    //$("#"+response).load('includes/delete-departament.inc.php #'+response,"");
+                    if (response == 1) {
+                        $('#Response').html("Departamenti nuk mund te fshihet sepse ka dhoma aktive ne te.");
+                    } else {
+                        $("#Departaments").html(response);
+                        $('#Response').html("Fshierja u krye me sukses.");
+                        //$("#"+response).load('includes/delete-departament.inc.php #'+response,"");
+                    }
                 });
             return false;
         } else {
             $('#Response').html("Fshierja u anulua.");
         }
     }
-
-    function adddepartament() {
+    $("#addDep_form").submit(function(e) {
+        e.preventDefault();
         $('#Response').html("");
         $depname = $('#DepName').val();
         if ($depname == "") {
@@ -117,25 +130,23 @@ include('config.php');
                             }
                         })
                         .done(function(response) {
-                            if(response=="error")
-                            {
+                            if (response == "error") {
                                 $('#ResponseDepAdd').html("Departamenti ekziston!.");
-                             }else{
+                            } else {
                                 $("#Departaments").html(response);
-                            $('#ResponseDepAdd').html("Shtimi u krye me sukses.");
+                                $('#ResponseDepAdd').html("Shtimi u krye me sukses.");
                             }
-                           
+
                         });
                     return false;
-                 } else {
+                } else {
                     $('#ResponseDepAdd').html("Shtimi u anulua.");
                 }
-            }else 
-            {
-              $('#ResponseDepAdd').html("Emri i departamentit mund te permbaje: shkronja, numra dhe -");
+            } else {
+                $('#ResponseDepAdd').html("Emri i departamentit mund te permbaje: shkronja, numra dhe -");
             }
-       }
-    }
+        }
+    });
 
     function depExists($name) {
         $query = mysqli_query($con, "SELECT * from departaments WHERE depstatus=1");
