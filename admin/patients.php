@@ -50,25 +50,28 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
 
 <body onload="reportWindowSize()">
     <header>
-        <?php include('includes/header.php');?>
+        <?php include('includes/header.php'); ?>
         <hr style="margin-top:0px;">
     </header>
     <div class="" style="display: flex; margin-top: -16px; width: 100%;">
-        <?php include('includes/sidebar.php');?>
+        <?php include('includes/sidebar.php'); ?>
 
         <div class="page" style="width: 100%;">
             <div class="card-header">
                 <p>Admin | Pacientët</p>
             </div>
             <div class="container-fullw">
-                <form class="search-form">
+                <form class="search-form" id="search_form" method="post">
                     <div class="d-inline-flex panel-search">
                         <div class="input-group-prepend">
                             <img class="input-group-text" src="img/search-clipart-btn.png" width="38px" height="38px">
                         </div>
-                        <input type="search" class="form-control type-text data-to-search" placeholder="Kerko sipas emrit ose ID">
+                        <input type="search" name="search-patient" id="SearchPatient" class="form-control type-text data-to-search" placeholder="Kerko sipas emrit">
                         <button type="submit" class="btn btn-primary btn-send">Kerko</button>
+                        <button type="button" id="Refresh" class="btn btn-primary btn-send"><img class="" src="img/refresh.png" width="20px" height="20px">
+                        </button>
                     </div>
+                    <p id="Searcherror" style="color:red;"></p>
                 </form>
                 <div class="panel-body no-padding">
                     <div class="panel-heading">
@@ -76,7 +79,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
                     </div>
                     <table class="data-list min-height">
                         <tr class="table-head ">
-                            <td class="pid-h">ID</td>
+                            <td class="pid-h">Nr.</td>
                             <td class="pnameh">Emri</td>
                             <td class="psnameh">Mbiemri</td>
                             <td class="pcontacth">Kontakti</td>
@@ -86,198 +89,47 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
                         </tr>
                     </table>
                     <table class="data-list">
-                        <tr>
-                            <td class="pid">
-                                1234234
-                            </td>
-                            <td class="pname">
-                                Alban34234234234
-                            </td>
-                            <td class="psname">
-                                Berisha234234324
-                            </td>
-                            <td class="pcontact">
-                                044528369
-                            </td>
-                            <td class="pgender">
-                               Mashkull
-                            </td>
-                            <td class="actions">
-                                <span class="edit-data" onclick="window.open('view-patient.php', '_self');"><img src="img/eye-icon.png"></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="pid">
-                                1234234
-                            </td>
-                            <td class="pname">
-                                Alban34234234234
-                            </td>
-                            <td class="psname">
-                                Berisha234234324
-                            </td>
-                            <td class="pcontact">
-                                044528369
-                            </td>
-                            <td class="pgender">
-                               Mashkull
-                            </td>
-                            <td class="actions">
-                                <span class="edit-data" onclick="window.open('view-patient.php', '_self');"><img src="img/eye-icon.png"></span>
-                            </td>
-                        </tr><tr>
-                            <td class="pid">
-                                1234234
-                            </td>
-                            <td class="pname">
-                                Alban34234234234
-                            </td>
-                            <td class="psname">
-                                Berisha234234324
-                            </td>
-                            <td class="pcontact">
-                                044528369
-                            </td>
-                            <td class="pgender">
-                               Mashkull
-                            </td>
-                            <td class="actions">
-                                <span class="edit-data" onclick="window.open('view-patient.php', '_self');"><img src="img/eye-icon.png"></span>
-                            </td>
-                        </tr><tr>
-                            <td class="pid">
-                                1234234
-                            </td>
-                            <td class="pname">
-                                Alban34234234234
-                            </td>
-                            <td class="psname">
-                                Berisha234234324
-                            </td>
-                            <td class="pcontact">
-                                044528369
-                            </td>
-                            <td class="pgender">
-                               Mashkull
-                            </td>
-                            <td class="actions">
-                                <span class="edit-data" onclick="window.open('view-patient.php', '_self');"><img src="img/eye-icon.png"></span>
-                            </td>
-                        </tr><tr>
-                            <td class="pid">
-                                1234234
-                            </td>
-                            <td class="pname">
-                                Alban34234234234
-                            </td>
-                            <td class="psname">
-                                Berisha234234324
-                            </td>
-                            <td class="pcontact">
-                                044528369
-                            </td>
-                            <td class="pgender">
-                               Mashkull
-                            </td>
-                            <td class="actions">
-                                <span class="edit-data" onclick="window.open('view-patient.php', '_self');"><img src="img/eye-icon.png"></span>
-                            </td>
-                        </tr><tr>
-                            <td class="pid">
-                                1234234
-                            </td>
-                            <td class="pname">
-                                Alban34234234234
-                            </td>
-                            <td class="psname">
-                                Berisha234234324
-                            </td>
-                            <td class="pcontact">
-                                044528369
-                            </td>
-                            <td class="pgender">
-                               Mashkull
-                            </td>
-                            <td class="actions">
-                                <span class="edit-data" onclick="window.open('view-patient.php', '_self');"><img src="img/eye-icon.png"></span>
-                            </td>
-                        </tr><tr>
-                            <td class="pid">
-                                1234234
-                            </td>
-                            <td class="pname">
-                                Alban34234234234
-                            </td>
-                            <td class="psname">
-                                Berisha234234324
-                            </td>
-                            <td class="pcontact">
-                                044528369
-                            </td>
-                            <td class="pgender">
-                               Mashkull
-                            </td>
-                            <td class="actions">
-                                <span class="edit-data" onclick="window.open('view-patient.php', '_self');"><img src="img/eye-icon.png"></span>
-                            </td>
-                        </tr><tr>
-                            <td class="pid">
-                                1234234
-                            </td>
-                            <td class="pname">
-                                Alban34234234234
-                            </td>
-                            <td class="psname">
-                                Berisha234234324
-                            </td>
-                            <td class="pcontact">
-                                044528369
-                            </td>
-                            <td class="pgender">
-                               Mashkull
-                            </td>
-                            <td class="actions">
-                                <span class="edit-data" onclick="window.open('view-patient.php', '_self');"><img src="img/eye-icon.png"></span>
-                            </td>
-                        </tr><tr>
-                            <td class="pid">
-                                1234234
-                            </td>
-                            <td class="pname">
-                                Alban34234234234
-                            </td>
-                            <td class="psname">
-                                Berisha234234324
-                            </td>
-                            <td class="pcontact">
-                                044528369
-                            </td>
-                            <td class="pgender">
-                               Mashkull
-                            </td>
-                            <td class="actions">
-                                <span class="edit-data" onclick="window.open('view-patient.php', '_self');"><img src="img/eye-icon.png"></span>
-                            </td>
-                        </tr><tr>
-                            <td class="pid">
-                                1234234
-                            </td>
-                            <td class="pname">
-                                Alban34234234234
-                            </td>
-                            <td class="psname">
-                                Berisha234234324
-                            </td>
-                            <td class="pcontact">
-                                044528369
-                            </td>
-                            <td class="pgender">
-                               Mashkull
-                            </td>
-                            <td class="actions">
-                                <span class="edit-data" onclick="window.open('view-patient.php', '_self');"><img src="img/eye-icon.png"></span>
-                            </td>
-                        </tr>
+                        <tbody id="Patients">
+                            <?php
+                            $query = mysqli_query($con, "SELECT id, name, surname, phone, gender from patients where status='1'");
+                            if (!$query) {
+                                die("E pamundur te azhurohen te dhenat: " . mysqli_connect_error());
+                            } else {
+                                $count = 1;
+                                while (($data = mysqli_fetch_array($query))) {
+                            ?>
+                                    <tr>
+                                        <td class="pid">
+                                            <?php echo $count; ?>
+                                        </td>
+                                        <td class="pname">
+                                            <?php echo htmlentities($data['name']); ?>
+
+                                        </td>
+                                        <td class="psname">
+                                            <?php echo htmlentities($data['surname']); ?>
+                                        </td>
+                                        <td class="pcontact">
+                                            <?php echo htmlentities($data['phone']); ?>
+
+                                        </td>
+                                        <td class="pgender">
+                                            <?php echo htmlentities($data['gender']); ?>
+
+                                        </td>
+                                        <td class="actions">
+                                            <span class="edit-data">
+                                                <a href="view-patient.php?id=<?php echo $data['id'] ?>&view=patient">
+                                                    <img src="img/eye-icon.png"> </a>
+                                            </span>
+                                        </td>
+                                    </tr>
+                            <?php
+                                    $count++;
+                                }
+                            }
+                            ?>
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -286,3 +138,33 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
 </body>
 
 </html>
+
+<script>
+        $("#Refresh").on('click', function()
+        {
+            location.reload();
+        });
+
+        $("#search_form").submit(function(e) {
+            e.preventDefault();
+            name = $('#SearchPatient').val();
+            table = 'patients'
+            $.ajax({
+                    method: "POST",
+                    url: "includes/search.inc.php",
+                    data: {
+                        name: name,
+                        table: table
+                    }
+                })
+                .done(function(response) {
+                    if (response == "error") {
+                        $('#Searcherror').html("Format i pa lejuar!");
+                    } else {
+                        $('#Searcherror').html("");
+                        $("#Patients").html(response);
+                    }
+                });
+            return false;
+        });
+    </script>

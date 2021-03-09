@@ -61,14 +61,17 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
                 <p>Admin | Kycjet</p>
             </div>
             <div class="container-fullw">
-                <form class="search-form">
+            <form class="search-form" id="search_form" method="post">
                     <div class="d-inline-flex panel-search">
                         <div class="input-group-prepend">
                             <img class="input-group-text" src="img/search-clipart-btn.png" width="38px" height="38px">
                         </div>
-                        <input type="search" class="form-control type-text data-to-search" placeholder="Kerko sipas emrit">
+                        <input type="search" name="search-staff" id="Search" class="form-control type-text data-to-search" placeholder="Kerko sipas emrit">
                         <button type="submit" class="btn btn-primary btn-send">Kerko</button>
+                        <button type="button" id="Refresh" class="btn btn-primary btn-send"><img class="" src="img/refresh.png" width="20px" height="20px">
+                        </button>
                     </div>
+                    <p id="Searcherror" style="color:red;"></p>
                 </form>
                 <div class="panel-body no-padding">
                     <div class="panel-heading">
@@ -85,6 +88,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
                         </tr>
                     </table>
                     <table class="data-list">
+                    <tbody id="User-logs">
                         <?php
                         $query=mysqli_query($con,"SELECT * from userlog ORDER BY id DESC");
                         
@@ -123,6 +127,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
                           }
                         }
                         ?>
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -131,3 +136,33 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
 </body>
 
 </html>
+
+<script>
+    $("#Refresh").on('click', function() {
+        location.reload();
+    });
+
+
+    $("#search_form").submit(function(e) {
+        e.preventDefault();
+        username = $('#Search').val();
+        table = 'session-logs';
+        $.ajax({
+                method: "POST",
+                url: "includes/search.inc.php",
+                data: {
+                    name: username,
+                    table: table
+                }
+            })
+            .done(function(response) {
+                if (response == "error") {
+                    $('#Searcherror').html("Format i pa lejuar!");
+                } else {
+                    $('#Searcherror').html("");
+                    $("#User-logs").html(response);
+                }
+            });
+        return false;
+    });
+</script>

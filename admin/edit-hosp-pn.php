@@ -16,6 +16,23 @@ if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 
     header("Location: http://$host$uri/$extra");
 }
 $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
+
+
+
+$hosppnoldprice = null;
+$hospnid = null;
+if (isset($_GET['edit'])) {
+    $hospnid = $_GET['id'];
+    $query = mysqli_query($con, "SELECT * From pricing_list WHERE status=1 && id='$hospnid'");
+    if (!$query) {
+        die("E pamundur te azhurohen te dhenat: " . mysqli_connect_error());
+    } else {
+        $data = mysqli_fetch_array($query);
+        if ($data > 0) {
+            $hosppnoldprice = $data['price'];
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,28 +78,80 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
                 <p>Admin | Ndrysho</p>
             </div>
             <div class=" container-fullw">
-                <div class="card">
-                    <div class="form-group">
-                        <form>
-                            <div class="form-group">
-                                <label class="input-title">
-                                    Çmimi per nje nate ne spital</label>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">€</span>
-                                    </div>
-                                    <input type="number" class="form-control" placeholder="Çmimi i analizes" value="20">
+                <?php
+                if ($hospnid == NULL) {
+                    echo "Asgje per tu shfaqur";
+                } else {
+                    $query = mysqli_query($con, "SELECT * from pricing_list WHERE id='$hospnid' && status='1'");
+                    if (!$query) {
+                        die("E pamundur te azhurohen te dhenat: " . mysqli_connect_error());
+                    } else {
+                        $data = mysqli_fetch_array($query);
+                        if ($data > 0) {
+                ?>
+                            <div class="card">
+                                <div class="form-group">
+                                    <form id="edithosppn_form" method="post">
+                                        <div class="form-group">
+                                            <label class="input-title">
+                                                Çmimi per nje nate ne spital</label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">€</span>
+                                                </div>
+                                                <input type="number" step="0.01" id="HospnPrice" class="form-control" placeholder="Çmimi i nates ne spital" value="<?php echo htmlentities($data['price']) ?>">
+                                            </div>
+                                            <p id="ResponseHospnEdit" style="color:red;"></p>
+
+                                        </div>
+                                        <div class="form-group" style="margin-top: 10px;">
+                                            <button type="submit" class="btn btn-primary">Ndrysho</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
-                            <div class="form-group" style="margin-top: 10px;">
-                                <button type="submit" class="btn btn-primary">Ndrysho</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                <?php
+                        }
+                    }
+                }
+                ?>
             </div>
         </div>
     </div>
 </body>
 
 </html>
+
+<script>
+    $('#edithosppn_form').submit(function(e) {
+
+        e.preventDefault();
+        $('#ResponseHospnEdit').html("");
+        hospprice = $('#HospnPrice').val();
+        oldprice = "<?php echo $hosppnoldprice ?>";
+        hospnid = "<?php echo $hospnid ?>";
+        if (oldprice == hospprice) {
+            $('#ResponseHospnEdit').html("Ky eshte aktualisht qmimi!");
+        } else {
+            $confirm = confirm('A jeni te sigurte qe deshironi ta beni perditesimin?');
+            if ($confirm) {
+                $.ajax({
+                        method: "POST",
+                        url: "includes/update-hosp-pn.inc.php",
+                        data: {
+                            id: hospnid,
+                            price: hospprice
+                        }
+                    })
+                    .done(function(response) {
+                            alert("Perditesimi u krye me sukses.");
+                            window.open('hospital-info.php', '_self');
+                    });
+                return false;
+
+            } else {
+                $('#ResponseHospnEdit').html("Perditesimi u anulua.");
+            }
+        }
+    });
+</script>

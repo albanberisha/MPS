@@ -660,6 +660,16 @@ ul .profile-pic:hover {
     margin-top: 14px;
 }
 
+.status-offline {
+    background-color: red;
+    width: 10px;
+    height: 10px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    margin-top: 14px;
+}
+
 .position {
     font-family: Helvetica, Arial, sans-serif;
     color: rgb(141, 141, 141);
@@ -988,7 +998,8 @@ ul .profile-pic:hover {
     color: rgb(99, 99, 99);
     display: block;
     overflow: auto;
-    height: 383px;
+    max-height: 383px;
+    height: fit-content;
     word-break: break-all;
 }
 

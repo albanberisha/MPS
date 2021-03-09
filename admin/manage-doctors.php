@@ -1,5 +1,3 @@
-
-
 <?php
 session_start();
 error_reporting(0);
@@ -19,122 +17,158 @@ if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 
 }
 $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
 ?>
-<!DOCTYPE html>
-<html lang="en">
+    <!DOCTYPE html>
+    <html lang="en">
 
-<head>
-    <title>Admin | Menaxho Doktorret</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/style.css">
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/Chart.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="js/sidenavigation.js"></script>
-    <script src="js/imagebrowse.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#widget li').on('click', function() {
-                $(this).removeClass('new-ntf');
+    <head>
+        <title>Admin | Menaxho Doktorret</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/style.css">
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/Chart.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="js/sidenavigation.js"></script>
+        <script src="js/imagebrowse.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('#widget li').on('click', function() {
+                    $(this).removeClass('new-ntf');
+                });
             });
-        });
-    </script>
-    <script>
-        function reportWindowSize() {
-            var widthOutput = window.innerWidth;
-            if (widthOutput < 960) {
-                $('.centered-name-1').addClass('active');
-                $('.dropdown-content-1').addClass('active');
-                $(".closebtn").css("display", "none");
-                $(".openbtn").css("display", "inline");
-                $(".sidenav").css("width", "60px");
+        </script>
+        <script>
+            function reportWindowSize() {
+                var widthOutput = window.innerWidth;
+                if (widthOutput < 960) {
+                    $('.centered-name-1').addClass('active');
+                    $('.dropdown-content-1').addClass('active');
+                    $(".closebtn").css("display", "none");
+                    $(".openbtn").css("display", "inline");
+                    $(".sidenav").css("width", "60px");
+                }
             }
-            if (widthOutput < 1120) {
-                closeChat();
-            } else {}
-        }
+            window.onresize = reportWindowSize;
+        </script>
+    </head>
 
-        function closeChat() {
-            document.getElementById("Chatbox").style.display = "none";
-
-        }
-
-        function openChat() {
-            document.getElementById("Chatbox").style.display = "inline";
-
-        }
-        window.onresize = reportWindowSize;
-    </script>
-</head>
-
-<body onload="reportWindowSize()">
-    <header>
-        <?php include('includes/header.php'); ?>
-        <hr style="margin-top:0px;">
-    </header>
-    <div class="" style="display: flex; margin-top: -16px; width: 100%;">
-        <?php include('includes/sidebar.php'); ?>
-
-        <div class="page" id="page" style="width: 100%;">
-            <div class="card-header">
-                <p>Admin | Menaxho Doktorret</p>
-            </div>
-            <div class="container-fullw">
-                <form class="search-form">
-                    <div class="d-inline-flex panel-search">
-                        <div class="input-group-prepend">
-                            <img class="input-group-text" src="img/search-clipart-btn.png" width="38px" height="38px">
+    <body onload="reportWindowSize()">
+        <header>
+            <?php include('includes/header.php'); ?>
+            <hr style="margin-top:0px;">
+        </header>
+        <div class="" style="display: flex; margin-top: -16px; width: 100%;">
+            <?php include('includes/sidebar.php'); ?>
+            <div class="page" id="page" style="width: 100%;">
+                <div class="card-header">
+                    <p>Admin | Menaxho Doktorret</p>
+                </div>
+                <div class="container-fullw">
+                    <form class="search-form" id="search_form" method="post">
+                        <div class="d-inline-flex panel-search">
+                            <div class="input-group-prepend">
+                                <img class="input-group-text" src="img/search-clipart-btn.png" width="38px" height="38px">
+                            </div>
+                            <input type="search" name="search-doctor" id="SearchDoctor" class="form-control type-text data-to-search" placeholder="Kerko sipas emrit">
+                            <button type="submit" class="btn btn-primary btn-send">Kerko</button>
+                            <button type="button" id="Refresh" class="btn btn-primary btn-send"><img class="" src="img/refresh.png" width="20px" height="20px">
+                            </button>
                         </div>
-                        <input type="search" class="form-control type-text data-to-search" placeholder="Kerko sipas emrit">
-                        <button type="submit" class="btn btn-primary btn-send">Kerko</button>
+                        <p id="Searcherror" style="color:red;"></p>
+                    </form>
+                    <div class="panel-body no-padding">
+                        <div class="panel-heading">
+                            <h5 class="panel-title panel-white text-center">Doktorret</h5>
+                        </div>
+                        <table class="data-list min-height">
+                            <tr class="table-head ">
+                                <td class="didh">Nr.</td>
+                                <td class="dnameh">Emri</td>
+                                <td class="dsnameh">Mbiemri</td>
+                                <td class="dspech">Specializimi</td>
+                                <td class="actionsh">
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="data-list">
+                            <tbody id="Doctors">
+                                <?php
+                            $query = mysqli_query($con, "SELECT users.id as id,users.name as name, users.surname as surname, doctors.specialties as spetialities, specialties.description as spetialitiesname from users,doctors, specialties where (doctors.userId=users.id and users.status=1) and(specialties.id=doctors.specialties)");
+                            if (!$query) {
+                                die("E pamundur te azhurohen te dhenat: " . mysqli_connect_error());
+                            } else {
+                                $count = 1;
+                                while (($data = mysqli_fetch_array($query))) {
+                            ?>
+                                    <tr>
+                                        <td class="did">
+                                            <?php echo $count; ?>
+                                        </td>
+                                        <td class="dname">
+                                            <?php echo htmlentities($data['name']); ?>
+                                        </td>
+                                        <td class="dsname">
+                                            <?php echo htmlentities($data['surname']); ?>
+                                        </td>
+                                        <td class="dspec">
+                                            <?php echo htmlentities($data['spetialitiesname']); ?>
+                                        </td>
+                                        <td class=" actions">
+                                            <span class="edit-data">
+                                                <a href="edit-doctor.php?id=<?php echo $data['id'] ?>&edit=doctor">
+                                                    <img src="img/edit-icon.png"> </a>
+                                            </span>
+                                            <span class="delete-data">
+                                                <a href="#" onclick="deleteuser(<?php echo $data['id'] ?>);">
+                                                    <img src="img/delete-icon.png">
+                                                </a>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                    $count++;
+                                }
+                            }
+                            ?>
+                            </tbody>
+                        </table>
                     </div>
-                </form>
-                <div class="panel-body no-padding">
-                    <div class="panel-heading">
-                        <h5 class="panel-title panel-white text-center">Doktorret</h5>
-                    </div>
-                    <table class="data-list min-height">
-                        <tr class="table-head ">
-                            <td class="didh">ID</td>
-                            <td class="dnameh">Emri</td>
-                            <td class="dsnameh">Mbiemri</td>
-                            <td class="dspech">Specializimi</td>
-                            <td class="actionsh">
-                            </td>
-                        </tr>
-                    </table>
-                    <table class="data-list">
-                        <tr>
-                            <td class="did">
-                                1234234
-                            </td>
-                            <td class="dname">
-                                Alban34234234234
-                            </td>
-                            <td class="dsname">
-                                Berisha234234324
-                            </td>
-                            <td class="dspec">
-                                Specializimi234234234
-                            </td>
-                            <td class="actions">
-                                <span class="edit-data" id="EditDoctor"><img src="img/edit-icon.png"></span>
-                                <span class="delete-data"><img src="img/delete-icon.png"></span>
-                            </td>
-                        </tr>
-                    </table>
                 </div>
             </div>
         </div>
-    </div>
-</body>
+    </body>
 
-</html>
-<script>
-    $(document).ready(function() {
-        $("#EditDoctor").click(function() {
-            $("#page").load('includes/edit-doctor.php');
+    </html>
+    <script>
+        function deleteuser($id) {
+
+        }
+        $("#Refresh").on('click', function()
+        {
+            location.reload();
         });
-    });
-</script>
+
+        $("#search_form").submit(function(e) {
+            e.preventDefault();
+            docname = $('#SearchDoctor').val();
+            table = 'doctors'
+            $.ajax({
+                    method: "POST",
+                    url: "includes/search.inc.php",
+                    data: {
+                        name: docname,
+                        table: table
+                    }
+                })
+                .done(function(response) {
+                    if (response == "error") {
+                        $('#Searcherror').html("Format i pa lejuar!");
+                    } else {
+                        $('#Searcherror').html("");
+                        $("#Doctors").html(response);
+                    }
+                });
+            return false;
+        });
+    </script>

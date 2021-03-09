@@ -49,8 +49,8 @@
                 </div>
             </button>
             <div class="dropdown-content-1 font-weight-bold">
-                <a href="add-infermier.php">Shto infermier</a>
-                <a href="manage-infermiers.php">Menaxho infermieret</a>
+                <a href="add-infirmier.php">Shto infermier</a>
+                <a href="manage-infirmiers.php">Menaxho infermieret</a>
             </div>
         </div>
         <div class="dropdown-1" style="position: relative;">

@@ -50,60 +50,87 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
 
 <body onload="reportWindowSize()">
     <header>
-        <?php include('includes/header.php');?>
+        <?php include('includes/header.php'); ?>
         <hr style="margin-top:0px;">
     </header>
     <div class="" style="display: flex; margin-top: -16px; width: 100%;">
-        <?php include('includes/sidebar.php');?>
+        <?php include('includes/sidebar.php'); ?>
 
         <div class="page" style="width: 100%;">
             <div class="card-header">
                 <p>Admin | Menaxho Recepsionistet</p>
             </div>
             <div class="container-fullw">
-                <form class="search-form">
+                <form class="search-form" id="search_form" method="post">
                     <div class="d-inline-flex panel-search">
                         <div class="input-group-prepend">
                             <img class="input-group-text" src="img/search-clipart-btn.png" width="38px" height="38px">
                         </div>
-                        <input type="search" class="form-control type-text data-to-search" placeholder="Kerko sipas emrit">
+                        <input type="search" name="search-doctor" id="Search" class="form-control type-text data-to-search" placeholder="Kerko sipas emrit">
                         <button type="submit" class="btn btn-primary btn-send">Kerko</button>
+                        <button type="button" id="Refresh" class="btn btn-primary btn-send"><img class="" src="img/refresh.png" width="20px" height="20px">
+                        </button>
                     </div>
+                    <p id="Searcherror" style="color:red;"></p>
                 </form>
+                <p id="Deleteerror" style="color:red;"></p>
+
                 <div class="panel-body no-padding">
+                
                     <div class="panel-heading">
                         <h5 class="panel-title panel-white text-center">Recepsionistet</h5>
                     </div>
                     <table class="data-list min-height">
                         <tr class="table-head ">
-                            <td class="ridh">ID</td>
-                            <td class="rnameh">Emri</td>
-                            <td class="rsnameh">Mbiemri</td>
-                            <td class="rusernameh">Username</td>
+                            <td class="didh">Nr.</td>
+                            <td class="dnameh">Emri</td>
+                            <td class="dsnameh">Mbiemri</td>
+                            <td class="dspech">Username</td>
                             <td class="actionsh">
                             </td>
                         </tr>
                     </table>
                     <table class="data-list">
-                        <tr>
-                            <td class="rid">
-                                1234234
-                            </td>
-                            <td class="rname">
-                                Arbnor
-                            </td>
-                            <td class="rsname">
-                                Berisha
-                            </td>
-                            <td class="rusername">
-                                Arbnor17
-                            </td>
-                            <td class="actions">
-                                <span class="edit-data" onclick="window.open('edit-receptionist.php', '_self');"><img src="img/edit-icon.png"></span>
-                                <span class="delete-data"><img src="img/delete-icon.png"></span>
-                            </td>
-                        </tr>
-                        
+                        <tbody id="Receptionists">
+                            <?php
+                            $query = mysqli_query($con, " SELECT id, name, surname, username from users where status=1 and privilege='receptionist'");
+                            if (!$query) {
+                                die("E pamundur te azhurohen te dhenat: " . mysqli_connect_error());
+                            } else {
+                                $count = 1;
+                                while (($data = mysqli_fetch_array($query))) {
+                            ?>
+                                    <tr>
+                                        <td class="did">
+                                            <?php echo $count; ?>
+                                        </td>
+                                        <td class="dname">
+                                            <?php echo htmlentities($data['name']); ?>
+                                        </td>
+                                        <td class="dsname">
+                                            <?php echo htmlentities($data['surname']); ?>
+                                        </td>
+                                        <td class="dspec">
+                                            <?php echo htmlentities($data['username']); ?>
+                                        </td>
+                                        <td class=" actions">
+                                            <span class="edit-data">
+                                                <a href="edit-receptionist.php?id=<?php echo $data['id'] ?>&edit=receptionist">
+                                                    <img src="img/edit-icon.png"> </a>
+                                            </span>
+                                            <span class="delete-data">
+                                                <a href="#" onclick="deleteuser(<?php echo $data['id'] ?>);">
+                                                    <img src="img/delete-icon.png">
+                                                </a>
+                                            </span>
+                                        </td>
+                                    </tr>
+                            <?php
+                                    $count++;
+                                }
+                            }
+                            ?>
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -112,3 +139,60 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
 </body>
 
 </html>
+
+<script>
+        function deleteuser($id) {
+            table = 'users-receptionists';
+            $confirm = confirm('A jeni te sigurte qe deshironi ta fshini recepsionistin?');
+            if($confirm)
+            {
+                $.ajax({
+                    method: "POST",
+                    url: "includes/delete-user.inc.php",
+                    data: {
+                        id: $id,
+                        table: table
+                    }
+                })
+                .done(function(response) {
+                    if (response == "error") {
+                        $('#Deleteerror').html("Fshierja nuk lejohet!");
+                    } else {
+                        $('#Deleteerror').html("Fshierja u krye me sukses.");
+                        $("#Receptionists").html(response);
+                    }
+                });
+            return false;
+            }else{
+                $('#Deleteerror').html("Fshierja u anulua.");
+
+            }
+        }
+        $("#Refresh").on('click', function()
+        {
+            location.reload();
+        });
+
+        $("#search_form").submit(function(e) {
+            e.preventDefault();
+            recname = $('#Search').val();
+            table = 'users-receptionists'
+            $.ajax({
+                    method: "POST",
+                    url: "includes/search.inc.php",
+                    data: {
+                        name: recname,
+                        table: table
+                    }
+                })
+                .done(function(response) {
+                    if (response == "error") {
+                        $('#Searcherror').html("Format i pa lejuar!");
+                    } else {
+                        $('#Searcherror').html("");
+                        $("#Receptionists").html(response);
+                    }
+                });
+            return false;
+        });
+    </script>

@@ -9,7 +9,7 @@ function savedata($con, $hname, $hinitials, $hstate, $hcity, $hstreet, $hlogo)
     $query = mysqli_query($con, "SELECT * FROM hospital_details WHERE id='1'");
     $data = mysqli_fetch_array($query);
     $lastupdated = $data['lastUpdate'];
-    $today = date("Y-m-d");
+    $today = date("Y-m-d h:i:sa");
     //if ($lastupdated == $today) 
     if(false)
         {$alert="Mund te ndryshoni te dhenat vetem nje here brenda dites.";

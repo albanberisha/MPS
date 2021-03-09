@@ -21,7 +21,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
 <html lang="en">
 
 <head>
-    <title>Admin | Menaxho Stafin</title>
+    <title>Admin | Menaxho Infermieret</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -58,21 +58,21 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
 
         <div class="page" style="width: 100%;">
             <div class="card-header">
-                <p>Admin | Menaxho Stafin</p>
+                <p>Admin | Menaxho Infermieret</p>
             </div>
             <div class="container-fullw">
-                <form class="search-form" id="search_form" method="post">
-                    <div class="d-inline-flex panel-search">
-                        <div class="input-group-prepend">
-                            <img class="input-group-text" src="img/search-clipart-btn.png" width="38px" height="38px">
+            <form class="search-form" id="search_form" method="post">
+                        <div class="d-inline-flex panel-search">
+                            <div class="input-group-prepend">
+                                <img class="input-group-text" src="img/search-clipart-btn.png" width="38px" height="38px">
+                            </div>
+                            <input type="search" name="search-infirmier" id="SearchInfirmier" class="form-control type-text data-to-search" placeholder="Kerko sipas emrit">
+                            <button type="submit" class="btn btn-primary btn-send">Kerko</button>
+                            <button type="button" id="Refresh" class="btn btn-primary btn-send"><img class="" src="img/refresh.png" width="20px" height="20px">
+                            </button>
                         </div>
-                        <input type="search" name="search-staff" id="Search" class="form-control type-text data-to-search" placeholder="Kerko sipas emrit">
-                        <button type="submit" class="btn btn-primary btn-send">Kerko</button>
-                        <button type="button" id="Refresh" class="btn btn-primary btn-send"><img class="" src="img/refresh.png" width="20px" height="20px">
-                        </button>
-                    </div>
-                    <p id="Searcherror" style="color:red;"></p>
-                </form>
+                        <p id="Searcherror" style="color:red;"></p>
+                    </form>
                 <p id="Deleteerror" style="color:red;"></p>
                 <div class="panel-body no-padding">
                     <div class="panel-heading">
@@ -80,53 +80,53 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
                     </div>
                     <table class="data-list min-height">
                         <tr class="table-head ">
-                            <td class="sidh">Nr.</td>
-                            <td class="snameh">Emri</td>
-                            <td class="ssnameh">Mbiemri</td>
-                            <td class="sposf">Pozita</td>
+                            <td class="iidh">Nr.</td>
+                            <td class="inameh">Emri</td>
+                            <td class="isnameh">Mbiemri</td>
+                            <td class="ideph">Departamenti</td>
                             <td class="actionsh">
                             </td>
                         </tr>
                     </table>
                     <table class="data-list">
-                        <tbody id="Staff">
+                        <tbody id="Infirmiers">
                             <?php
-                            $query = mysqli_query($con, " SELECT additional_staff.id, additional_staff.name, additional_staff.surname, hospital_additional_staff.name as pos_name from additional_staff, hospital_additional_staff where additional_staff.status=1 and additional_staff.position=hospital_additional_staff.id ");
+                            $query = mysqli_query($con, " SELECT users.id, users.name, users.surname, departaments.depname from users, infirmiers ,departaments where (infirmiers.userId=users.id and users.status=1) and infirmiers.depId=departaments.id");
                             if (!$query) {
                                 die("E pamundur te azhurohen te dhenat: " . mysqli_connect_error());
                             } else {
                                 $count = 1;
                                 while (($data = mysqli_fetch_array($query))) {
                             ?>
+
                                     <tr>
-                                        <td class="sid">
+                                        <td class="iid">
                                             <?php echo $count; ?>
                                         </td>
-                                        <td class="sname">
-                                            <?php echo htmlentities($data['name']); ?>
-                                        </td>
-                                        <td class="ssname">
-                                            <?php echo htmlentities($data['surname']); ?>
-                                        </td>
-                                        <td class="spos">
-                                            <?php echo htmlentities($data['pos_name']); ?>
-
+                                        <td class="iname">
+                                            <?php echo htmlentities($data['name']); ?> </td>
+                                        <td class="isname">
+                                            <?php echo htmlentities($data['surname']); ?> </td>
+                                        <td class="idep">
+                                            <?php echo htmlentities($data['depname']); ?>
                                         </td>
                                         <td class=" actions">
                                             <span class="edit-data">
-                                                <a href="edit-staf.php?id=<?php echo $data['id'] ?>&edit=staff">
+                                                <a href="edit-infirmier.php?id=<?php echo $data['id'] ?>&edit=infirmier">
                                                     <img src="img/edit-icon.png"> </a>
                                             </span>
                                             <span class="delete-data">
-                                                <a href="#" onclick="deletestaf(<?php echo $data['id'] ?>);">
+                                                <a href="#" onclick="deleteuser(<?php echo $data['id'] ?>);">
                                                     <img src="img/delete-icon.png">
                                                 </a>
                                             </span>
-                                    <?php
-                                    $count++;
+                                        </td>
+                                    </tr>
+                            <?php
+                            $count++;
                                 }
                             }
-                                    ?>
+                            ?>
                         </tbody>
                     </table>
                 </div>
@@ -138,10 +138,11 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
 </html>
 
 <script>
-    function deletestaf($id) {
-        table = 'staff';
-        $confirm = confirm('A jeni te sigurte qe deshironi ta fshini?');
-        if ($confirm) {
+      function deleteuser($id) {
+        $confirm = confirm('A jeni te sigurte qe deshironi ta fshini infermierin?');
+        if($confirm)
+        {
+            table = 'infirmiers';
             $.ajax({
                     method: "POST",
                     url: "includes/delete-user.inc.php",
@@ -154,41 +155,40 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
                     if (response == "error") {
                         $('#Deleteerror').html("Fshierja nuk lejohet!");
                     } else {
-                        $('#Deleteerror').html("Fshierja u krye me sukses.");
-                        $("#Staff").html(response);
+                        $('#Deleteerror').html("Fshierja u krye me sukses");
+                        $("#Infirmiers").html(response);
                     }
                 });
             return false;
-        } else {
+        }else{
             $('#Deleteerror').html("Fshierja u anulua.");
-
+        }            
         }
-    }
-    $("#Refresh").on('click', function() {
-        location.reload();
-    });
+        $("#Refresh").on('click', function()
+        {
+            location.reload();
+        });
 
-
-    $("#search_form").submit(function(e) {
-        e.preventDefault();
-        recname = $('#Search').val();
-        table = 'staff'
-        $.ajax({
-                method: "POST",
-                url: "includes/search.inc.php",
-                data: {
-                    name: recname,
-                    table: table
-                }
-            })
-            .done(function(response) {
-                if (response == "error") {
-                    $('#Searcherror').html("Format i pa lejuar!");
-                } else {
-                    $('#Searcherror').html("");
-                    $("#Staff").html(response);
-                }
-            });
-        return false;
-    });
-</script>
+        $("#search_form").submit(function(e) {
+            e.preventDefault();
+            docname = $('#SearchInfirmier').val();
+            table = 'infirmiers';
+            $.ajax({
+                    method: "POST",
+                    url: "includes/search.inc.php",
+                    data: {
+                        name: docname,
+                        table: table
+                    }
+                })
+                .done(function(response) {
+                    if (response == "error") {
+                        $('#Searcherror').html("Format i pa lejuar!");
+                    } else {
+                        $('#Searcherror').html("");
+                        $("#Infirmiers").html(response);
+                    }
+                });
+            return false;
+        });
+    </script>

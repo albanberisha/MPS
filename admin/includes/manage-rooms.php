@@ -333,6 +333,7 @@ include('config.php');
        
     }
     function filter($filter) {
+
         $.ajax({
                 method: "POST",
                 url: "includes/filter.inc.php",

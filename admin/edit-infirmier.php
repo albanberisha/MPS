@@ -17,16 +17,16 @@ if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 
 }
 $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
 
-$staffid = null;
+$userid = null;
 if (isset($_GET['edit'])) {
-    $staffid = $_GET['id'];
+    $userid = $_GET['id'];
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Admin | Ndrysho Detajet e Stafit</title>
+    <title>Admin | Ndrysho Detajet e Infermierit</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -63,15 +63,15 @@ if (isset($_GET['edit'])) {
 
         <div class="page" style="width: 100%;">
             <div class="card-header">
-                <p>Admin | Ndrysho Detajet e Stafit</p>
+                <p>Admin | Ndrysho Detajet e Infermierit</p>
             </div>
             <div class=" container-fullw">
                 <?php
-                if ($staffid == NULL) {
+                if ($userid == NULL) {
                     echo "Asgje per tu shfaqur";
                 } else {
-                    $_SESSION['userid'] = $staffid;
-                    $query = mysqli_query($con, "SELECT a.id, a.name, a.surname, a.registered, a.last_updated, a.photo, a.birthday, a.gender, a.state, a.city, a.street_address, a.phone, a.position, h.name as pos_name,a.email FROM additional_staff as a, hospital_additional_staff as h WHERE a.status=1 and a.position=h.id and a.id='$staffid'");
+                    $_SESSION['userid'] = $userid;
+                    $query = mysqli_query($con, "SELECT name, surname, birthday, gender, state, city, street_address, phone, departaments.depname, departaments.id as depid, email, username, last_updated, registered, photo from users, infirmiers, departaments where (users.id=infirmiers.userId and users.status=1) and infirmiers.depId=departaments.id and users.id='$userid'");
                     if (!$query) {
                         die("E pamundur te azhurohen te dhenat: " . mysqli_connect_error());
                     } else {
@@ -93,7 +93,7 @@ if (isset($_GET['edit'])) {
                                     </div>
                                 </div>
                                 <div class="panel-form">
-                                    <form id="EditStaffForm" enctype="multipart/form-data">
+                                    <form id="EditInfirmierForm" enctype="multipart/form-data">
                                         <div class="circle form-group">
                                             <div class="input-formimg">
                                                 <?php
@@ -118,22 +118,23 @@ if (isset($_GET['edit'])) {
                                             <span id="Imageerror" style="color: red;"></span>
                                             <input type="file" id="file2" name="file2" class="file" accept="image/png">
                                         </div>
+
                                         <div class="div-inlineflex">
                                             <div class="form-group">
-                                                <label class="input-title">Emri</label>
-                                                <input type="text" id="nameStaf" name="nameStaf" class="form-control" placeholder="Sheno emrin" value="<?php echo htmlentities($data['name']) ?>">
+                                                <label class="input-title">Emri i infermierit</label>
+                                                <input type="text" id="nameInf" name="nameInf" class="form-control" placeholder="Sheno emrin e infermierit" value="<?php echo htmlentities($data['name']) ?>">
                                                 <span id="Nameerror" style="color: red;"></span>
                                             </div>
                                             <div class="form-group">
-                                                <label class="input-title">Mbiemri</label>
-                                                <input type="text" id="surnameStaf" name="surnameStaf" class="form-control" placeholder="Sheno mbiemrin" value="<?php echo htmlentities($data['surname']) ?>">
+                                                <label class="input-title">Mbiemri i infermierit</label>
+                                                <input type="text" id="surnameInf" name="surnameInf" class="form-control" placeholder="Sheno mbiemrin e infermierit" value="<?php echo htmlentities($data['surname']) ?>">
                                                 <span id="Surnameerror" style="color: red;"></span>
                                             </div>
                                         </div>
                                         <div class="div-inlineflex">
                                             <div class="form-group">
                                                 <label class="input-title">Datelindja</label>
-                                                <input type="date" class="form-control" id="Stafstart-date" name="stafstart_date" value="<?php echo htmlentities($data['birthday']) ?>" />
+                                                <input type="date" class="form-control" id="Infstart-date" name="infstart_date" value="<?php echo htmlentities($data['birthday']) ?>" />
                                                 <span id="Birthdayerror" style="color: red;"></span>
                                             </div>
                                             <div class="form-group">
@@ -143,13 +144,13 @@ if (isset($_GET['edit'])) {
                                                     $gender = $data['gender'];
                                                     if (strcmp($gender, 'm') == 0) {
                                                     ?>
-                                                        <input type="radio" name="stafgender" checked value="m"> Mashkull<br>
-                                                        <input type="radio" name="stafgender" value="f"> Femër
+                                                        <input type="radio" name="infgender" checked value="m"> Mashkull<br>
+                                                        <input type="radio" name="infgender" value="f"> Femër
                                                     <?php
                                                     } else {
                                                     ?>
-                                                        <input type="radio" name="stafgender" value="m"> Mashkull<br>
-                                                        <input type="radio" name="stafgender" checked value="f"> Femër
+                                                        <input type="radio" name="infgender" value="m"> Mashkull<br>
+                                                        <input type="radio" name="infgender" checked value="f"> Femër
                                                     <?php
                                                     }
                                                     ?>
@@ -180,32 +181,38 @@ if (isset($_GET['edit'])) {
                                             <span id="Pronenumbererror" style="color: red;"></span>
                                         </div>
                                         <div class="form-group">
-                                <label class="input-title" for="Stafposition">
-                                  Pozita
-                                </label>
-                                <select name="Stafposition" class="form-control">
-                                <option value="<?php echo htmlentities($data['position']) ?>"><?php echo htmlentities($data['pos_name']) ?></option>
-                                    <?php
-                                    $posid =$data['position'];
-                                    $query2 = mysqli_query($con, "SELECT * FROM `hospital_additional_staff` WHERE id!='$posid' ORDER BY name");
-                                    if (!$query2) {
-                                        die("E pamundur te azhurohen te dhenat: " . mysqli_connect_error());
-                                    } else {
-                                        while ($data2 = mysqli_fetch_array($query2)) {
-                                    ?>
-                                            <option value="<?php echo htmlentities($data2['id']) ?>"><?php echo htmlentities($data2['name']) ?></option>
+                                            <label class="input-title" for="InfermierDepartament">
+                                                Departamenti
+                                            </label>
+                                            <select name="Infermierdepartament" class="form-control">
+                                                <option value="<?php echo htmlentities($data['depid']) ?>" selected><?php echo htmlentities($data['depname']) ?></option>
+                                                <?php
+                                                $depid = $data['depid'];
+                                                $query3 = mysqli_query($con, "SELECT * FROM `departaments` where id!='$depid' and depstatus=1 ORDER BY depname");
+                                                if (!$query3) {
+                                                    die("E pamundur te azhurohen te dhenat: " . mysqli_connect_error());
+                                                } else {
+                                                    while ($data3 = mysqli_fetch_array($query3)) {
+                                                ?>
+                                                        <option value="<?php echo htmlentities($data3['id']) ?>"><?php echo htmlentities($data3['depname']) ?></option>
 
-                                    <?php
-                                        }
-                                    }
-                                    ?>                                                   
-                                </select>
-                                <span id="Positionerror" style="color: red;"></span>
-                            </div>
+                                                <?php
+                                                    }
+                                                }
+                                                ?>
+
+                                            </select>
+                                        </div>
                                         <div class="form-group">
                                             <label class="input-title">Emaili</label>
-                                            <input type="email" class="form-control" name="stafemail" placeholder="Emaili" value="<?php echo htmlentities($data['email']) ?>">
+                                            <input type="email" readonly="readonly" class="form-control" name="infemail" placeholder="Emaili" value="<?php echo htmlentities($data['email']) ?>">
                                             <span id="Emailerror" style="color: red;"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="input-title">Username</label>
+                                            <input type="text" class="form-control" name="infusername" placeholder="Username" value="<?php echo htmlentities($data['username']) ?>">
+                                            <span id="Usernameerror" style="color: red;"></span>
+
                                         </div>
                                         <div class="form-group" style="margin-top: 10px;">
                                             <button type="submit" class="btn btn-primary">Ndrysho</button>
@@ -222,11 +229,11 @@ if (isset($_GET['edit'])) {
         </div>
     </div>
 </body>
-
 </html>
 
+
 <script>
-$("#EditStaffForm").submit(function(e) {
+$("#EditInfirmierForm").submit(function(e) {
         e.preventDefault();
         $('#Imageerror').html("");
         $('#Nameerror').html("");
@@ -237,11 +244,11 @@ $("#EditStaffForm").submit(function(e) {
         $('#Citydayerror').html("");
         $('#Streetaddresserror').html("");
         $('#Pronenumbererror').html("");
-        $('#Emailerror').html("");
-        var myform = document.getElementById("EditStaffForm");
+        $('#Usernameerror').html("");
+        var myform = document.getElementById("EditInfirmierForm");
     var fd = new FormData(myform );
     $.ajax({
-        url: "includes/update-staff.inc.php",
+        url: "includes/update-infirmier.inc.php",
         data: fd,
         cache: false,
         processData: false,
@@ -296,10 +303,15 @@ $("#EditStaffForm").submit(function(e) {
     $('#Pronenumbererror').html($message);
     document.getElementById('Pronenumbererror').scrollIntoView({ behavior: 'smooth', block: 'center' });
     break;
-    case "13":
-    $message="Format i gabuar!";
-    $('#Emailerror').html($message);
-    document.getElementById('Emailerror').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    case "15":
+    $message="Username duhet te jete 5-20 karaktere, jo _ dhe . ne fillim apo ne fund!";
+    $('#Usernameerror').html($message);
+    document.getElementById('Usernameerror').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    break;
+    case "16":
+    $message="Ky username ekziston.";
+    $('#Usernameerror').html($message);
+    document.getElementById('Usernameerror').scrollIntoView({ behavior: 'smooth', block: 'center' });
     break;
   default: alert("Te dhenat u ndryshuan me sukses.");
   window.location.href=response;

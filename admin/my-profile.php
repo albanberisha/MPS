@@ -20,6 +20,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
 ?>
 
 <?php
+/*
 if (isset($_POST['submit'])) {
     function checkemailexistence($con, $email)
     {
@@ -57,11 +58,11 @@ if (isset($_POST['submit'])) {
             }
         }
     }
-    function checkpassword($con, $pasword, $username)
+    function checkpassword($con, $pasword, $id)
     {
         $validimi = false;
         $oldpass = $pasword;
-        $query = mysqli_query($con, "SELECT * FROM users WHERE username='$username'");
+        $query = mysqli_query($con, "SELECT * FROM users WHERE id='$id'");
         $data = mysqli_fetch_array($query);
         if (!$query) {
             die("E pamundur te azhurohen te dhenat: " . mysqli_connect_error());
@@ -77,55 +78,52 @@ if (isset($_POST['submit'])) {
         return $validimi; //psw gabim
     }
 
-    function savedata($con, $u_photo, $name, $surname, $birthday, $gender, $state, $city, $street, $phone, $email, $username, $adminpsw)
+    function savedata($con, $id, $u_photo, $name, $surname, $birthday, $gender, $state, $city, $street, $phone, $email, $username, $adminpsw)
     {
-        $alert="Te dhenat u ruajten me sukses.";
-        $query = mysqli_query($con, "SELECT * FROM users WHERE username='$username'");
+        $alert = "Te dhenat u ruajten me sukses.";
+        $query = mysqli_query($con, "SELECT * FROM users WHERE id='$id'");
         $data = mysqli_fetch_array($query);
-        $lastupdated=$data['last_updated'];
-        $today= date("Y-m-d");
+        $lastupdated = $data['last_updated'];
+        $today = date("Y-m-d h:i:sa");
         //if($lastupdated==$today)
-        if(false)
-        {
-            $alert="Mund te ndryshoni te dhenat vetem nje here brenda dites.";
+        if (false) {
+            $alert = "Mund te ndryshoni te dhenat vetem nje here brenda dites.";
             echo "<script>
-            alert('".$alert."');
+            alert('" . $alert . "');
             window.location.href='my-profile.php';
       </script>";
-        }else{
+        } else {
             if (empty($adminpsw)) {
-                $query = mysqli_query($con, "SELECT * FROM users WHERE username='$username'");
+                $query = mysqli_query($con, "SELECT * FROM users WHERE id='$id'");
                 $data = mysqli_fetch_array($query);
                 $password1 = $data['password'];
             } else {
                 $password1 = password_hash($adminpsw, PASSWORD_BCRYPT);
-                $alert="Paswordi dhe ".strtolower($alert);
-    
+                $alert = "Paswordi dhe " . strtolower($alert);
             }
-            $today = date("Y-m-d");
             if (empty($u_photo)) {
-                $query2 = mysqli_query($con, "UPDATE users SET name='$name' , surname='$surname', email='$email', username='$username', password='$password1', birthday='$birthday', gender='$gender', state='$state', city='$city', street_address='$street', phone='$phone', last_updated='$today' WHERE username='$username'");
+                $query2 = mysqli_query($con, "UPDATE users SET name='$name' , surname='$surname', email='$email', username='$username', password='$password1', birthday='$birthday', gender='$gender', state='$state', city='$city', street_address='$street', phone='$phone', last_updated='$today' WHERE id='$id'");
             } else {
                 $photo = addslashes($u_photo);
-                $query2 = mysqli_query($con, "UPDATE users SET name='$name' , surname='$surname', email='$email', username='$username', password='$password1', birthday='$birthday', gender='$gender', state='$state', city='$city', street_address='$street', phone='$phone', photo='$photo', last_updated='$today' WHERE username='$username'");
-                $alert="Fotografija, ".strtolower($alert);
-    
+                $query2 = mysqli_query($con, "UPDATE users SET name='$name' , surname='$surname', email='$email', username='$username', password='$password1', birthday='$birthday', gender='$gender', state='$state', city='$city', street_address='$street', phone='$phone', photo='$photo', last_updated='$today' WHERE id='$id'");
+                $alert = "Fotografija, " . strtolower($alert);
             }
-                    $data = mysqli_fetch_array($query2);
+            $data = mysqli_fetch_array($query2);
             if (!$query2) {
-                die("E pamundur te azhurohen te dhenat: " .mysqli_errno($query2));
+                die("E pamundur te azhurohen te dhenat: " . mysqli_errno($query2));
             } else {
+                $_SESSION['login'] = $username;
                 $extra = "my-profile.php"; //
                 $host = $_SERVER['HTTP_HOST'];
                 $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
                 echo "<script>
-            alert('".$alert."');
-            window.location.href='http://".$host.$uri."/".$extra."?edit=success';
+            alert('" . $alert . "');
+            window.location.href='http://" . $host . $uri . "/" . $extra . "?edit=success';
          </script>";
             }
         }
-        }
-        
+    }
+
 
 
     function savedata1($con, $u_photo, $name, $surname, $birthday, $gender, $state, $city, $street, $phone, $email, $username, $adminpsw)
@@ -155,13 +153,12 @@ if (isset($_POST['submit'])) {
             $data = mysqli_fetch_array($query);
             $photo1 = $data['photo'];
         } else {
-            $photo1=addslashes($u_photo);
+            $photo1 = addslashes($u_photo);
         }
         $updated = date("Y-m-d h:i:sa");
         $stmt->bind_param("sss", $name1, $surname1, $email1, $username1, $password1, $birthday1, $gender1, $state1, $city1, $street1, $phone1, $photo1, $updated);
         $stmt->execute();
         $stmt->close();
-        
     }
 
 
@@ -171,7 +168,7 @@ if (isset($_POST['submit'])) {
             //$fileName = $_FILES['file']['name'];
             //$fileContent = file_get_contents($_FILES['file']['tmp_name']);
 
-
+            $id = $_SESSION['id'];
             $fileContent = file_get_contents($_FILES['file']['tmp_name']);
             $fileType = $_FILES['file']['type'];
             $u_name = $_POST['nameAdmin'];
@@ -211,9 +208,9 @@ if (isset($_POST['submit'])) {
                 $image_error = $fileType . " nuk preferohet. Kerkohen formatet: png, gif, jpeg, jpg!";
             } elseif ($_FILES['file']['size'] > 10485760) { //10 MB (size is also in bytes)
                 $image_error = " Keni tejkaluar madhesine e mundshme!";
-            } elseif (empty($name) || (!preg_match("/^[a-zA-Z ]/", $name))) {
+            } elseif (empty($name) || (!preg_match("/^([a-zA-Z' ]+)$/", $name))) {
                 $name_error = "Emri duhet te permbaje vetem shkronja dhe nuk mund te jete i zbrazet!";
-            } elseif (empty($surname) || (!preg_match("/^[a-zA-Z ]/", $surname))) {
+            } elseif (empty($surname) || (!preg_match("/^([a-zA-Z' ]+)$/", $surname))) {
                 $surname_error = "Mbiemri duhet te permbaje vetem shkronja dhe nuk mund te jete i zbrazet!";
             } elseif (empty($birthday)) {
                 $birthday_error = "Nuk duhet te jete i zbrazet!";
@@ -243,14 +240,14 @@ if (isset($_POST['submit'])) {
                     //$url_photo = 'data:' . $fileType . ';base64,' . base64_encode($fileContent);
                     //echo '<script>alert("Te dhenat u ruajten me sukses")</script>';
 
-                    savedata($con, $fileContent, $name, $surname, $birthday, $gender, $state, $city, $street, $phone, $email, $username, $adminpsw);
+                    savedata($con, $id, $fileContent, $name, $surname, $birthday, $gender, $state, $city, $street, $phone, $email, $username, $adminpsw);
                 }
-            } elseif (checkpassword($con, $oldadminpsw, $username)) {
+            } elseif (checkpassword($con, $oldadminpsw, $id)) {
                 if (!preg_match("/^(?=.*?[a-z])(?=.*?[0-9]).{8,}$/", $adminpsw) || empty($adminpsw)) {
                     $psw1error = "Paswordi duhet t'i permbaje 8 karaktere, se paku nje shkronje dhe nje numer.";
                 } else {
                     if (strcmp($adminpsw, $confpsw) == 0) {
-                        savedata($con, $fileContent, $name, $surname, $birthday, $gender, $state, $city, $street, $phone, $email, $username, $adminpsw);
+                        savedata($con, $id, $fileContent, $name, $surname, $birthday, $gender, $state, $city, $street, $phone, $email, $username, $adminpsw);
                     } else {
                         $psw2_error = "Paswordat nuk perputhen 1.";
                     }
@@ -261,7 +258,7 @@ if (isset($_POST['submit'])) {
         }
     }
 }
-
+*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -320,39 +317,43 @@ if (isset($_POST['submit'])) {
                                 <div class="circle form-group">
                                     <div class="input-formimg">
                                         <?php
-                                        if($userdata['photo']==Null)
-                                        {}else{
-                                        echo '<img id="preview" class="circle" src="data:image/jpeg;base64,' . base64_encode($userdata['photo']) . '" />  ';
+                                        if ($userdata['photo'] == Null) {
+                                        ?>
+                                            <img id="preview" class="circle" src="../img/empty-img.png">
+                                        <?php
+                                        } else {
+                                            echo '<img id="preview" class="circle" src="data:image/jpeg;base64,' . base64_encode($userdata['photo']) . '" />  ';
                                         }
                                         ?>
                                     </div>
                                 </div>
-
-                                <div class="form-group my-3">
-                                    <div class="input-formimg">
-                                        <input type="file" id="file" name="file" accept="image/*" />
+                                <div class="form-group">
+                                    <div class="input-group my-3">
+                                        <input type="text" class="form-control" disabled placeholder="Ngarkoni fotografi" id="file">
+                                        <div class="input-group-append">
+                                            <button type="button" class="browse btn btn-primary">Ngarkoni...</button>
+                                        </div>
                                     </div>
-                                    <div class="input-formimg">
-                                        <span style="color: red;"><?php echo  @$image_error; ?></span>
-                                    </div>
+                                    <span id="Imageerror" style="color: red;"></span>
+                                    <input type="file" id="file2" name="file2" class="file" accept="image/png">
                                 </div>
                                 <div class="div-inlineflex">
                                     <div class="form-group">
                                         <label class="input-title">Emri</label>
                                         <input type="text" id="NameAdmin" name="nameAdmin" placeholder="Emri" class="form-control" value="<?php echo htmlentities($userdata['name']); ?>">
-                                        <span style="color: red;"><?php echo @$name_error; ?></span>
+                                        <span id="Nameerror" style="color: red;"></span>
                                     </div>
                                     <div class="form-group">
                                         <label class="input-title">Mbiemri</label>
                                         <input type="text" id="SurnameAdmin" name="surnameAdmin" placeholder="Mbiemri" class="form-control" value="<?php echo htmlentities($userdata['surname']); ?>">
-                                        <span style="color: red;"><?php echo @$surname_error; ?></span>
+                                        <span id="Surnameerror" style="color: red;"></span>
                                     </div>
                                 </div>
                                 <div class="div-inlineflex">
                                     <div class="form-group">
                                         <label class="input-title">Datelindja</label>
                                         <input type="date" class="form-control" id="Adminstart-date" name="adminstart_date" value="<?php echo htmlentities($userdata['birthday']); ?>" />
-                                        <span style="color: red;"><?php echo @$birthday_error; ?></span>
+                                        <span id="Birthdayerror" style="color: red;"></span>
                                     </div>
                                     <div class="form-group">
                                         <label class="input-title">Gjinia</label>
@@ -362,74 +363,75 @@ if (isset($_POST['submit'])) {
                                             if ($gender != null) {
                                                 if (strcmp($gender, 'm') == 0) {
                                             ?>
-                                                    <input type="radio" name="admingender" value="male" checked> Mashkull<br>
-                                                    <input type="radio" name="admingender" value="female"> Femër
+                                                    <input type="radio" name="admingender" value="m" checked> Mashkull<br>
+                                                    <input type="radio" name="admingender" value="f"> Femër
                                                 <?php
                                                 } else {
                                                 ?>
-                                                    <input type="radio" name="admingender" value="male"> Mashkull<br>
-                                                    <input type="radio" name="admingender" value="female" checked> Femër <?php
-                                                                                                                        }
-                                                                                                                    } else {
-                                                                                                                            ?>
-                                                <input type="radio" name="admingender" value="male"> Mashkull<br>
-                                                <input type="radio" name="admingender" value="female"> Femër
+                                                    <input type="radio" name="admingender" value="m"> Mashkull<br>
+                                                    <input type="radio" name="admingender" value="f" checked> Femër <?php
+                                                                                                                }
+                                                                                                            } else {
+                                                                                                                    ?>
+                                                <input type="radio" name="admingender" value="m"> Mashkull<br>
+                                                <input type="radio" name="admingender" value="f"> Femër
                                             <?php
-                                                                                                                    }
+                                                                                                            }
                                             ?>
-                                            <span style="color: red;"><?php echo @$gender_error; ?></span>
                                         </div>
+                                        <span id="Gendererror" style="color: red;"></span>
+
                                     </div>
                                 </div>
                                 <div class="div-inlineflex">
                                     <div class="form-group">
                                         <label class="input-title">Shteti</label>
                                         <input type="text" class="form-control" id="StateAddress" name="stateaddress" placeholder="Shteti" value="<?php echo htmlentities($userdata['state']); ?>">
-                                        <span style="color: red;"><?php echo @$state_error; ?></span>
+                                        <span id="Statedayerror" style="color: red;"></span>
                                     </div>
                                     <div class="form-group">
                                         <label class="input-title">Qyteti</label>
                                         <input type="text" class="form-control" id="CityAddress" name="cityaddress" placeholder="Qyteti" value="<?php echo htmlentities($userdata['city']); ?>">
-                                        <span style="color: red;"><?php echo @$city_error; ?></span>
+                                        <span id="Citydayerror" style="color: red;"></span>
 
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="input-title">Adresa e rruges</label>
                                     <input type="text" class="form-control" id="StreetAddress" name="streetAddress" placeholder="Adresa e rrugës" value="<?php echo htmlentities($userdata['street_address']); ?>">
-                                    <span style="color: red;"><?php echo @$streetaddress_error; ?></span>
+                                    <span id="Streetaddresserror" style="color: red;"></span>
                                 </div>
                                 <div class="form-group">
                                     <label class="input-title">Numri i telefonit</label>
                                     <input class="form-control" id="phone-number" name="adminPhone" value="<?php echo htmlentities($userdata['phone']); ?>">
-                                    <span style="color: red;"><?php echo @$phone_error; ?></span>
+                                    <span id="Pronenumbererror" style="color: red;"></span>
                                 </div>
 
                                 <div class="register-div-info">
                                     <div class="form-group">
                                         <label class="input-title">Emaili</label>
                                         <input type="email" autocomplete="" class="form-control" name="Adminemail" placeholder="Emaili" value="<?php echo htmlentities($userdata['email']); ?>">
-                                        <span style="color: red;"><?php echo @$email_error; ?></span>
+                                        <span id="Emailerror" style="color: red;"></span>
                                     </div>
                                     <div class="form-group">
                                         <label class="input-title">Username</label>
                                         <input type="text" autocomplete="" class="form-control" id="adminusername" name="adminusername" placeholder="Username" value="<?php echo htmlentities($userdata['username']); ?>">
-                                        <span style="color: red;"><?php echo @$username_error; ?></span>
+                                        <span id="Usernameerror" style="color: red;"></span>
                                     </div>
                                     <div class="form-group">
                                         <label class="input-title">Paswordi i vjeter</label>
                                         <input type="password" autocomplete="" class="form-control" name="oldadminpassword" placeholder="Paswordi">
-                                        <span style="color: red;"><?php echo @$oldpsw1error; ?></span>
+                                        <span id="Oldpassworderror" style="color: red;"></span>
                                     </div>
                                     <div class="form-group">
                                         <label class="input-title">Paswordi i ri</label>
                                         <input type="password" autocomplete="" class="form-control" name="adminpassword" placeholder="Paswordi">
-                                        <span style="color: red;"><?php echo @$psw1error; ?></span>
+                                        <span id="Passworderror" style="color: red;"></span>
                                     </div>
                                     <div class="form-group">
                                         <label class="input-title">Perserit paswordin</label>
                                         <input type="password" autocomplete="" class="form-control" name="adminconfirm_password" placeholder="Perserit paswordin">
-                                        <span style="color: red;"><?php echo @$psw2_error; ?></span>
+                                        <span id="Password2error" style="color: red;"></span>
                                     </div>
                                 </div>
                             <?php } ?>
@@ -445,6 +447,182 @@ if (isset($_POST['submit'])) {
 </body>
 
 </html>
+<script>
+    $("#UserFrom").submit(function(e) {
+        e.preventDefault();
+        $('#Imageerror').html("");
+        $('#Nameerror').html("");
+        $('#Surnameerror').html("");
+        $('#Birthdayerror').html("");
+        $('#Gendererror').html("");
+        $('#Statedayerror').html("");
+        $('#Citydayerror').html("");
+        $('#Streetaddresserror').html("");
+        $('#Pronenumbererror').html("");
+        $('#Emailerror').html("");
+        $('#Usernameerror').html("");
+        $('#Oldpassworderror').html("");
+        $('#Passworderror').html("");
+        $('#Password2error').html("");
+
+        var myform = document.getElementById("UserFrom");
+        var fd = new FormData(myform);
+        $.ajax({
+                url: "includes/update-my-profile.inc.php",
+                data: fd,
+                cache: false,
+                processData: false,
+                contentType: false,
+                method: 'POST'
+            })
+            .done(function(response) {
+                $message = "";
+
+                switch (response) {
+                    case "1":
+                        $message = "Kerkohen formatet: png, gif, jpeg, jpg. Si dhe madhesia e limituar.";
+                        $('#Imageerror').html($message);
+                        document.getElementById('Imageerror').scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                        break;
+                    case "2":
+                        $message = "Emri duhet te permbaje vetem shkronja dhe nuk mund te jete i zbrazet!";
+                        $('#Nameerror').html($message);
+                        document.getElementById('Nameerror').scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                        break;
+                    case "3":
+                        $message = "Mbiemri duhet te permbaje vetem shkronja dhe nuk mund te jete i zbrazet!";
+                        $('#Surnameerror').html($message);
+                        document.getElementById('Surnameerror').scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                        break;
+                    case "4":
+                        $message = "Nuk duhet te jete i zbrazet!";
+                        $('#Birthdayerror').html($message);
+                        document.getElementById('Birthdayerror').scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                        break;
+                    case "5":
+                        $message = "Zgjidhni njeren nga opsionet!";
+                        $('#Gendererror').html($message);
+                        document.getElementById('Gendererror').scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                        break;
+                    case "6":
+                        $message = "Shenoni shtetin!";
+                        $('#Statedayerror').html($message);
+                        document.getElementById('Statedayerror').scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                        break;
+                    case "7":
+                        $message = "Shenoni qytetin!";
+                        $('#Citydayerror').html($message);
+                        document.getElementById('Citydayerror').scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                        break;
+                    case "8":
+                        $message = "Shenoni adresen!";
+                        $('#Streetaddresserror').html($message);
+                        document.getElementById('Streetaddresserror').scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                        break;
+                    case "9":
+                        $message = "Shenoni numrin e telefonit!";
+                        $('#Pronenumbererror').html($message);
+                        document.getElementById('Pronenumbererror').scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                        break;
+                    case "10":
+                        $message = "Format i gabuar!";
+                        $('#Emailerror').html($message);
+                        document.getElementById('Emailerror').scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                        break;
+                    case "11":
+                        $message = "Ky email ekziston.!";
+                        $('#Emailerror').html($message);
+                        document.getElementById('Emailerror').scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                        break;
+                    case "12":
+                        $message = "Username duhet te jete 5-20 karaktere, jo _ dhe . ne fillim apo ne fund!";
+                        $('#Usernameerror').html($message);
+                        document.getElementById('Usernameerror').scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                        break;
+                    case "13":
+                        $message = "Ky username ekziston.";
+                        $('#Usernameerror').html($message);
+                        document.getElementById('Usernameerror').scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                        break;
+                    case "14":
+                        $message = "Shenoni paswordin e vjeter!";
+                        $('#Oldpassworderror').html($message);
+                        document.getElementById('Oldpassworderror').scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                        break;
+                    case "15":
+                        $message = "Paswordi gabim!";
+                        $('#Oldpassworderror').html($message);
+                        document.getElementById('Oldpassworderror').scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                        break;
+                    case "16":
+                        $message = "Paswordi duhet t'i permbaje 8 karaktere, se paku nje shkronje dhe nje numer.";
+                        $('#Passworderror').html($message);
+                        document.getElementById('Passworderror').scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                        break;
+                    case "17":
+                        $message = "Paswordat nuk perputhen.";
+                        $('#Password2error').html($message);
+                        document.getElementById('Password2error').scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                        break;
+                    default:
+                        alert("Te dhenat u ruajten me sukses");
+                        window.location.href = response;
+                }
+            });
+        return false;
+    });
+</script>
 
 <script>
     /** 
