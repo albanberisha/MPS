@@ -64,8 +64,20 @@ if (isset($_POST['submit'])) {
     if ($num > 0) {
         $dbpass = $num['password'];
         if (password_verify($user_pasword, $dbpass)) {
-            print($num['username']);
-            $extra = "admin/dashboard.php"; //
+            $prv=null;
+            $privilege=$num['privilege'];
+            switch ($privilege) {
+                case "admin":
+                    $priv='admin';
+                    break;
+                case "receptionist":
+                    $priv='receptionist';
+                    break;
+                case "cake":
+                    echo "i is cake";
+                    break;
+            }
+            $extra = "$priv/dashboard.php";
             $_SESSION['login'] = $num['username'];
             $_SESSION['id'] = $num['id'];
             $host = $_SERVER['HTTP_HOST'];
@@ -85,7 +97,20 @@ if (isset($_POST['submit'])) {
         if ($num > 0) {
             $dbpass = $num['password'];
             if (password_verify($user_pasword, $dbpass)) {
-                $extra = "admin/dashboard.php"; //
+                $prv=null;
+                $privilege=$num['privilege'];
+                switch ($privilege) {
+                    case "admin":
+                        $priv='admin';
+                        break;
+                    case "receptionist":
+                        $priv='receptionist';
+                        break;
+                    case "cake":
+                        echo "i is cake";
+                        break;
+                }
+                $extra = "$priv/dashboard.php"; //
                 $_SESSION['login'] = $num['username'];
                 $_SESSION['id'] = $num['id'];
                 $host = $_SERVER['HTTP_HOST'];

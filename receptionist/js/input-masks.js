@@ -7,6 +7,10 @@ $(document).ready(function() {
         mask: '+999 99 999 999'
     });
 
+    $("#phone-number2").inputmask({
+        mask: '+999 99 999 999'
+    });
+
 
     $("#barcode").inputmask({
         mask: '9 999999 999999',

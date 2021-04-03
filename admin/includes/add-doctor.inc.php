@@ -23,7 +23,7 @@ $docposition = $_POST['Doctorposition'];//
 $docname = $_POST['nameDoc'];//
 $docsurname = $_POST['surnameDoc'];//
 $docbirthday = $_POST['docstart_date'];//
-$gender = $_POST['docgender'];//
+$gender = $_POST['docgender'];
 $state = $_POST['stateaddress'];//
 $city = $_POST['cityaddress'];//
 $streetaddress = $_POST['streetAddress'];//
@@ -88,6 +88,7 @@ if (empty($docname) || (!preg_match("/^([a-zA-Z' ]+)$/", $docname)))
 }
 //echo $docposition.$docname.$docsurname.$docbirthday.$gender.$state.$city.$streetaddress.$phonenumber.$docspecialization.$doctordepartament.$adressKDoc.$consultfee.$docemail.$docusername.$docpassword.$docconfirm_password;
 }
+
 
 function savedata($con,$docname,$docsurname,$docemail,$docusername,$docpassword,$docbirthday,$gender,$state,$city,$streetaddress,$phonenumber,$docposition, $docphoto,$status,$docspecialization,$adressKDoc,$consultfee,$doctordepartament)
 {

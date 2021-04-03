@@ -113,7 +113,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
                                 <div class="form-group">
                                     <label class="input-title">Gjinia</label>
                                     <div class="input-title-btn">
-                                        <input type="radio" name="docgender" value="m"> Mashkull<br>
+                                        <input type="radio" name="docgender" value="m" checked> Mashkull<br>
                                         <input type="radio" name="docgender" value="f"> Femër
                                     </div>
                                     <span id="Gendererror" style="color: red;"></span>
@@ -365,7 +365,8 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
     $('#Password2error').html($message);
     document.getElementById('Password2error').scrollIntoView({ behavior: 'smooth', block: 'center' });
     break;
-  default: alert("Te dhenat u ruajten me sukses");
+  default:
+       alert("Te dhenat u ruajten me sukses");
   window.location.href=response;
 }
         });

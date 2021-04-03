@@ -102,7 +102,7 @@ if (isset($_GET['edit'])) {
                                                 <?php
                                                 if ($data['photo'] == Null) {
                                                 ?>
-                                                    <img id="preview" class="circle" src="../img/empty-img.png">
+                                                    <img id="preview" class="circle" src="../img/empty-img.png" >
                                                 <?php
                                                 } else {
 

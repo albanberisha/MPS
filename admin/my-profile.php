@@ -436,8 +436,7 @@ if (isset($_POST['submit'])) {
                                 </div>
                             <?php } ?>
                             <div class="form-group" style="margin-top: 10px;">
-                                <button type="submit" id="submit" name="submit" class="btn btn-primary">Ndrysho</button>
-                            </div>
+                            <button type="submit" class="btn btn-primary">Ndrysho</button>                            </div>
                         </form>
                     </div>
                 </div>
