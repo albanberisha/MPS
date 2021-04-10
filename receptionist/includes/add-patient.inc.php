@@ -22,6 +22,7 @@ $state2 = $_POST['stateaddress2'];//
 $city2 = $_POST['cityaddress2'];//
 $street2 = $_POST['streetAddress2'];//
 $phone2 = $_POST['phone-number2'];//
+$condition = $_POST['cond'];//
 $status=1;//
 
 if (empty($name) || (!preg_match("/^([a-zA-Z' ]+)$/", $name))) 
@@ -57,11 +58,10 @@ if (empty($name) || (!preg_match("/^([a-zA-Z' ]+)$/", $name)))
 {
     echo $error="12";
 }else{
-    savedata($con,$name,$surname,$patientid,$birthday,$phone,$state,$city,$street,$email,$gender,$PatientBloodtype,$regdatetime,$status,$name2,$surname2,$c2,$state2,$city2,$street2,$phone2,$bedid,$reason);
+    savedata($con,$name,$surname,$patientid,$birthday,$phone,$state,$city,$street,$email,$gender,$PatientBloodtype,$regdatetime,$status,$name2,$surname2,$c2,$state2,$city2,$street2,$phone2,$bedid,$reason,$condition);
 }
 
-
-function savedata($con,$name,$surname,$patientid,$birthday,$phone,$state,$city,$street,$email,$gender,$PatientBloodtype,$regdatetime,$status,$name2,$surname2,$c2,$state2,$city2,$street2,$phone2,$bedid,$reason)
+function savedata($con,$name,$surname,$patientid,$birthday,$phone,$state,$city,$street,$email,$gender,$PatientBloodtype,$regdatetime,$status,$name2,$surname2,$c2,$state2,$city2,$street2,$phone2,$bedid,$reason,$condition)
 {
     $query = mysqli_query($con,"INSERT INTO patients(name,surname,patientID,birthday,phone,state,city,street_address,email,gender,blood_type,registered,status) VALUES('$name','$surname','$patientid','$birthday','$phone','$state','$city','$street','$email','$gender','$PatientBloodtype','$regdatetime','$status')");
     if (!$query) {
@@ -82,7 +82,7 @@ function savedata($con,$name,$surname,$patientid,$birthday,$phone,$state,$city,$
                 if($bedid==0)
                 {
                     $query3 = mysqli_query($con,"INSERT INTO receipts(patientId,entryDateTime,exitDateTime,reason,userInCharge,cond) 
-                VALUES('$patientid','$regdatetime','$regdatetime','$reason','$userInCharge','red')");
+                VALUES('$patientid','$regdatetime','$regdatetime','$reason','$userInCharge','$condition')");
                 if (!$query3) {
                     die("E pamundur te azhurohen te dhenat: " .mysqli_errno($query3));
                      }else{
@@ -92,8 +92,9 @@ function savedata($con,$name,$surname,$patientid,$birthday,$phone,$state,$city,$
                         echo "http://".$host.$uri."/".$extra."?add=success";
                      }
                 }else{
+                    $query5=mysqli_query($con,"UPDATE beds SET patientId='$patientid', beds.condition='$condition' WHERE id='$bedid'");
                     $query4 = mysqli_query($con,"INSERT INTO receipts(patientId,entryDateTime,reason,userInCharge,bedId,cond) 
-                VALUES('$patientid','$regdatetime','$reason','$userInCharge','$bedid','red')");
+                VALUES('$patientid','$regdatetime','$reason','$userInCharge','$bedid','$condition')");
                 if (!$query4) {
                     die("E pamundur te azhurohen te dhenat: " .mysqli_errno($query4));
                      }else{

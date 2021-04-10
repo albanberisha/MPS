@@ -70,7 +70,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
                         <div class="form-group row">
                             <label for="example-datetime-local-input" class="input-title" style="margin-top: 7px;">Data:</label>
                             <div class="col-10">
-                                <input type="datetime" readonly="readonly" class="form-control" id="Reg-date" name="reg_date" value="<?php echo date(" Y-m-d h:i:sa "); ?>">
+                                <input type="datetime" readonly="readonly" class="form-control" id="Reg-date" name="reg_date" value="<?php echo date(" Y-m-d H:i:sa "); ?>">
                             </div>
                         </div>
                         <div class="form-group">
@@ -218,6 +218,9 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
                                 <label class="input-title">Numri i telefonit</label>
                                 <input class="form-control" id="phone-number2" name="phone-number2">
                                 <span id="Pronenumbererror2" style="color: red;"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" class="form-control" id="Cond" name="cond" value="red">
                             </div>
                             <div class="form-group" style="margin-top: 10px;">
                                 <button type="submit" class="btn btn-primary">Regjistro</button>

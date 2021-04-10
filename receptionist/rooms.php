@@ -1,3 +1,23 @@
+<?php
+session_start();
+error_reporting(0);
+include('includes/config.php');
+include('includes/logincheck.php');
+check_login();
+//Ending a php session after 1(60 min) hours of inactivity
+$minutesBeforeSessionExpire = 60;
+if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > ($minutesBeforeSessionExpire * 60))) {
+    session_unset();     // unset $_SESSION   
+    session_destroy();   // destroy session data 
+    $host = $_SERVER['HTTP_HOST'];
+    $uri  = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+    $extra = "../index.php";
+    $_SESSION["login"] = "";
+    header("Location: http://$host$uri/$extra");
+}
+$_SESSION['LAST_ACTIVITY'] = time(); // update last activity
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,42 +66,52 @@
                     <div class="panel-heading">
                         <h5 class="panel-title panel-white text-center">Shtreterit dhe dhomat në spital</h5>
                     </div>
-                    <div class="form-group">
-                                <label class="input-title" for="HospitalDepartaments">
-                                    Departamentet
-                                </label>
-                                <select name="hospitalDepartaments" class="form-control" required="true">
-                                    <option selected="" value="">Selekto departamentin</option>
-                                    <option>Urgjence</option>
-                                    <option>Emergjence</option>
-                                    <option>Urologji</option>
-                                </select>
-                            </div>
-                    <div class="row">
-                        <div class="col-md-auto room">
-                            <a href="#" type="button" class="btn btn-secondary free" data-toggle="tooltip" data-placement="bottom" title="Dhoma 1. E lire.">1</a>
-                        </div>
-                        <div class="col-md-auto room">
-                            <a href="view-patient.php" type="button" class="btn btn-secondary busy" data-toggle="tooltip" data-placement="bottom" title="Dhoma 1. ID13454 Alban Trollaj.">2</a>
-                        </div>
-                        <div class="col-md-auto room">
-                            <a href="view-patient.php" type="button" class="btn btn-secondary busy" data-toggle="tooltip" data-placement="bottom" title="Dhoma 2. ID13454 Alban Trollaj.">3</a>
-                        </div>
-                        <div class="col-md-auto room">
-                            <a href="view-patient.php" type="button" class="btn btn-secondary busy" data-toggle="tooltip" data-placement="bottom" title="Dhoma 2. ID13454 Alban Trollaj.">4</a>
-                        </div>
-                        <div class="col-md-auto room">
-                            <a href="#" type="button" class="btn btn-secondary free" data-toggle="tooltip" data-placement="bottom" title="Dhoma 3. E lire.">5</a>
-                        </div>
-                        <div class="col-md-auto room">
-                            <a href="#" type="button" class="btn btn-secondary free" data-toggle="tooltip" data-placement="bottom" title="Dhoma 4. E lire.">6</a>
-                        </div>
-                        <div class="col-md-auto room">
-                            <a href="#" type="button" class="btn btn-secondary free" data-toggle="tooltip" data-placement="bottom" title="Dhoma 5. E lire.">7</a>
-                        </div>
-                        <div class="col-md-auto room">
-                            <a href="#" type="button" class="btn btn-secondary free" data-toggle="tooltip" data-placement="bottom" title="Dhoma 6. E lire.">8</a>
-                        </div>
+                    <div class="row" id="Rooms">
+                        <?php
+                        $query = mysqli_query($con, "SELECT beds.id, beds.patientId, patients.patientID as patID, patients.name, patients.surname,rooms.id as roomid,departaments.id as depid, departaments.depname from beds, patients,rooms,departaments where beds.patientId=patients.id and beds.roomId=rooms.id and rooms.depId=departaments.id and beds.bedstatus=1 UNION SELECT beds.id, beds.patientId, NULL,NULL,NULL,rooms.id as roomid,departaments.id as depid, departaments.depname from beds,rooms,departaments WHERE beds.patientId IS NULL and beds.roomId=rooms.id and rooms.depId=departaments.id and beds.bedstatus=1 ORDER by roomid ASC, id ASC");
+                        if (!$query) {
+                            die("E pamundur te azhurohen te dhenat: " . mysqli_connect_error());
+                        } else {
+                            $previousroom = 1;
+                            $thisdepartament="";
+                            ?>
+                            <div class="col-md-auto room">
+                                <p class="roomnumber">Dhoma: <?php echo($previousroom); ?></p>
+                                <div class="roomsplitter">
+                                <?php
+                            while (($data = mysqli_fetch_array($query))) {
+                                $thisroom = $data['roomid'];
+                                $thisdepartament=$data['depname'];
+                                if ($thisroom != $previousroom) {
+                                  ?>
+                                   </div>
+                                   <p class="roomnumber">Dep: <?php echo htmlentities($data['depname']); ?></p>
+                                    </div>
+                                    <div class="col-md-auto room">
+                                        <p class="roomnumber">Dhoma: <?php echo htmlentities($data['roomid']); ?></p>
+                                        <div class="roomsplitter">
+                                        <?php
+                                    }
+                                    $activebed = $data['patientId'];
+                                    if ($activebed != NULL) {
+                                        ?>
+                                            <a href="view-patient.php?id=<?php echo $data['patientId'] ?>&view=patient" type="button" class="btn btn-secondary busy" data-toggle="tooltip" data-placement="bottom" title="Departamenti <?php echo htmlentities($data['depname']); ?>, Dhoma <?php echo htmlentities($data['roomid']); ?>. ID: <?php echo htmlentities($data['patID']); ?>, Emri dhe Mbiemri: <?php echo htmlentities($data['name']); ?> <?php echo htmlentities($data['surname']); ?>"><?php echo htmlentities($data['id']); ?></a>
+                                        <?php
+                                    } else {
+                                        ?>
+                                            <a href="register-patients.php" type="button" class="btn btn-secondary free" data-toggle="tooltip" data-placement="bottom" title="Departamenti <?php echo htmlentities($data['depname']); ?>, Dhoma <?php echo htmlentities($data['roomid']); ?>. E LIRE. "><?php echo htmlentities($data['id']); ?></a>
+
+                                        <?php
+                                    }
+                                    $previousroom = $thisroom;
+                                }
+                                ?>
+                                 
+                                   </div>
+                                   <p class="roomnumber">Dep: <?php echo $thisdepartament; ?></p>
+                                 <?php
+                            }
+                        ?>
                     </div>
                 </div>
             </div>

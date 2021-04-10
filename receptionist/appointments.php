@@ -1,3 +1,23 @@
+<?php
+session_start();
+error_reporting(0);
+include('includes/config.php');
+include('includes/logincheck.php');
+check_login();
+//Ending a php session after 1(60 min) hours of inactivity
+$minutesBeforeSessionExpire = 60;
+if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > ($minutesBeforeSessionExpire * 60))) {
+    session_unset();     // unset $_SESSION   
+    session_destroy();   // destroy session data 
+    $host = $_SERVER['HTTP_HOST'];
+    $uri  = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+    $extra = "../index.php";
+    $_SESSION["login"] = "";
+    header("Location: http://$host$uri/$extra");
+}
+$_SESSION['LAST_ACTIVITY'] = time(); // update last activity
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,6 +69,7 @@
                                 <div style="padding-bottom: 0;">
                                     <h6 class="panel-title panel-white text-center col-header">Terminet</h6>
                                 </div>
+
                                 <div class="card-body card-top">
                                     <table class="data-list min-height dignosis color-none">
                                         <tbody>
@@ -66,72 +87,62 @@
                                                     Pacienti:
                                                 </th>
                                                 <th class="panel-title title4 ">
-                                                    ID:
+                                                    Telefoni:
                                                 </th>
                                                 <th class="panel-title title4 ">
                                                     Statusi:
                                                 </th>
                                             </tr>
-                                            <tr>
-                                                <td class=" date3">
-                                                    19.12.2020
-                                                </td>
-                                                <td class=" date3">
-                                                    12:45
-                                                </td>
-                                                <td class="title4">
-                                                    Dr. Argon Mustafa
-                                                </td>
-                                                <td class="title4">
-                                                    Artan Lajqi
-                                                </td>
-                                                <td class="title4">
-                                                    1234
-                                                </td>
-                                                <td class="title4">
-                                                    Perfunduar
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class=" date3">
-                                                    19.12.2020
-                                                </td>
-                                                <td class=" date3">
-                                                    12:45
-                                                </td>
-                                                <td class="title4">
-                                                    Dr. Argon Mustafa
-                                                </td>
-                                                <td class="title4">
-                                                    Artan Lajqi
-                                                </td>
-                                                <td class="title4">
-                                                    1234
-                                                </td>
-                                                <td class="title4">
-                                                    Perfunduar
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class=" date3">
-                                                    19.12.2020
-                                                </td>
-                                                <td class=" date3">
-                                                    12:45
-                                                </td>
-                                                <td class="title4">
-                                                    Dr. Argon Mustafa
-                                                </td>
-                                                <td class="title4">
-                                                    Artan Lajqi
-                                                </td>
-                                                <td class="title4">
-                                                    1234
-                                                </td>
-                                                <td class="title4">
-                                                    Ne pritje per aprovim
-                                                </td>
-                                            </tr>
+                                            <?php
+                                            $query = mysqli_query($con, "SELECT appointments.date,appointments.starttime,appointments.endtime,appointments.status,patients.name as patientname,patients.surname as patientsurname,patients.phone,users.name as docname,users.surname as docsurname from appointments,patients,users where appointments.patientId=patients.id and appointments.doctorId=users.id and appointments.date>=CURDATE() ORDER by date ASC, starttime ASC LIMIT 50");
+                                            if (!$query) {
+                                                die("E pamundur te azhurohen te dhenat: " . mysqli_connect_error());
+                                            } else {
+                                                while ($data = mysqli_fetch_array($query)) {
+                                            ?>
+                                                    <tr>
+                                                        <td class=" date3">
+                                                            <?php echo htmlentities($data['date']) ?>
+                                                        </td>
+                                                        <td class=" date3">
+                                                            <?php echo htmlentities($data['starttime']) ?>-<?php echo htmlentities($data['endtime']) ?>
+                                                        </td>
+                                                        <td class="title4">
+                                                            <?php echo htmlentities($data['docname']) ?> <?php echo htmlentities($data['docsurname']) ?>
+                                                        </td>
+                                                        <td class="title4">
+                                                            <?php echo htmlentities($data['patientname']) ?> <?php echo htmlentities($data['patientsurname']) ?>
+                                                        </td>
+                                                        <td class="title4">
+                                                            <?php echo htmlentities($data['phone']) ?>
+                                                        </td>
+                                                        <td class="title4">
+                                                            <?php 
+                                                            $status=$data['status'];
+                                                            $statusi="";
+                                                            switch($status)
+                                                            {
+                                                                case "approved":
+                                                                    $statusi="Aprovuar";
+                                                                    break;
+                                                                    case "finished":
+                                                                        $statusi="Pefunduar";
+                                                                        break;
+                                                                        case "rejected":
+                                                                            $statusi="refuzuar";
+                                                                            break;
+                                                                            default:
+                                                                                $statusi="";
+                                                            }
+                                                            echo $statusi;
+                                                            ?>
+                                                        </td>
+                                                    </tr>
+                                            <?php
+                                                }
+                                            }
+                                            ?>
+
                                         </tbody>
                                     </table>
                                 </div>

@@ -725,7 +725,7 @@ ul .profile-pic:hover {
 .page {
     background-color: rgba(0, 0, 0, 0.03);
     padding-bottom: 5px;
-    min-height: 640px;
+    min-height: 682px;
 }
 
 .image-wid img {
@@ -1241,9 +1241,9 @@ ul .profile-pic:hover {
 }
 
 .row-cols-sm-20p {
-    -ms-flex: 0 0 25%;
-    flex: 0 0 25%;
-    max-width: 25%;
+    -ms-flex: 0 0 33.33%;
+    flex: 0 0 33.33%;
+    max-width: 33.33%;
     text-align: center !important;
 }
 
@@ -1378,4 +1378,19 @@ ul .profile-pic:hover {
 
 .datalist-3 {
     height: fit-content;
+}
+
+
+/*room show*/
+
+.roomsplitter {
+    background-color: rgb(133, 133, 133);
+    padding: 5px;
+}
+
+.roomnumber {
+    text-align: center;
+    font-family: Helvetica, Arial, sans-serif;
+    color: rgb(99, 99, 99);
+    font-weight: bold;
 }

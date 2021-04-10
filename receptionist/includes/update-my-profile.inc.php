@@ -117,7 +117,7 @@ function savedata($con, $id, $u_photo, $name, $surname, $birthday, $gender, $sta
         $query = mysqli_query($con, "SELECT * FROM users WHERE id='$id'");
         $data = mysqli_fetch_array($query);
         $lastupdated = $data['last_updated'];
-        $today = date("Y-m-d h:i:sa");
+        $today = date("Y-m-d H:i:sa");
         //if($lastupdated==$today)
         if (false) {
             $alert = "Mund te ndryshoni te dhenat vetem nje here brenda dites.";
