@@ -23,7 +23,6 @@ if (isset($_GET['death'])) {
 }
 ?>
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en">
 
 <head>

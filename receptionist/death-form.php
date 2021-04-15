@@ -86,7 +86,7 @@ if (isset($_GET['death'])) {
                             <?php
                             $query = mysqli_query($con, "SELECT patients.id, patients.name,patients.surname,patients.patientID, patients.birthday, patients.gender, patients.state,patients.city, patients.street_address, patients.phone from patients where patients.id='$patient' and patients.status='1'");
                             if (!$query) {
-                                die("E pamundur te azhurohen te dhenat: " . mysqli_connect_error());
+                                die(mysqli_error($con).$query);
                             } else {
                                 $data = mysqli_fetch_array($query);
                                 if ($data > 0) {

@@ -59,7 +59,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
 
         <div class="page" style="width: 100%;">
             <div class="card-header">
-                <p>Receptionist | Informata rreth pdhomave</p>
+                <p>Receptionist | Informata rreth dhomave</p>
             </div>
             <div class="container-fullw">
                 <div class="panel-body no-padding">
@@ -82,10 +82,9 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
                             while (($data = mysqli_fetch_array($query))) {
                                 $thisroom = $data['roomid'];
                                 $thisdepartament=$data['depname'];
-                                if ($thisroom != $previousroom) {
+                                if ($thisroom != $previousroom ) {
                                   ?>
                                    </div>
-                                   <p class="roomnumber">Dep: <?php echo htmlentities($data['depname']); ?></p>
                                     </div>
                                     <div class="col-md-auto room">
                                         <p class="roomnumber">Dhoma: <?php echo htmlentities($data['roomid']); ?></p>
@@ -108,7 +107,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
                                 ?>
                                  
                                    </div>
-                                   <p class="roomnumber">Dep: <?php echo $thisdepartament; ?></p>
+                                   
                                  <?php
                             }
                         ?>

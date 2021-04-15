@@ -1,3 +1,23 @@
+<?php
+session_start();
+error_reporting(0);
+include('includes/config.php');
+include('includes/logincheck.php');
+check_login();
+//Ending a php session after 6(360 min) hours of inactivity
+$minutesBeforeSessionExpire = 360;
+if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > ($minutesBeforeSessionExpire * 60))) {
+    session_unset();     // unset $_SESSION   
+    session_destroy();   // destroy session data 
+    $host = $_SERVER['HTTP_HOST'];
+    $uri  = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+    $extra = "../index.php";
+    $_SESSION["login"] = "";
+    header("Location: http://$host$uri/$extra");
+}
+$_SESSION['LAST_ACTIVITY'] = time(); // update last activity
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,180 +62,65 @@
                 <p>Doktor | Rezultatet e sotme</p>
             </div>
             <div class="container-fullw">
-
             <div class="panel-body no-padding" style="margin-top: 20px;">
                     <div class="panel-heading">
-                        <h5 class="panel-title panel-white text-center">Publikimet e mija te dates <b>24.04.2021</b></h5>
+                        <h5 class="panel-title panel-white text-center">Publikimet e mija te dates <b><?php echo date('d.m.Y') ?></b></h5>
                     </div>
+                    <p id="Deleteerror" style="color:red;"></p>
                     <table class="data-list min-height">
                         <tbody>
                             <tr class="table-head ">
-                                <td class="rezidh">ID e pacientit</td>
-                                <td class="rezdesch">Pershkrimi</td>
-                                <td class="rezdateh">Data e krijimit</td>
-                                <td class="rezdepth">Departamenti</td>
+                                <td class="rezidh">Nr.</td>
+                                <td class="rezdesch">ID e pacientit</td>
+                                <td class="rezdateh">Pershkrimi</td>
+                                <td class="rezdepth">Data e krijimit</td>
                                 <td class="actionsh">
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                     <table class="data-list">
-                        <tbody>
-                            <tr>
+                    <tbody id="Analyzes">
+                        <?php
+                        $userid=$_SESSION['id'];
+            $query2 = mysqli_query($con,"SELECT analyzes.id,analyzes.patientId,analyzes.releaseDate,patients.name,patients.surname,patients.patientID,pricing_list.name as analysedesc from patients,analyzes,pricing_list WHERE analyzes.patientId=patients.id and analyzes.analyse_id=pricing_list.id and pricing_list.status='1' and analyzes.status='1' and analyzes.userId='$userid' and DATE(analyzes.releaseDate) = CURDATE() ORDER BY id DESC");
+             if (!$query2) {
+                die(mysqli_error($con).$query2);
+                 }else{
+                     $count=1;
+                    while ($data2 = mysqli_fetch_array($query2)) {
+                        $count
+                        ?>
+                        <tr>
                                 <td class="rezid">
-                                    1234234
+                                <?php echo $count; ?>
                                 </td>
                                 <td class="rezdesc">
-                                    Analize e mushkrive
+                                <?php echo htmlentities($data2['patientID']) ?>
                                 </td>
                                 <td class="rezdate">
-                                    25.12.2020
+                                <?php echo htmlentities($data2['analysedesc']) ?>
                                 </td>
                                 <td class="rezdept">
-                                   I mushkerive
+                                <?php echo htmlentities($data2['releaseDate']) ?>
                                 </td>
                                 <td class="actions">
-                                    <span class="edit-data" onclick="window.open('edit-result.php', '_self');"><img src="img/edit-icon.png"></span>
-                                    <span class="delete-data"><img src="img/delete-icon.png"></span>
+                                    <span class="edit-data">
+                                                <a href="edit-result.php?id=<?php echo $data2['id'] ?>&edit=analyze">
+                                                    <img src="img/edit-icon.png"> </a>
+                                            </span>
+                                    <span class="delete-data">
+                                                <a href="#" onclick="deleteanalyze(<?php echo $data2['id'] ?>);">
+                                                    <img src="img/delete-icon.png">
+                                                </a>
+                                            </span>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="rezid">
-                                    1234234
-                                </td>
-                                <td class="rezdesc">
-                                    Analize e mushkrive
-                                </td>
-                                <td class="rezdate">
-                                    25.12.2020
-                                </td>
-                                <td class="rezdept">
-                                   I mushkerive
-                                </td>
-                                <td class="actions">
-                                    <span class="edit-data" onclick="window.open('edit-result.php', '_self');"><img src="img/edit-icon.png"></span>
-                                    <span class="delete-data"><img src="img/delete-icon.png"></span>
-                                </td>
-                            </tr><tr>
-                                <td class="rezid">
-                                    1234234
-                                </td>
-                                <td class="rezdesc">
-                                    Analize e mushkrive
-                                </td>
-                                <td class="rezdate">
-                                    25.12.2020
-                                </td>
-                                <td class="rezdept">
-                                   I mushkerive
-                                </td>
-                                <td class="actions">
-                                    <span class="edit-data" onclick="window.open('edit-result.php', '_self');"><img src="img/edit-icon.png"></span>
-                                    <span class="delete-data"><img src="img/delete-icon.png"></span>
-                                </td>
-                            </tr><tr>
-                                <td class="rezid">
-                                    1234234
-                                </td>
-                                <td class="rezdesc">
-                                    Analize e mushkrive
-                                </td>
-                                <td class="rezdate">
-                                    25.12.2020
-                                </td>
-                                <td class="rezdept">
-                                   I mushkerive
-                                </td>
-                                <td class="actions">
-                                    <span class="edit-data" onclick="window.open('edit-result.php', '_self');"><img src="img/edit-icon.png"></span>
-                                    <span class="delete-data"><img src="img/delete-icon.png"></span>
-                                </td>
-                            </tr><tr>
-                                <td class="rezid">
-                                    1234234
-                                </td>
-                                <td class="rezdesc">
-                                    Analize e mushkrive
-                                </td>
-                                <td class="rezdate">
-                                    25.12.2020
-                                </td>
-                                <td class="rezdept">
-                                   I mushkerive
-                                </td>
-                                <td class="actions">
-                                    <span class="edit-data" onclick="window.open('edit-result.php', '_self');"><img src="img/edit-icon.png"></span>
-                                    <span class="delete-data"><img src="img/delete-icon.png"></span>
-                                </td>
-                            </tr><tr>
-                                <td class="rezid">
-                                    1234234
-                                </td>
-                                <td class="rezdesc">
-                                    Analize e mushkrive
-                                </td>
-                                <td class="rezdate">
-                                    25.12.2020
-                                </td>
-                                <td class="rezdept">
-                                   I mushkerive
-                                </td>
-                                <td class="actions">
-                                    <span class="edit-data" onclick="window.open('edit-result.php', '_self');"><img src="img/edit-icon.png"></span>
-                                    <span class="delete-data"><img src="img/delete-icon.png"></span>
-                                </td>
-                            </tr><tr>
-                                <td class="rezid">
-                                    1234234
-                                </td>
-                                <td class="rezdesc">
-                                    Analize e mushkrive
-                                </td>
-                                <td class="rezdate">
-                                    25.12.2020
-                                </td>
-                                <td class="rezdept">
-                                   I mushkerive
-                                </td>
-                                <td class="actions">
-                                    <span class="edit-data" onclick="window.open('edit-result.php', '_self');"><img src="img/edit-icon.png"></span>
-                                    <span class="delete-data"><img src="img/delete-icon.png"></span>
-                                </td>
-                            </tr><tr>
-                                <td class="rezid">
-                                    1234234
-                                </td>
-                                <td class="rezdesc">
-                                    Analize e mushkrive
-                                </td>
-                                <td class="rezdate">
-                                    25.12.2020
-                                </td>
-                                <td class="rezdept">
-                                   I mushkerive
-                                </td>
-                                <td class="actions">
-                                    <span class="edit-data" onclick="window.open('edit-result.php', '_self');"><img src="img/edit-icon.png"></span>
-                                    <span class="delete-data"><img src="img/delete-icon.png"></span>
-                                </td>
-                            </tr><tr>
-                                <td class="rezid">
-                                    1234234
-                                </td>
-                                <td class="rezdesc">
-                                    Analize e mushkrive
-                                </td>
-                                <td class="rezdate">
-                                    25.12.2020
-                                </td>
-                                <td class="rezdept">
-                                   I mushkerive
-                                </td>
-                                <td class="actions">
-                                    <span class="edit-data" onclick="window.open('edit-result.php', '_self');"><img src="img/edit-icon.png"></span>
-                                    <span class="delete-data"><img src="img/delete-icon.png"></span>
-                                </td>
-                            </tr>
+                        <?php
+                        $count++;
+                    }
+                 }
+            ?>
                         </tbody>
                     </table>
                 </div>
@@ -225,3 +130,32 @@
 </body>
 
 </html>
+
+<script>
+ function deleteanalyze($id) {
+            $confirm = confirm('A jeni te sigurte qe deshironi ta fshini analizen?');
+        if($confirm)
+        {
+            table = 'analyzes';
+            $.ajax({
+                    method: "POST",
+                    url: "includes/delete.inc.php",
+                    data: {
+                        id: $id,
+                        table: table
+                    }
+                })
+                .done(function(response) {
+                    if (response == "error") {
+                        $('#Deleteerror').html("Fshierja nuk lejohet!");
+                    } else {
+                        $('#Deleteerror').html("Fshierja u krye me sukses");
+                        $("#Analyzes").html(response);
+                    }
+                });
+            return false;
+        }else{
+            $('#Deleteerror').html("Fshierja u anulua.");
+        }            
+        }
+</script>

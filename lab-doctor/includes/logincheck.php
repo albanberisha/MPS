@@ -2,7 +2,7 @@
 function check_login()
 {
     include("includes/config.php");
-    $privilege="receptionist";
+    $privilege="lab-doctor";
     $username=$_SESSION['login'];
     $sql="SELECT * From users WHERE username=? and privilege=? and status=1";
     $stmt=mysqli_stmt_init($con);

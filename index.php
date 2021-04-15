@@ -59,7 +59,7 @@ if (isset($_POST['submit'])) {
     $time = date("h:i:sa");
     $status = 0;
 
-    $ret = mysqli_query($con, "SELECT * FROM users WHERE email='" . $_POST['username'] . "'");
+    $ret = mysqli_query($con, "SELECT * FROM users WHERE email='" . $_POST['username'] . "' and status=1");
     $num = mysqli_fetch_array($ret);
     if ($num > 0) {
         $dbpass = $num['password'];
@@ -73,9 +73,11 @@ if (isset($_POST['submit'])) {
                 case "receptionist":
                     $priv='receptionist';
                     break;
-                case "cake":
-                    echo "i is cake";
+                case "lab-doctor":
+                    $priv='lab-doctor';
                     break;
+                default:
+                echo "ERROR";
             }
             $extra = "$priv/dashboard.php";
             $_SESSION['login'] = $num['username'];
@@ -92,7 +94,7 @@ if (isset($_POST['submit'])) {
             loginerror();
         }
     } else {
-        $ret = mysqli_query($con, "SELECT * FROM users WHERE username='" . $_POST['username'] . "'");
+        $ret = mysqli_query($con, "SELECT * FROM users WHERE username='" . $_POST['username'] . "' and status=1");
         $num = mysqli_fetch_array($ret);
         if ($num > 0) {
             $dbpass = $num['password'];
@@ -106,9 +108,11 @@ if (isset($_POST['submit'])) {
                     case "receptionist":
                         $priv='receptionist';
                         break;
-                    case "cake":
-                        echo "i is cake";
-                        break;
+                        case "lab-doctor":
+                            $priv='lab-doctor';
+                            break;
+                        default:
+                        echo "ERROR";
                 }
                 $extra = "$priv/dashboard.php"; //
                 $_SESSION['login'] = $num['username'];

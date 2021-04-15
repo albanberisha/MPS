@@ -93,7 +93,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
                         <tbody id="Patients">
                             <?php
                             $query = mysqli_query($con, "SELECT id, name, surname, phone, gender from patients where status='1' and id in (SELECT patientID
-                            from beds) LIMIT 25");
+                            from beds) ORDER BY name ASC, surname ASC LIMIT 25");
                             if (!$query) {
                                 die("E pamundur te azhurohen te dhenat: " . mysqli_connect_error());
                             } else {

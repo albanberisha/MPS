@@ -93,8 +93,8 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
                     <table class="data-list">
                         <tbody id="Patients">
                             <?php
-                            $query = mysqli_query($con, "SELECT patients.id, patients.patientID, patients.name,patients.surname, patients.phone,patients.gender from patients where patients.status=1 and patients.id IN (SELECT beds.patientId FROM beds)");
-                            $query2 = mysqli_query($con, "SELECT patients.id, patients.patientID, patients.name,patients.surname, patients.phone,patients.gender from patients where patients.status=1 and patients.patientID and patients.id NOT IN(SELECT patients.id from patients where patients.status=1 and patients.id IN (SELECT beds.patientId FROM beds))");
+                            $query = mysqli_query($con, "SELECT patients.id, patients.patientID, patients.name,patients.surname, patients.phone,patients.gender from patients where patients.status=1 and patients.id IN (SELECT beds.patientId FROM beds) ORDER BY name ASC, surname ASC");
+                            $query2 = mysqli_query($con, "SELECT patients.id, patients.patientID, patients.name,patients.surname, patients.phone,patients.gender from patients where patients.status=1 and patients.patientID and patients.id NOT IN(SELECT patients.id from patients where patients.status=1 and patients.id IN (SELECT beds.patientId FROM beds) ORDER BY name ASC, surname ASC)");
                             if (!$query || !$query2) {
                                 die("E pamundur te azhurohen te dhenat: " . mysqli_connect_error());
                             } else {

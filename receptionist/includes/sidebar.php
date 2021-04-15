@@ -1,3 +1,8 @@
+<?php
+session_start();
+error_reporting(0);
+include('config.php');
+?>
 <div class="side-nav" id="side-nav">
     <script>
         function closeNav() {

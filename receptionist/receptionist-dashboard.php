@@ -26,7 +26,17 @@ $myid = $_SESSION['id'];
                         </div>
                         <h2 class="StepTitle">Regjistro Pacientë</h2>
                         <p class="links cl-effect-1">
-                            Total Pacientë :6
+                        <?php
+                            $query = mysqli_query($con, "SELECT count(id) as count from patients where status='1'");
+                            if (!$query) {
+                                die(mysqli_error($con).$query);                            } else {
+                                $data = mysqli_fetch_array($query)
+                            ?>
+                                Total : <?php echo htmlentities($data['count']); ?>
+                            <?php
+
+                            }
+                            ?>
                         </p>
                     </div>
                 </div>
@@ -37,7 +47,17 @@ $myid = $_SESSION['id'];
                         </div>
                         <h2 class="StepTitle">Shiko dhomat e spitalit</h2>
                         <p class="links cl-effect-1">
-                            Gjithsej shtretër të lirë: 17
+                            <?php
+                            $query = mysqli_query($con, "SELECT count(id) as count from beds where bedstatus='1' and patientId IS NULL");
+                            if (!$query) {
+                                die(mysqli_error($con).$query);                            } else {
+                                $data = mysqli_fetch_array($query)
+                            ?>
+                                Gjithsej shtretër të lirë: <?php echo htmlentities($data['count']); ?>
+                            <?php
+
+                            }
+                            ?>
                         </p>
                     </div>
                 </div>
@@ -74,11 +94,25 @@ $myid = $_SESSION['id'];
                         </div>
                         <h2 class=" StepTitle ">Mbyll historinë</h2>
                         <p class="links cl-effect-1">
-                            Pacientë aktiv :6
+                            <?php
+                            $query = mysqli_query($con, "SELECT count(id) as count from beds where bedstatus='1' and patientId IS NOT NULL ");
+                            if (!$query) {
+                                die("E pamundur te azhurohen te dhenat: " . mysqli_connect_error());
+                            } else {
+                                $data = mysqli_fetch_array($query)
+                            ?>
+                                Pacientë aktiv : <?php echo htmlentities($data['count']); ?>
+                            <?php
+
+                            }
+                            ?>
                         </p>
                     </div>
                 </div>
-                <div class="panel panel-white no-radius text-center" onclick="window.open('manage-staf.php', '_self');">
+                <?php
+                /* 
+                ?>
+                 <div class="panel panel-white no-radius text-center" onclick="window.open('manage-staf.php', '_self');">
                     <div class="panel-body wid">
                         <div class="fa-stack fa-2x image-wid">
                             <img src="img/working-clipart.png">
@@ -89,6 +123,8 @@ $myid = $_SESSION['id'];
                         </p>
                     </div>
                 </div>
+                <?php */
+                ?>
             </div>
         </div>
         <div class="col-sm-4 users">
