@@ -76,6 +76,9 @@ if (isset($_POST['submit'])) {
                 case "lab-doctor":
                     $priv='lab-doctor';
                     break;
+                case "doctor":
+                     $priv='doctor';
+                     break;
                 default:
                 echo "ERROR";
             }
@@ -108,8 +111,11 @@ if (isset($_POST['submit'])) {
                     case "receptionist":
                         $priv='receptionist';
                         break;
-                        case "lab-doctor":
+                    case "lab-doctor":
                             $priv='lab-doctor';
+                            break;
+                    case "doctor":
+                            $priv='doctor';
                             break;
                         default:
                         echo "ERROR";

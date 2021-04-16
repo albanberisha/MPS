@@ -77,6 +77,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
                         </div>
                         <p id="Searcherror" style="color:red;"></p>
                     </form>
+                    <p id="Deleteerror" style="color:red;"></p>
                     <div class="panel-body no-padding">
                         <div class="panel-heading">
                             <h5 class="panel-title panel-white text-center">Doktorret</h5>
@@ -142,7 +143,30 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
     </html>
     <script>
         function deleteuser($id) {
-
+        $confirm = confirm('A jeni te sigurte qe deshironi ta fshini doktorrin?');
+        if($confirm)
+        {
+            table = 'doctors';
+            $.ajax({
+                    method: "POST",
+                    url: "includes/delete-user.inc.php",
+                    data: {
+                        id: $id,
+                        table: table
+                    }
+                })
+                .done(function(response) {
+                    if (response == "error") {
+                        $('#Deleteerror').html("Fshierja nuk lejohet sepse doktorri ka termine te pa kryer!");
+                    } else {
+                        $('#Deleteerror').html("Fshierja u krye me sukses");
+                        $("#Doctors").html(response);
+                    }
+                });
+            return false;
+        }else{
+            $('#Deleteerror').html("Fshierja u anulua.");
+        }            
         }
         $("#Refresh").on('click', function()
         {

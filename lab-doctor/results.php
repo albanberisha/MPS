@@ -1,3 +1,23 @@
+<?php
+session_start();
+error_reporting(0);
+include('includes/config.php');
+include('includes/logincheck.php');
+check_login();
+//Ending a php session after 6(360 min) hours of inactivity
+$minutesBeforeSessionExpire = 360;
+if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > ($minutesBeforeSessionExpire * 60))) {
+    session_unset();     // unset $_SESSION   
+    session_destroy();   // destroy session data 
+    $host = $_SERVER['HTTP_HOST'];
+    $uri  = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+    $extra = "../index.php";
+    $_SESSION["login"] = "";
+    header("Location: http://$host$uri/$extra");
+}
+$_SESSION['LAST_ACTIVITY'] = time(); // update last activity
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,199 +70,76 @@
                 <p>Doktor | Rezultatet laboratorike</p>
             </div>
             <div class="container-fullw">
-                <form class="search-form">
+            <form class="search-form" id="search_form" method="post">
                     <div class="d-inline-flex panel-search">
                         <div class="input-group-prepend">
                             <img class="input-group-text" src="img/search-clipart-btn.png" width="38px" height="38px">
                         </div>
-                        <input type="search" class="form-control type-text data-to-search" placeholder="Kerko sipas ID">
+                        <input type="search" name="search-analyze" id="SearchAnalyze" class="form-control type-text data-to-search" placeholder="Sheno ID ose emrin e pacientit">
                         <button type="submit" class="btn btn-primary btn-send">Kerko</button>
+                        <button type="button" id="Refresh" class="btn btn-primary btn-send"><img class="" src="../img/refresh.png" width="20px" height="20px">
+                        </button>
                     </div>
+                    <p id="Searcherror" style="color:red;"></p>
                 </form>
-                <form>
-                <label class="" for="filters">Filtro sipas departamenteve:</label>
-            <div class="col-xs-10 col-sm-8 col-md-2" id="filters">
-                <select class="selectorfilter form-control selectpicker" name="section_id" >
-                    <option value="all">Departamentet</option>
-                    <option >I zemres</option>
-                    <option >I mushkerive</option>
-                </select>
-            </div>
-                </form>
-
                 <div class="panel-body no-padding" style="margin-top: 20px;">
                     <div class="panel-heading">
                         <h5 class="panel-title panel-white text-center">Rezulatet</h5>
                     </div>
+                    <p id="Deleteerror" style="color:red;"></p>
                     <table class="data-list min-height">
                         <tbody>
                             <tr class="table-head ">
-                                <td class="rezidh">ID e pacientit</td>
+                                <td class="rezidh">Numri personal</td>
                                 <td class="rezdesch">Pershkrimi</td>
                                 <td class="rezdateh">Data e krijimit</td>
-                                <td class="rezdepth">Departamenti</td>
+                                <td class="rezdepth">Pacienti</td>
                                 <td class="actionsh">
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                     <table class="data-list">
-                        <tbody>
-                            <tr>
+                        <tbody id="Results">
+                        <?php
+                        $userid=$_SESSION['id'];
+            $query2 = mysqli_query($con,"SELECT analyzes.id, patients.id as patientId,patients.patientID as personalnumber,analyzes.analyse_id,pricing_list.name as analyzename,analyzes.releaseDate,patients.name, patients.surname from patients,analyzes,pricing_list where analyzes.patientId=patients.id and analyzes.analyse_id=pricing_list.id and analyzes.status='1' and patients.status='1' and pricing_list.status='1' ORDER BY analyzes.releaseDate DESC LIMIT 100");
+             if (!$query2) {
+                die(mysqli_error($con).$query2);
+                 }else{
+                     $count=1;
+                    while ($data2 = mysqli_fetch_array($query2)) {
+                        ?>
+                        <tr>
                                 <td class="rezid">
-                                    1234234
+                                <?php echo htmlentities($data2['personalnumber']) ?>
                                 </td>
                                 <td class="rezdesc">
-                                    Analize e mushkrive
+                                <?php echo htmlentities($data2['analyzename']) ?>
                                 </td>
                                 <td class="rezdate">
-                                    25.12.2020
+                                <?php echo htmlentities($data2['releaseDate']) ?>
                                 </td>
                                 <td class="rezdept">
-                                   I mushkerive
+                                <?php echo htmlentities($data2['name']) ?> <?php echo htmlentities($data2['surname']) ?> 
                                 </td>
                                 <td class="actions">
-                                    <span class="edit-data" onclick="window.open('edit-result.php', '_self');"><img src="img/edit-icon.png"></span>
-                                    <span class="delete-data"><img src="img/delete-icon.png"></span>
+                                    <span class="edit-data">
+                                                <a href="edit-result.php?id=<?php echo $data2['id'] ?>&edit=analyze">
+                                                    <img src="img/edit-icon.png"> </a>
+                                            </span>
+                                    <span class="delete-data">
+                                                <a href="#" onclick="deleteanalyze(<?php echo $data2['id'] ?>);">
+                                                    <img src="img/delete-icon.png">
+                                                </a>
+                                            </span>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="rezid">
-                                    1234234
-                                </td>
-                                <td class="rezdesc">
-                                    Analize e mushkrive
-                                </td>
-                                <td class="rezdate">
-                                    25.12.2020
-                                </td>
-                                <td class="rezdept">
-                                   I mushkerive
-                                </td>
-                                <td class="actions">
-                                    <span class="edit-data" onclick="window.open('edit-result.php', '_self');"><img src="img/edit-icon.png"></span>
-                                    <span class="delete-data"><img src="img/delete-icon.png"></span>
-                                </td>
-                            </tr><tr>
-                                <td class="rezid">
-                                    1234234
-                                </td>
-                                <td class="rezdesc">
-                                    Analize e mushkrive
-                                </td>
-                                <td class="rezdate">
-                                    25.12.2020
-                                </td>
-                                <td class="rezdept">
-                                   I mushkerive
-                                </td>
-                                <td class="actions">
-                                    <span class="edit-data" onclick="window.open('edit-result.php', '_self');"><img src="img/edit-icon.png"></span>
-                                    <span class="delete-data"><img src="img/delete-icon.png"></span>
-                                </td>
-                            </tr><tr>
-                                <td class="rezid">
-                                    1234234
-                                </td>
-                                <td class="rezdesc">
-                                    Analize e mushkrive
-                                </td>
-                                <td class="rezdate">
-                                    25.12.2020
-                                </td>
-                                <td class="rezdept">
-                                   I mushkerive
-                                </td>
-                                <td class="actions">
-                                    <span class="edit-data" onclick="window.open('edit-result.php', '_self');"><img src="img/edit-icon.png"></span>
-                                    <span class="delete-data"><img src="img/delete-icon.png"></span>
-                                </td>
-                            </tr><tr>
-                                <td class="rezid">
-                                    1234234
-                                </td>
-                                <td class="rezdesc">
-                                    Analize e mushkrive
-                                </td>
-                                <td class="rezdate">
-                                    25.12.2020
-                                </td>
-                                <td class="rezdept">
-                                   I mushkerive
-                                </td>
-                                <td class="actions">
-                                    <span class="edit-data" onclick="window.open('edit-result.php', '_self');"><img src="img/edit-icon.png"></span>
-                                    <span class="delete-data"><img src="img/delete-icon.png"></span>
-                                </td>
-                            </tr><tr>
-                                <td class="rezid">
-                                    1234234
-                                </td>
-                                <td class="rezdesc">
-                                    Analize e mushkrive
-                                </td>
-                                <td class="rezdate">
-                                    25.12.2020
-                                </td>
-                                <td class="rezdept">
-                                   I mushkerive
-                                </td>
-                                <td class="actions">
-                                    <span class="edit-data" onclick="window.open('edit-result.php', '_self');"><img src="img/edit-icon.png"></span>
-                                    <span class="delete-data"><img src="img/delete-icon.png"></span>
-                                </td>
-                            </tr><tr>
-                                <td class="rezid">
-                                    1234234
-                                </td>
-                                <td class="rezdesc">
-                                    Analize e mushkrive
-                                </td>
-                                <td class="rezdate">
-                                    25.12.2020
-                                </td>
-                                <td class="rezdept">
-                                   I mushkerive
-                                </td>
-                                <td class="actions">
-                                    <span class="edit-data" onclick="window.open('edit-result.php', '_self');"><img src="img/edit-icon.png"></span>
-                                    <span class="delete-data"><img src="img/delete-icon.png"></span>
-                                </td>
-                            </tr><tr>
-                                <td class="rezid">
-                                    1234234
-                                </td>
-                                <td class="rezdesc">
-                                    Analize e mushkrive
-                                </td>
-                                <td class="rezdate">
-                                    25.12.2020
-                                </td>
-                                <td class="rezdept">
-                                   I mushkerive
-                                </td>
-                                <td class="actions">
-                                    <span class="edit-data" onclick="window.open('edit-result.php', '_self');"><img src="img/edit-icon.png"></span>
-                                    <span class="delete-data"><img src="img/delete-icon.png"></span>
-                                </td>
-                            </tr><tr>
-                                <td class="rezid">
-                                    1234234
-                                </td>
-                                <td class="rezdesc">
-                                    Analize e mushkrive
-                                </td>
-                                <td class="rezdate">
-                                    25.12.2020
-                                </td>
-                                <td class="rezdept">
-                                   I mushkerive
-                                </td>
-                                <td class="actions">
-                                    <span class="edit-data" onclick="window.open('edit-result.php', '_self');"><img src="img/edit-icon.png"></span>
-                                    <span class="delete-data"><img src="img/delete-icon.png"></span>
-                                </td>
-                            </tr>
+                        <?php
+                        $count++;
+                    }
+                }
+                        ?>
                         </tbody>
                     </table>
                 </div>
@@ -252,3 +149,58 @@
 </body>
 
 </html>
+
+<script>
+$("#Refresh").on('click', function()
+        {
+            location.reload();
+        });
+ function deleteanalyze($id) {
+            $confirm = confirm('A jeni te sigurte qe deshironi ta fshini analizen?');
+        if($confirm)
+        {
+            table = 'analyzes-report';
+            $.ajax({
+                    method: "POST",
+                    url: "includes/delete.inc.php",
+                    data: {
+                        id: $id,
+                        table: table
+                    }
+                })
+                .done(function(response) {
+                    if (response == "error") {
+                        $('#Deleteerror').html("Fshierja nuk lejohet!");
+                    } else {
+                        $('#Deleteerror').html("Fshierja u krye me sukses");
+                        $("#Results").html(response);
+                    }
+                });
+            return false;
+        }else{
+            $('#Deleteerror').html("Fshierja u anulua.");
+        }            
+        }
+        $("#search_form").submit(function(e) {
+            e.preventDefault();
+            name = $('#SearchAnalyze').val();
+            table = 'searchanalyse'
+            $.ajax({
+                    method: "POST",
+                    url: "includes/search.inc.php",
+                    data: {
+                        name: name,
+                        table: table
+                    }
+                })
+                .done(function(response) {
+                    if (response == "error") {
+                        $('#Searcherror').html("Format i pa lejuar!");
+                    } else {
+                        $('#Searcherror').html("");
+                        $("#Results").html(response);
+                    }
+                });
+            return false;
+        });
+</script>

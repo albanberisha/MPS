@@ -14,14 +14,81 @@ if (strcmp($table, "users-receptionists") == 0) {
 }elseif (strcmp($table, "medicaments") == 0) {
     $medid=$userid;
     deletemedicament($con, $medid);
+}elseif (strcmp($table, "doctors") == 0) {
+    $doctorid=$userid;
+    deletedoctor($con, $doctorid);
 }
 
-
+function deletedoctor($con, $doctorid)
+{
+    if(doctorHasAppointments($con,$doctorid))
+    {
+        echo $error='error';
+    }else{
+        $query = mysqli_query($con, "UPDATE users SET status='2' WHERE id='$doctorid' ");
+        if (!$query) {
+             die(mysqli_error($con).$query);
+        } else {
+            $query = mysqli_query($con, "SELECT users.id as id,users.name as name, users.surname as surname, doctors.specialties as spetialities, specialties.description as spetialitiesname from users,doctors, specialties where (doctors.userId=users.id and users.status=1) and(specialties.id=doctors.specialties)");
+                            if (!$query) {
+                                die("E pamundur te azhurohen te dhenat: " . mysqli_connect_error());
+                            } else {
+                                $count = 1;
+                                while (($data = mysqli_fetch_array($query))) {
+                            ?>
+                                    <tr>
+                                        <td class="did">
+                                            <?php echo $count; ?>
+                                        </td>
+                                        <td class="dname">
+                                            <?php echo htmlentities($data['name']); ?>
+                                        </td>
+                                        <td class="dsname">
+                                            <?php echo htmlentities($data['surname']); ?>
+                                        </td>
+                                        <td class="dspec">
+                                            <?php echo htmlentities($data['spetialitiesname']); ?>
+                                        </td>
+                                        <td class=" actions">
+                                            <span class="edit-data">
+                                                <a href="edit-doctor.php?id=<?php echo $data['id'] ?>&edit=doctor">
+                                                    <img src="img/edit-icon.png"> </a>
+                                            </span>
+                                            <span class="delete-data">
+                                                <a href="#" onclick="deleteuser(<?php echo $data['id'] ?>);">
+                                                    <img src="img/delete-icon.png">
+                                                </a>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                    $count++;
+                                }
+                            }
+        }
+    }
+}
+function doctorHasAppointments($con,$doctorid)
+{
+    $query = mysqli_query($con, "SELECT doctorId from appointments where doctorId='$doctorid' and date>CURDATE()");
+    if(!$query)
+    {
+        die(mysqli_error($con).$query);
+    }else{
+        $data=mysqli_fetch_array($query);
+        if($data>0)
+        {
+            return true;
+        }else{
+            return false;
+        }
+    }
+}
 function deletereceptionist($con, $id)
 {
     $query = mysqli_query($con, "UPDATE users SET status='2' WHERE id='$id' ");
     if (!$query) {
-        die("E pamundur te azhurohen te dhenat: " . mysqli_connect_error());
+         die(mysqli_error($con).$query);
     } else {
         $query = mysqli_query($con, " SELECT id, name, surname, username from users where status=1 and privilege='receptionist'");
         if (!$query) {

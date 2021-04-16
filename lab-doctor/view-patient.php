@@ -1,3 +1,26 @@
+<?php
+session_start();
+error_reporting(0);
+include('includes/config.php');
+include('includes/logincheck.php');
+check_login();
+//Ending a php session after 6(360 min) hours of inactivity
+$minutesBeforeSessionExpire = 360;
+if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > ($minutesBeforeSessionExpire * 60))) {
+    session_unset();     // unset $_SESSION   
+    session_destroy();   // destroy session data 
+    $host = $_SERVER['HTTP_HOST'];
+    $uri  = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+    $extra = "../index.php";
+    $_SESSION["login"] = "";
+    header("Location: http://$host$uri/$extra");
+}
+$_SESSION['LAST_ACTIVITY'] = time(); // update last activity
+$userid = null;
+if (isset($_GET['view'])) {
+    $userid = $_GET['id'];
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,8 +65,20 @@
                 <p>Doktor | Pacientët</p>
             </div>
             <div class="container-fullw">
-                <div class="panel-body no-padding">
-                <table border="1" class="table table-bordered">
+            <?php
+                if ($userid == NULL) {
+                    echo "Asgje per tu shfaqur";
+                } else {
+                   
+                    $query = mysqli_query($con, " SELECT name, surname, patientID, phone, state, city, street_address, email, gender, registered from patients WHERE id='$userid' and status='1'");
+                    if (!$query) {
+                        die("E pamundur te azhurohen te dhenat: " . mysqli_connect_error());
+                    } else {
+                        $data = mysqli_fetch_array($query);
+                        if ($data > 0) {
+                        ?>
+                        <div class="panel-body no-padding">
+                    <table border="1" class="table table-bordered">
                         <tbody>
                             <tr align="center">
                                 <td colspan="4" style="font-size:20px;">
@@ -52,34 +87,39 @@
 
                             <tr>
                             <th scope="">Emri</th>
-                                <td>Artan</td>
+                                <td><?php echo htmlentities($data['name']) ?></td>
                             <th scope="">Mbiemri</th>
-                                <td>Dreshaj</td>
+                                <td><?php echo htmlentities($data['surname']) ?></td>
                                 
                             </tr>
                             <tr>
                             <th scope="">Id</th>
-                                <td>45678</td>
+                                <td><?php echo htmlentities($data['patientID']) ?></td>
                             
                                 <th scope="">Kontakti</th>
-                                <td>4558968789</td>
+                                <td><?php echo htmlentities($data['phone']) ?></td>
                             </tr>
                             <tr>
                             <th>Adresa</th>
-                                <td>Rruga Xhamil Dreshaj</td>
+                                <td> <?php echo htmlentities($data['state']) ?>,<?php echo htmlentities($data['city']) ?>,<?php echo htmlentities($data['street_address']) ?></td>
                                 <th scope="">Emaili</th>
-                                <td>test@gmail.com</td>
+                                <td><?php echo htmlentities($data['email']) ?></td>
                             </tr> 
                             <tr>
                             <th>Gjinia</th>
-                                <td>Mashkull</td>
+                                <td><?php echo htmlentities($data['gender']) ?></td>
                                 <th>Date e regjistrimit</th>
-                                <td>2019-11-04 22:38:06</td>
+                                <td><?php echo htmlentities($data['registered']) ?></td>
                             </tr>
-
                         </tbody>
                     </table>
                 </div>
+                        <?php
+                        }
+                    }
+                }
+                    ?>
+                
             </div>
         </div>
     </div>
