@@ -23,6 +23,6 @@ In your browser search the project ex:http://localhost/MPS/
 
 ## Authors
 
-* **Alban Berisha** - *Initial work* - [AlbanBerisha](https://github.com/PurpleBooth)
+* **Alban Berisha** - *Initial work* - [AlbanBerisha](https://github.com/albanberisha)
 
 
