@@ -13,46 +13,51 @@ if (empty($analyseTypeId)) {
   echo $error = "105";
 } else {
   list($patientPersonaleNumber, $patientid, $patientname, $patientsurname) = explode("-", $patientIdName);
-  if (!checkPatientExistence($con, $patientPersonaleNumber)) {
-    echo $error = "106";
-  } else {
-    if (is_uploaded_file($_FILES['file2']['tmp_name'])) {
-      $currentDirectory = dirname(__DIR__, 2);
-      $uploadDirectory = "/uploads/";
-      $fileExtensionsAllowed = ['jpeg', 'jpg', 'png', 'doc', 'docx', 'xlsx', 'pdf'];
-      $fileName = $_FILES['file2']['name'];
-      $fileSize = $_FILES['file2']['size'];
-      $fileTmpName  = $_FILES['file2']['tmp_name'];
-      $fileType = $_FILES['file2']['type'];
-
-      $fileExtension = strtolower(end(explode('.', $fileName)));
-      $date = date('j-m-y');
-      $space = "";
-      $filenewname = $patientPersonaleNumber . "-" . $patientid . "-" . $analyseTypeId . "-" . $date . "-" . $space . "." . $fileExtension;
-      if (!in_array($fileExtension, $fileExtensionsAllowed)) {
-        echo $error = "101";
-      } elseif ($fileSize > 4000000) {
-        echo $error = "102";
-      } else {
-        $uploadPath = $currentDirectory . $uploadDirectory . basename($filenewname);
-        while (file_exists($uploadPath)) {
-          $space = $space . "0";
-          $filenewname = $patientPersonaleNumber . "-" . $patientid . "-" . $analyseTypeId . "-" . $date . "-" . $space . "." . $fileExtension;
-          $uploadPath = $currentDirectory . $uploadDirectory . basename($filenewname);
-        }
-        $filenewname = $patientPersonaleNumber . "-" . $patientid . "-" . $analyseTypeId . "-" . $date . "-" . $space . "." . $fileExtension;
-        $didUpload = move_uploaded_file($fileTmpName, $uploadPath);
-        if ($didUpload) {
-          $filepath = basename($filenewname);
-          $now = date(" Y-m-d H:i:sa");
-          saveanalyse($con, $filepath, $analyseTypeId, $patientid, $now, $userid);
-          echo "Analiza " . basename($filenewname) . " eshte ngarkuar";
-        } else {
-          echo "103";
-        }
-      }
+  if($patientid==NULL)
+  {
+    echo $error="105";
+  }else{
+    if (!checkPatientExistence($con, $patientPersonaleNumber)) {
+      echo $error = "106";
     } else {
-      echo "100";
+      if (is_uploaded_file($_FILES['file2']['tmp_name'])) {
+        $currentDirectory = dirname(__DIR__, 2);
+        $uploadDirectory = "/uploads/";
+        $fileExtensionsAllowed = ['jpeg', 'jpg', 'png', 'doc', 'docx', 'xlsx', 'pdf'];
+        $fileName = $_FILES['file2']['name'];
+        $fileSize = $_FILES['file2']['size'];
+        $fileTmpName  = $_FILES['file2']['tmp_name'];
+        $fileType = $_FILES['file2']['type'];
+  
+        $fileExtension = strtolower(end(explode('.', $fileName)));
+        $date = date('j-m-y');
+        $space = "";
+        $filenewname = $patientPersonaleNumber . "-" . $patientid . "-" . $analyseTypeId . "-" . $date . "-" . $space . "." . $fileExtension;
+        if (!in_array($fileExtension, $fileExtensionsAllowed)) {
+          echo $error = "101";
+        } elseif ($fileSize > 4000000) {
+          echo $error = "102";
+        } else {
+          $uploadPath = $currentDirectory . $uploadDirectory . basename($filenewname);
+          while (file_exists($uploadPath)) {
+            $space = $space . "0";
+            $filenewname = $patientPersonaleNumber . "-" . $patientid . "-" . $analyseTypeId . "-" . $date . "-" . $space . "." . $fileExtension;
+            $uploadPath = $currentDirectory . $uploadDirectory . basename($filenewname);
+          }
+          $filenewname = $patientPersonaleNumber . "-" . $patientid . "-" . $analyseTypeId . "-" . $date . "-" . $space . "." . $fileExtension;
+          $didUpload = move_uploaded_file($fileTmpName, $uploadPath);
+          if ($didUpload) {
+            $filepath = basename($filenewname);
+            $now = date(" Y-m-d H:i:sa");
+            saveanalyse($con, $filepath, $analyseTypeId, $patientid, $now, $userid);
+            echo "Analiza " . basename($filenewname) . " eshte ngarkuar";
+          } else {
+            echo "103";
+          }
+        }
+      } else {
+        echo "100";
+      }
     }
   }
 }

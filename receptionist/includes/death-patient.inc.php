@@ -51,22 +51,10 @@ if (!$query) {
     if (!$query2) {
         die(mysqli_error($con).$query2);
         } else {
-        $query3=mysqli_query($con,"UPDATE beds SET beds.condition = NULL,beds.patientId=NULL WHERE patientId='$patid'");
-        if (!$query3) {
-            die(mysqli_error($con).$query3);
-        } else {
-            $data=date(" Y-m-d H:i:sa ");
-            $query4=mysqli_query($con,"UPDATE receipts SET exitDateTime='$data' WHERE patientId='$patid' AND id=(SELECT max(id) FROM receipts WHERE patientId='$patid' ORDER BY id DESC)");
-            if (!$query4) {
-                die(mysqli_error($con).$query4);
-            } else {
-                $extra = "../payment.php"; //
-                $host = $_SERVER['HTTP_HOST'];
-                $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-                echo "http://".$host.$uri."/".$extra."?id=$patid&death=patient";
-            }
-
-        }
+            $extra = "../payment.php"; //
+            $host = $_SERVER['HTTP_HOST'];
+            $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+            echo "http://".$host.$uri."/".$extra."?id=$patid&payment=patient";
        
         
     }

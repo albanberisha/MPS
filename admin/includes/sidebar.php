@@ -22,7 +22,7 @@
             <button class="drop-button-1" onclick="window.open('dashboard.php', '_self');">
                 <div class="d-inline-flex">
                     <img class="clipart-logo" src="img/dashboard-clipart.png" style="width: 25px; height: 25px; margin-top: 5px;">
-                    <p class="centered-name-1 text-left font-weight-bold">Dashboard</p>
+                    <p class="centered-name-1 text-left font-weight-bold">Paneli i aparaturave</p>
                 </div>
             </button>
         </div>
@@ -88,14 +88,6 @@
             </div>
         </div>
         <div class="dropdown-1" style="position: relative;">
-            <button class="drop-button-1">
-                <div class="d-inline-flex">
-                    <img class="clipart-logo" src="img/raports-clipart.png" style="width: 25px; height: 25px; margin-top: 5px;">
-                    <p id="name" class="centered-name-1 text-left font-weight-bold">Raportet ditore</p>
-                </div>
-            </button>
-        </div>
-        <div class="dropdown-1" style="position: relative;">
             <button class="drop-button-1" onclick="window.open('session-logs.php', '_self');">
                 <div class="d-inline-flex">
                     <img class="clipart-logo" src="img/kuqjet-clipart.png" style="width: 25px; height: 25px; margin-top: 5px;">
@@ -121,14 +113,6 @@
                 <div class="d-inline-flex">
                     <img class="clipart-logo" src="img/hospital-clipart.png" style="width: 25px; height: 25px; margin-top: 5px;">
                     <p class="centered-name-1 text-left font-weight-bold">Te dhenat e spitalit</p>
-                </div>
-            </button>
-        </div>
-        <div class="dropdown-1" style="position: relative;">
-            <button class="drop-button-1">
-                <div class="d-inline-flex">
-                    <img class="clipart-logo" src="img/charts-clipart.png" style="width: 25px; height: 25px; margin-top: 5px;">
-                    <p class="centered-name-1 text-left font-weight-bold">Statistika dhe analiza</p>
                 </div>
             </button>
         </div>

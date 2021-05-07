@@ -23,6 +23,7 @@ function userlog($con, $userId, $username, $loginDate, $loginTime, $status)
 {
 
     $log = mysqli_query($con, "INSERT INTO userlog(userId,username,loginDate,loginTime,status) values('$userId','$username','$loginDate','$loginTime','$status')");
+    $onlnine=mysqli_query($con,"UPDATE users SET online=1 WHERE id='$userId'");
 }
 $sql = mysqli_query($con, "SELECT * FROM hospital_details");
 $num = mysqli_fetch_array($sql);
@@ -138,6 +139,11 @@ if (isset($_POST['submit'])) {
             loginerror();
         }
     }
+}
+
+function online()
+{
+
 }
 ?>
 <!DOCTYPE html>

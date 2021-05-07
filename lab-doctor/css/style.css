@@ -672,11 +672,32 @@ ul .profile-pic:hover {
     width: 70%;
 }
 
+.status {
+    background-color: green;
+    width: 10px;
+    height: 10px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    margin-top: 14px;
+}
+
+.status-offline {
+    background-color: red;
+    width: 10px;
+    height: 10px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    margin-top: 14px;
+}
+
 .name-surname {
     font-family: Helvetica, Arial, sans-serif;
     color: rgb(99, 99, 99);
     font-size: 1.2em;
     margin-top: 5px;
+    margin-left: 5px;
 }
 
 .col-sm-4 {

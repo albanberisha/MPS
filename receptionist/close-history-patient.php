@@ -7,6 +7,8 @@ check_login();
 //Ending a php session after 6(360 min) hours of inactivity
 $minutesBeforeSessionExpire = 360;
 if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > ($minutesBeforeSessionExpire * 60))) {
+    $uname=$_SESSION["login"];
+    $onlnine=mysqli_query($con,"UPDATE users SET users.online=0 WHERE username='$uname'");
     session_unset();     // unset $_SESSION   
     session_destroy();   // destroy session data 
     $host = $_SERVER['HTTP_HOST'];
@@ -52,33 +54,6 @@ if (isset($_GET['closehistory'])) {
         }
 
         window.onresize = reportWindowSize;
-    </script>
-    <script>
-        var doc = new jsPDF();
-
-        function saveDiv(divId, title) {
-            doc.fromHTML(`<html><head><title>${title}</title></head><body>` + document.getElementById(divId).innerHTML + `</body></html>`);
-            doc.save('div.pdf');
-        }
-
-        function printDiv(divId,
-            title) {
-
-            let mywindow = window.open('', 'PRINT', 'height=650,width=900,top=100,left=150');
-
-            mywindow.document.write(`<html><head><title>${title}</title>`);
-            mywindow.document.write('</head><body >');
-            mywindow.document.write(document.getElementById(divId).innerHTML);
-            mywindow.document.write('</body></html>');
-
-            mywindow.document.close(); // necessary for IE >= 10
-            mywindow.focus(); // necessary for IE >= 10*/
-
-            mywindow.print();
-            mywindow.close();
-
-            return true;
-        }
     </script>
 </head>
 
@@ -507,8 +482,7 @@ if (isset($_GET['closehistory'])) {
 <script>
     $(document).ready(function() {
         $("#CloseHistory").click(function() {
-            window.open('payment.php?id=<?php echo $userid ?>&death=patient','_self');
-
+            window.open('payment.php?id=<?php echo $userid ?>&payment=patient','_self');
         });
         $("#DeatInHospital").click(function() {
             window.open('death-form.php?id=<?php echo $userid ?>&death=patient','_self');

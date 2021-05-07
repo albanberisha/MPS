@@ -7,6 +7,8 @@ check_login();
 //Ending a php session after 1(60 min) hours of inactivity
 $minutesBeforeSessionExpire = 60;
 if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > ($minutesBeforeSessionExpire * 60))) {
+    $uname=$_SESSION["login"];
+    $onlnine=mysqli_query($con,"UPDATE users SET users.online=0 WHERE username='$uname'");
     session_unset();     // unset $_SESSION   
     session_destroy();   // destroy session data 
     $host = $_SERVER['HTTP_HOST'];
@@ -79,10 +81,10 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
                         <p id="Searcherror" style="color:red;"></p>
                     </form>
                     <div class="panel-search" id="Error" style="margin-left: 20px;">
-                            <p id="Searcherror" style="color:red;"></p>
-                        </div>
-                    <div class="panel-body no-padding"id="Patients" hidden >
-                        <div >
+                        <p id="Searcherror" style="color:red;"></p>
+                    </div>
+                    <div class="panel-body no-padding" id="Patients" hidden>
+                        <div>
                         </div>
                     </div>
                     <h6 class="panel-title panel-white important2">Gjendja sipas kategorive:</h6>
@@ -107,34 +109,33 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
 </html>
 
 <script>
-$("#Refresh").on('click', function()
-        {
-            location.reload();
-        });
- $("#search_form").submit(function(e) {
-            e.preventDefault();
-            patientname = $('#SearchPatient').val();
-            table = 'patients'
-            $.ajax({
-                    method: "POST",
-                    url: "includes/search.inc.php",
-                    data: {
-                        name: patientname,
-                        table: table
-                    }
-                })
-                .done(function(response) {
-                    if (response == "error") {
-                        $('#Searcherror').html("Ky pacient nuk eziston. Regjistro pacientin e ri me poshte!");
-                        document.getElementById("Patients").hidden = true;
-                        document.getElementById("Searcherror").hidden = false;
-                    } else {
-                        document.getElementById("Patients").hidden = false;
-                        $("#Patients").html(response);
-                        
-                        document.getElementById("Searcherror").hidden = true;
-                    }
-                });
-            return false;
-        });
-        </script>
+    $("#Refresh").on('click', function() {
+        location.reload();
+    });
+    $("#search_form").submit(function(e) {
+        e.preventDefault();
+        patientname = $('#SearchPatient').val();
+        table = 'patients'
+        $.ajax({
+                method: "POST",
+                url: "includes/search.inc.php",
+                data: {
+                    name: patientname,
+                    table: table
+                }
+            })
+            .done(function(response) {
+                if (response == "error") {
+                    $('#Searcherror').html("Ky pacient nuk eziston. Regjistro pacientin e ri me poshte!");
+                    document.getElementById("Patients").hidden = true;
+                    document.getElementById("Searcherror").hidden = false;
+                } else {
+                    document.getElementById("Patients").hidden = false;
+                    $("#Patients").html(response);
+
+                    document.getElementById("Searcherror").hidden = true;
+                }
+            });
+        return false;
+    });
+</script>

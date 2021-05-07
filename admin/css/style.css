@@ -537,12 +537,11 @@ min-width: 300px;
     -webkit-border-radius: 25px;
     border-radius: 25px;
 }
+*/
 
 .media-body {
-    margin-left: 10px;
+    margin-left: 5px;
 }
-
-*/
 
 
 /*Actove users scrollbar*/
@@ -644,6 +643,11 @@ ul .profile-pic:hover {
     overflow-y: scroll;
 }
 
+.row .nphpver:hover {
+    border-color: white;
+    background-color: white;
+}
+
 .StepTitle {
     font-family: Helvetica, Arial, sans-serif;
     color: rgb(99, 99, 99);
@@ -690,6 +694,7 @@ ul .profile-pic:hover {
     color: rgb(99, 99, 99);
     font-size: 1.2em;
     margin-top: 5px;
+    margin-left: 5px;
 }
 
 .col-sm-4 {

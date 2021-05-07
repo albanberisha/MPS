@@ -27,7 +27,7 @@ if (strcmp($table, "doctors") == 0) {
 
 function searchdoctor($con, $user_name)
 {
-    if (empty($user_name) || (!preg_match("/^([a-zA-Z' ]+)$/", $user_name))) {
+    if (empty($user_name)) {
         echo $error = "error";
     } else {
         $query = mysqli_query($con, "SELECT users.id as id,users.name as name, users.surname as surname, doctors.specialties as spetialities, specialties.description as spetialitiesname from users,doctors, specialties where (doctors.userId=users.id and users.status=1) and(specialties.id=doctors.specialties) and users.name like '%$user_name%'");
@@ -74,7 +74,7 @@ function searchdoctor($con, $user_name)
 
 function searchreceptionist($con, $user_name)
 {
-    if (empty($user_name) || (!preg_match("/^([a-zA-Z' ]+)$/", $user_name))) {
+    if (empty($user_name)) {
         echo $error = "error";
     } else {
         $query = mysqli_query($con, "SELECT id, name, surname, username from users where status=1 and privilege='receptionist' and users.name like '%$user_name%'");
@@ -118,7 +118,7 @@ function searchreceptionist($con, $user_name)
 
 function searchinfirmier($con, $user_name)
 {
-    if (empty($user_name) || (!preg_match("/^([a-zA-Z' ]+)$/", $user_name))) {
+    if (empty($user_name)) {
         echo $error = "error";
     } else {
         $query = mysqli_query($con, " SELECT users.id, users.name, users.surname, departaments.depname from users, infirmiers ,departaments where (infirmiers.userId=users.id and users.status=1) and infirmiers.depId=departaments.id and users.name like '%$user_name%'");
@@ -161,7 +161,7 @@ function searchinfirmier($con, $user_name)
 
 function searchpatient($con, $patient_name)
 {
-    if (empty($patient_name) || (!preg_match("/^([a-zA-Z' ]+)$/", $patient_name))) {
+    if (empty($patient_name)) {
         echo $error = "error";
     } else {
         $query = mysqli_query($con, "SELECT id, name, surname, phone, gender from patients where status='1' and name like '%$patient_name%'");
@@ -207,7 +207,7 @@ function searchpatient($con, $patient_name)
 
 function searchstaff($con, $staff_name)
 {
-    if (empty($staff_name) || (!preg_match("/^([a-zA-Z' ]+)$/", $staff_name))) {
+    if (empty($staff_name)) {
         echo $error = "error";
     } else {
         $query = mysqli_query($con, " SELECT additional_staff.id, additional_staff.name, additional_staff.surname, hospital_additional_staff.name as pos_name from additional_staff, hospital_additional_staff where additional_staff.status=1 and additional_staff.position=hospital_additional_staff.id and additional_staff.name like '%$staff_name%' ");
@@ -250,7 +250,7 @@ function searchstaff($con, $staff_name)
 
 function searchuser_logs($con, $user_name)
 {
-    if (empty($user_name) || (!preg_match("/^(?=.{5,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/", $user_name))) {
+    if (empty($user_name)) {
         echo $error = "error";
     } else {
         $query=mysqli_query($con,"SELECT * from userlog where username like '%$user_name%' ORDER BY id DESC ");

@@ -281,10 +281,6 @@ if (!$query) {
                         if (!$query4) {
                             die("E pamundur te azhurohen te dhenat: " . mysqli_connect_error());
                         } else {
-                            $query5 = mysqli_query($con, "SELECT receipts.id,receipts.entryDateTime,departaments.depname,users.name, users.surname,receipts.reason,receipts.exitDateTime, receipts.bedId from receipts,rooms,beds,departaments,users where receipts.patientId='$patient' and receipts.bedId=beds.id and beds.roomId=rooms.id and rooms.depId=departaments.id and receipts.userInCharge=users.id ORDER BY receipts.id DESC");
-                            if (!$query5) {
-                                die("E pamundur te azhurohen te dhenat: " . mysqli_connect_error());
-                            } else {
                         ?>
                                 <div class="card-body card-top">
                                     <table class="data-list min-height dignosis color-none">
@@ -294,7 +290,6 @@ if (!$query) {
                                                     Data:
                                                 </th>
                                                 <th class="panel-title title2 ">
-                                                    Departamenti:
                                                 </th>
                                                 <th class="panel-title title2 ">
                                                     Pranuesi:
@@ -307,53 +302,18 @@ if (!$query) {
                                                 </th>
                                             </tr>
                                             <?php
-                                            $data5 = mysqli_fetch_array($query5);
+                                           
                                             while ($data4 = mysqli_fetch_array($query4)) {
-                                                if ($data4['bedId'] != NULL) {
                                             ?>
-                                                    <tr>
-                                                        <td class="title1 date">
-                                                            <?php
-                                                            $timestamp = $data5['entryDateTime'];
-                                                            $splitTimeStamp = explode(" ", $timestamp);
-                                                            echo htmlentities($splitTimeStamp[0]) ?>
-
-                                                        </td>
-                                                        <td class="title2">
-                                                            <?php echo htmlentities($data5['depname']) ?>
-                                                        </td>
-                                                        <td class="title2">
-                                                            <?php echo htmlentities($data5['name']) ?> <?php echo htmlentities($data5['surname']) ?>
-                                                        </td>
-                                                        <td class="title2">
-                                                            <?php echo htmlentities($data5['reason']) ?>
-                                                        </td>
-                                                        <td class="title1 date">
-                                                            <?php
-                                                            $timestamp = $data5['exitDateTime'];
-                                                            $splitTimeStamp = explode(" ", $timestamp);
-                                                            $data = $splitTimeStamp[0];
-                                                            if ($data == NULL) {
-                                                                echo "-";
-                                                            } else {
-                                                                echo htmlentities($splitTimeStamp[0]);
-                                                            }
-                                                            ?>
-                                                        </td>
-                                                    </tr>
-
-                                                <?php
-                                                } else {
-                                                ?>
                                                     <tr>
                                                         <td class="title1 date">
                                                             <?php
                                                             $timestamp = $data4['entryDateTime'];
                                                             $splitTimeStamp = explode(" ", $timestamp);
-                                                            echo htmlentities($splitTimeStamp[0]); ?>
+                                                            echo htmlentities($splitTimeStamp[0]) ?>
+
                                                         </td>
                                                         <td class="title2">
-                                                            -
                                                         </td>
                                                         <td class="title2">
                                                             <?php echo htmlentities($data4['name']) ?> <?php echo htmlentities($data4['surname']) ?>
@@ -375,18 +335,13 @@ if (!$query) {
                                                         </td>
                                                     </tr>
 
-                                            <?php
+                                                <?php
                                                 }
                                             }
                                             ?>
                                         </tbody>
                                     </table>
                                 </div>
-                        <?php
-                            }
-                        }
-
-                        ?>
                         <div style="padding-bottom: 0;">
                             <h6 class="panel-title panel-white text-center col-header">Terminet</h6>
                         </div>
@@ -436,7 +391,7 @@ if (!$query) {
                                                             $statusi = "Pefunduar";
                                                             break;
                                                         case "rejected":
-                                                            $statusi = "refuzuar";
+                                                            $statusi = "Refuzuar";
                                                             break;
                                                         default:
                                                             $statusi = "";

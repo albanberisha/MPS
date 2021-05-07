@@ -5,9 +5,11 @@ error_reporting(0);
 include('includes/config.php');
 include('includes/logincheck.php');
 check_login();
-//Ending a php session after 6(360 min) hours of inactivity
-$minutesBeforeSessionExpire = 360;
+//Ending a php session after 1(60 min) hours of inactivity
+$minutesBeforeSessionExpire =60;
 if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > ($minutesBeforeSessionExpire * 60))) {
+    $uname=$_SESSION["login"];
+    $onlnine=mysqli_query($con,"UPDATE users SET users.online=0 WHERE username='$uname'");
     session_unset();     // unset $_SESSION   
     session_destroy();   // destroy session data 
     $host = $_SERVER['HTTP_HOST'];
@@ -17,14 +19,12 @@ if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 
     header("Location: http://$host$uri/$extra");
 }
 $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Admin | Dashboard</title>
+    <title>Admin | Paneli i aparaturave</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -56,15 +56,17 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
             } else {}
         }
 
+        var acc;
         function closeChat() {
             document.getElementById("Chatbox").style.display = "none";
+            this.acc=0;
 
         }
 
-        function openChat() {
+        function openChat(from) {
             document.getElementById("Chatbox").style.display = "inline";
-
-        }
+            
+}
         window.onresize = reportWindowSize;
     </script>
 </head>

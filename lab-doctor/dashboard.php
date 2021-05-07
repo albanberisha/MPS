@@ -22,7 +22,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
 <html lang="en">
 
 <head>
-    <title>Doktor laboratori | Dashboard</title>
+    <title>Doktor laboratori | Paneli i aparaturave</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -54,17 +54,20 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
             } else {}
         }
 
+        var acc;
         function closeChat() {
             document.getElementById("Chatbox").style.display = "none";
+            this.acc=0;
 
         }
 
-        function openChat() {
+        function openChat(from) {
             document.getElementById("Chatbox").style.display = "inline";
-
-        }
+            
+}
         window.onresize = reportWindowSize;
     </script>
+    
 </head>
 
 <body onload="reportWindowSize()">

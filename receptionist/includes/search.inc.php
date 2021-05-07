@@ -486,7 +486,7 @@ function searchpatientForInfo($con, $patient_name)
             <?php
             }
         }
-        $query5 = mysqli_query($con, "SELECT patients.id, patients.patientID, patients.name,patients.surname, patients.phone,patients.gender from patients where patients.id IN (SELECT deaths.patientId FROM deaths) ORDER BY name ASC, surname ASC");
+        $query5 = mysqli_query($con, "SELECT patients.id, patients.patientID, patients.name,patients.surname, patients.phone,patients.gender from patients where patients.name like '%$patient_name%' and patients.id IN (SELECT deaths.patientId FROM deaths) ORDER BY name ASC, surname ASC");
         if (!$query5) {
             die(mysqli_error($con) . $query5);
         } else {

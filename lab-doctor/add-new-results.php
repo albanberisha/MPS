@@ -140,7 +140,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
                                 <h5 class="panel-title">Shto nje rezultat te analizave</h5>
                             </div>
                             <div class="panel-form">
-                                <form method="POST" id="AddAnalyseFrom" enctype="multipart/form-data">
+                                <form method="POST" id="AddAnalyseFrom" enctype="multipart/form-data" autocomplete="off">
                                     <div class="form-group">
                                         <div class="input-group my-3">
                                             <input type="text" class="form-control" disabled placeholder="Ngarkoni analizen" id="file">
@@ -381,7 +381,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
                         });
                         break;
                         case "105":
-                        $message = "Sheno ID e pacientit.";
+                        $message = "Sheno ID e pacientit dhe zgjedh ndonjeren nga opsionet e meposhtme.";
                         $('#Patienterror').html($message);
                         document.getElementById('Patienterror').scrollIntoView({
                             behavior: 'smooth',

@@ -1,15 +1,42 @@
+
+<?php
+session_start();
+error_reporting(0);
+include('includes/config.php');
+include('includes/logincheck.php');
+check_login();
+//Ending a php session after 1(60 min) hours of inactivity
+$minutesBeforeSessionExpire = 60;
+if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > ($minutesBeforeSessionExpire * 60))) {
+    $uname=$_SESSION["login"];
+    $onlnine=mysqli_query($con,"UPDATE users SET users.online=0 WHERE username='$uname'");
+    $uname=$_SESSION["login"];
+    $onlnine=mysqli_query($con,"UPDATE users SET users.online=0 WHERE username='$uname'");
+    session_unset();     // unset $_SESSION   
+    session_destroy();   // destroy session data 
+    $host = $_SERVER['HTTP_HOST'];
+    $uri  = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+    $extra = "../index.php";
+    $_SESSION["login"] = "";
+    header("Location: http://$host$uri/$extra");
+}
+$_SESSION['LAST_ACTIVITY'] = time(); // update last activity
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Doctor | Dashboard</title>
+    <title>Doctor | Paneli i aparaturave</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/Chart.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.js"></script>
-    <script type="text/javascript" src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
+    <script src="js/sidenavigation.js"></script>
+    <script src="js/imagebrowse.js"></script>
     <script>
         $(document).ready(function() {
             $('#widget li').on('click', function() {
@@ -31,196 +58,32 @@
                 closeChat();
             } else {}
         }
-
+        var acc;
         function closeChat() {
             document.getElementById("Chatbox").style.display = "none";
+            this.acc=0;
 
         }
 
-        function openChat() {
+        function openChat(from) {
             document.getElementById("Chatbox").style.display = "inline";
-
-        }
+            
+}
         window.onresize = reportWindowSize;
     </script>
 </head>
 
 <body onload="reportWindowSize()">
     <header>
-        <?php include('includes/header.php');?>
+    <?php 
+    define('SECURE_PAGE', true);
+        include('includes/header.php'); ?>
         <hr style="margin-top:0px;">
     </header>
     <div class="" style="display: flex; margin-top: -16px; width: 100%;">
         <?php include('includes/sidebar.php');?>
-
         <div class="page" style="width: 100%;">
-            <div class="card-header">
-                <p>Doctor | Dashboard</p>
-            </div>
-            <div class="container-fullw">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="col">
-                            <div class="panel panel-white text-center" onclick="window.open('my-appointments.php', 'mywindow');">
-                                <div class="panel-body wid">
-                                    <div class="fa-stack fa-2x image-wid">
-                                        <img src="img/appointments-clipart.png">
-                                    </div>
-                                    <h2 class="StepTitle">Terminet e mija</h2>
-                                    <p class="links cl-effect-1">
-                                        Total Pacientë :6
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="panel panel-white text-center" onclick="window.open('register-patients.php', 'mywindow');">
-                                <div class="panel-body wid">
-                                    <div class="fa-stack fa-2x image-wid">
-                                        <img src="img/patientregister-clipart.png">
-                                    </div>
-                                    <h2 class="StepTitle">Regjistro Pacientë</h2>
-                                    <p class="links cl-effect-1">
-                                        Total Pacientë :6
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="col">
-                            <div class="panel panel-white no-radius text-center" onclick="window.open('patient-info.php', 'mywindow');">
-                                <div class="panel-body wid">
-                                    <div class="fa-stack fa-2x image-wid">
-                                        <img src="img/patient-info.png">
-                                    </div>
-                                    <h2 class="StepTitle">Informata rreth pacientëve</h2>
-                                    <p class="links cl-effect-1" style="padding-bottom: 25px;">
-                                         
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 users">
-                        <div class="panel panel-white no-radius text-center">
-                            <div class="panel-body">
-                                <div>
-                                    <p class="wid-info text-center">Aktiv</p>
-                                    <hr class="divider" align="center">
-                                </div>
-                                <div class="active-users">
-                                    <div class="widget" id="widget">
-
-                                        <div class="active-now">
-                                            <ul class="list-group pmd-list pmd-card-list pmd-inset-divider">
-                                                <li id="user-row" class="list-group-item d-flex profile-pic new-ntf" onclick="openChat()">
-                                                    <a href="javascript:void(0);" class="pmd-avatar-list-img" title="profile-link">
-                                                        <img alt="40x40" src="img/doctor.png">
-                                                    </a>
-                                                    <div class="media-body">
-                                                        <h4 class="pmd-list-title name-surname Step-title">Albdfgdfan Berisha</h4>
-                                                        <p class="pmd-list-subtitle position">Doktorr</p>
-                                                    </div>
-                                                    <div class="status">
-                                                    </div>
-                                                </li>
-                                                <li id="user-row" class="list-group-item d-flex profile-pic new-ntf" onclick="openChat()">
-                                                    <a href="javascript:void(0);" class="pmd-avatar-list-img" title="profile-link">
-                                                        <img alt="40x40" src="img/doctor.png">
-                                                    </a>
-                                                    <div class="media-body">
-                                                        <h4 class="pmd-list-title name-surname Step-title">Alban Berisha</h4>
-                                                        <p class="pmd-list-subtitle position">Doktorr</p>
-                                                    </div>
-                                                    <div class="status">
-                                                    </div>
-                                                </li>
-                                                <li id="user-row" class="list-group-item d-flex profile-pic new-ntf" onclick="openChat()">
-                                                    <a href="javascript:void(0);" class="pmd-avatar-list-img" title="profile-link">
-                                                        <img alt="40x40" src="img/doctor.png">
-                                                    </a>
-                                                    <div class="media-body">
-                                                        <h4 class="pmd-list-title name-surname Step-title">blerim</h4>
-                                                        <p class="pmd-list-subtitle position">Doktorr</p>
-                                                    </div>
-                                                    <div class="status">
-                                                    </div>
-                                                </li>
-                                                <li class="list-group-item d-flex profile-pic" onclick="openChat()">
-                                                    <a href="javascript:void(0);" class="pmd-avatar-list-img" title="profile-link">
-                                                        <img alt="40x40" src="img/doctor.png">
-                                                    </a>
-                                                    <div class="media-body">
-                                                        <h4 class="pmd-list-title name-surname Step-title">Alban Berisha</h4>
-                                                        <p class="pmd-list-subtitle position">Doktorr</p>
-                                                    </div>
-                                                    <div class="status">
-                                                    </div>
-                                                </li>
-                                                <li class="list-group-item d-flex profile-pic" onclick="openChat()">
-                                                    <a href="javascript:void(0);" class="pmd-avatar-list-img" title="profile-link">
-                                                        <img alt="40x40" src="img/doctor.png">
-                                                    </a>
-                                                    <div class="media-body">
-                                                        <h4 class="pmd-list-title name-surname Step-title">Alban Berisha</h4>
-                                                        <p class="pmd-list-subtitle position">Doktorr</p>
-                                                    </div>
-                                                    <div class="status">
-                                                    </div>
-                                                </li>
-                                                <li class="list-group-item d-flex profile-pic" onclick="openChat()">
-                                                    <a href="javascript:void(0);" class="pmd-avatar-list-img" title="profile-link">
-                                                        <img alt="40x40" src="img/doctor.png">
-                                                    </a>
-                                                    <div class="media-body">
-                                                        <h4 class="pmd-list-title name-surname Step-title">Alban Berisha</h4>
-                                                        <p class="pmd-list-subtitle position">Doktorr</p>
-                                                    </div>
-                                                    <div class="status">
-                                                    </div>
-                                                </li>
-                                                <li class="list-group-item d-flex profile-pic" onclick="openChat()">
-                                                    <a href="javascript:void(0);" class="pmd-avatar-list-img" title="profile-link">
-                                                        <img alt="40x40" src="img/doctor.png">
-                                                    </a>
-                                                    <div class="media-body">
-                                                        <h4 class="pmd-list-title name-surname Step-title">Alban Berisha</h4>
-                                                        <p class="pmd-list-subtitle position">Doktorr</p>
-                                                    </div>
-                                                    <div class="status">
-                                                    </div>
-                                                </li>
-                                                <li class="list-group-item d-flex profile-pic" onclick="openChat()">
-                                                    <a href="javascript:void(0);" class="pmd-avatar-list-img" title="profile-link">
-                                                        <img alt="40x40" src="img/doctor.png">
-                                                    </a>
-                                                    <div class="media-body">
-                                                        <h4 class="pmd-list-title name-surname Step-title">Alban Berisha</h4>
-                                                        <p class="pmd-list-subtitle position">Doktorr</p>
-                                                    </div>
-                                                    <div class="status">
-                                                    </div>
-                                                </li>
-                                                <li class="list-group-item d-flex profile-pic" onclick="openChat()">
-                                                    <a href="javascript:void(0);" class="pmd-avatar-list-img" title="profile-link">
-                                                        <img alt="40x40" src="img/doctor.png">
-                                                    </a>
-                                                    <div class="media-body">
-                                                        <h4 class="pmd-list-title name-surname Step-title">Alban Berisha</h4>
-                                                        <p class="pmd-list-subtitle position">Doktorr</p>
-                                                    </div>
-                                                    <div class="status">
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <?php include('includes/chatbox.php');?>
-            </div>
+        <?php include('doctor-dashboard.php'); ?>
         </div>
     </div>
 </body>

@@ -7,6 +7,8 @@ check_login();
 //Ending a php session after 1(60 min) hours of inactivity
 $minutesBeforeSessionExpire = 60;
 if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > ($minutesBeforeSessionExpire * 60))) {
+    $uname=$_SESSION["login"];
+    $onlnine=mysqli_query($con,"UPDATE users SET users.online=0 WHERE username='$uname'");
     session_unset();     // unset $_SESSION   
     session_destroy();   // destroy session data 
     $host = $_SERVER['HTTP_HOST'];
@@ -94,7 +96,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity
                         <tbody id="Patients">
                             <?php
                             $query = mysqli_query($con, "SELECT patients.id, patients.patientID, patients.name,patients.surname, patients.phone,patients.gender from patients where patients.status=1 and patients.id IN (SELECT beds.patientId FROM beds) ORDER BY name ASC, surname ASC");
-                            $query2 = mysqli_query($con, "SELECT patients.id, patients.patientID, patients.name,patients.surname, patients.phone,patients.gender from patients where patients.status=1 and patients.patientID and patients.id NOT IN(SELECT patients.id from patients where patients.status=1 and patients.id IN (SELECT beds.patientId FROM beds) ORDER BY name ASC, surname ASC)");
+                            $query2 = mysqli_query($con, "SELECT patients.id, patients.patientID, patients.name,patients.surname, patients.phone,patients.gender from patients where patients.status=1 and patients.id NOT IN (SELECT beds.patientId FROM beds where patientId IS NOT NULL) ORDER BY name ASC, surname ASC");
                             if (!$query || !$query2) {
                                 die("E pamundur te azhurohen te dhenat: " . mysqli_connect_error());
                             } else {

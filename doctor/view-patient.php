@@ -1,3 +1,29 @@
+<?php
+session_start();
+error_reporting(0);
+include('includes/config.php');
+include('includes/logincheck.php');
+check_login();
+//Ending a php session after 6(360 min) hours of inactivity
+$minutesBeforeSessionExpire = 360;
+if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > ($minutesBeforeSessionExpire * 60))) {
+    $uname=$_SESSION["login"];
+    $onlnine=mysqli_query($con,"UPDATE users SET users.online=0 WHERE username='$uname'");
+    session_unset();     // unset $_SESSION   
+    session_destroy();   // destroy session data 
+    $host = $_SERVER['HTTP_HOST'];
+    $uri  = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+    $extra = "../index.php";
+    $_SESSION["login"] = "";
+    header("Location: http://$host$uri/$extra");
+}
+$_SESSION['LAST_ACTIVITY'] = time(); // update last activity
+
+$patient = null;
+if (isset($_GET['view'])) {
+    $patient = $_GET['id'];
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -104,19 +130,19 @@ function printDiv(divId,
 <script>
     $(document).ready(function() {
         $("#Summary").click(function() {
-            $("#container-fullw").load('includes/summary-patient.php');
+            $("#container-fullw").load('includes/summary-patient.php?id=<?php echo $patient ?>&view=patient');
         });
         $("#LabResults").click(function() {
-            $("#container-fullw").load('includes/lab-results.php');
+            $("#container-fullw").load('includes/lab-results.php?id=<?php echo $patient ?>&view=patient');
         });
         $("#Diagnosis").click(function() {
-            $("#container-fullw").load('includes/diagnosis.php');
+            $("#container-fullw").load('includes/diagnosis.php?id=<?php echo $patient ?>&view=patient');
         });
         $("#Manage").click(function() {
-            $("#container-fullw").load('includes/manage-patient.php');
+            $("#container-fullw").load('includes/manage-patient.php?id=<?php echo $patient ?>&view=patient');
         });
         $("#ActualCond").click(function() {
-            $("#container-fullw").load('includes/actual-condition.php');
+            $("#container-fullw").load('includes/actual-condition.php?id=<?php echo $patient ?>&view=patient');
         });
     });
 </script>

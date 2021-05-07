@@ -75,7 +75,7 @@ function savedata($con,$patid,$doctorId,$apointmentDate,$apointmentStartTime,$ap
             {
                 $appoisttime=$data['starttime'];
                    $appoientime=$data['endtime'];
-                   if($apointmentStartTime>=$appoisttime && $apointmentStartTime<=$appoientime)
+                   if(strtotime($apointmentStartTime)>=strtotime($appoisttime) && strtotime($apointmentStartTime)<=strtotime($appoientime))
                    {
                        global $endtime;
                        $endtime=$appoientime;
@@ -119,7 +119,7 @@ function savedata($con,$patid,$doctorId,$apointmentDate,$apointmentStartTime,$ap
             {
                 $appoisttime=$data['starttime'];
                    $appoientime=$data['endtime'];
-                   if($appoisttime>=$apointmentStartTime && $appoisttime<=$apointmentEndTime )
+                   if(strtotime($appoisttime)>=strtotime($apointmentStartTime) && strtotime($appoisttime)<=strtotime($apointmentEndTime) )
                    {
                        global $starttime;
                        $starttime=$appoisttime;
@@ -141,7 +141,7 @@ function closestAppointmentEnd($con,$apointmentEndTime,$apointmentStartTime,$doc
              {
                  $appoisttime=$data['starttime'];
                     $appoientime=$data['endtime'];
-                    if($appoisttime>=$apointmentStartTime && $appoisttime<=$apointmentEndTime )
+                    if(strtotime($appoisttime)>=strtotime($apointmentStartTime) && strtotime($appoisttime)<=strtotime($apointmentEndTime) )
                     {
                         if($appoisttime<=$datameafert)
                         {
