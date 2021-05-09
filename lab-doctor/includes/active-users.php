@@ -5,7 +5,7 @@ $myid = $_SESSION['id'];
 ?>
 <ul class="list-group pmd-list pmd-card-list pmd-inset-divider">
     <?php
-    $query = mysqli_query($con, "SELECT id, name, surname, privilege, online,photo from users WHERE status='1' and id!='$myid' order By online DESC, name ASC");
+    $query = mysqli_query($con, "SELECT id, name, surname, privilege, online,photo from users WHERE status='1' and id!='$myid' and privilege!='infirmier' order By online DESC, name ASC");
     if (!$query) {
         die("E pamundur te azhurohen te dhenat: " . mysqli_connect_error());
     } else {

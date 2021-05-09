@@ -60,7 +60,7 @@ if (isset($_POST['submit'])) {
     $time = date("h:i:sa");
     $status = 0;
 
-    $ret = mysqli_query($con, "SELECT * FROM users WHERE email='" . $_POST['username'] . "' and status=1");
+    $ret = mysqli_query($con, "SELECT * FROM users WHERE email='" . $_POST['username'] . "' and status=1 and privilege!='infirmier'");
     $num = mysqli_fetch_array($ret);
     if ($num > 0) {
         $dbpass = $num['password'];
@@ -98,7 +98,7 @@ if (isset($_POST['submit'])) {
             loginerror();
         }
     } else {
-        $ret = mysqli_query($con, "SELECT * FROM users WHERE username='" . $_POST['username'] . "' and status=1");
+        $ret = mysqli_query($con, "SELECT * FROM users WHERE username='" . $_POST['username'] . "' and status=1 and privilege!='infirmier'");
         $num = mysqli_fetch_array($ret);
         if ($num > 0) {
             $dbpass = $num['password'];

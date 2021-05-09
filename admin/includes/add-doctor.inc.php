@@ -97,7 +97,7 @@ function savedata($con,$docname,$docsurname,$docemail,$docusername,$docpassword,
     $photo = addslashes($docphoto);
     $query = mysqli_query($con,"INSERT INTO users(name,surname,email,username,password,birthday,gender,state,city,street_address,phone,privilege,photo,status,registered,last_updated) VALUES('$docname','$docsurname','$docemail','$docusername','$password','$docbirthday','$gender','$state','$city','$streetaddress','$phonenumber','$docposition','$photo','$status','$today','$today')");
     if (!$query) {
-        die("E pamundur te azhurohen te dhenat: " .mysqli_errno($query));
+        die(mysqli_error($con).$query);
     } else {
         $query = mysqli_query($con, "SELECT id FROM users where username='$docusername'");
         $data=mysqli_fetch_array($query);
@@ -106,7 +106,7 @@ function savedata($con,$docname,$docsurname,$docemail,$docusername,$docpassword,
             $userid=$data['id'];
             $query2 = mysqli_query($con,"INSERT INTO doctors(userId,specialties,position,clinic_address,consultancy_fees,departament) VALUES('$userid','$docspecialization','$docposition','$adressKDoc','$consultfee','$doctordepartament')");
             if (!$query2) {
-                die("E pamundur te azhurohen te dhenat: " .mysqli_errno($query2));
+                die(mysqli_error($con).$query2);
             } else {
                 $extra = "../add-doctor.php"; //
                 $host = $_SERVER['HTTP_HOST'];
@@ -114,7 +114,7 @@ function savedata($con,$docname,$docsurname,$docemail,$docusername,$docpassword,
                 echo "http://".$host.$uri."/".$extra."?add=success";
             }
         }else{
-            die("E pamundur te azhurohen te dhenat: " .mysqli_errno($query));
+            die(mysqli_error($con).$query);
         }
     }
 }
